@@ -1,0 +1,75 @@
+#+STARTUP: indent
+#+STARTUP: hidestars
+
+* Merging an upstream repository into your fork
+
+quaziashfaq/emacs.d is a fork of purcell/emacs.d
+
+Clone my fork in my machine
+$ git clone git@github.com:quaziashfaq/emacs.d.git
+
+Checkout master branch of my fork.
+
+$ git checkout master
+
+This is what 'origin' pointns to ->
+$ git remote
+origin
+
+$ git remote show origin
+\* remote origin
+  Fetch URL: git@github.com:quaziashfaq/emacs.d.git
+  Push  URL: git@github.com:quaziashfaq/emacs.d.git
+  HEAD branch: master
+  Remote branches:
+    company-again      tracked
+    master             tracked
+    patch-1            tracked
+    smartparens-take-2 tracked
+  Local branch configured for 'git pull':
+    master merges with remote master
+  Local ref configured for 'git push':
+    master pushes to master (up to date)
+
+
+Now get the upstream data. Give it a name: 'upstream'
+
+$ git remote add upstream git@github.com:purcell/emacs.d.git
+
+$ git remote
+origin
+upstream
+
+$ git remote show upstream
+\* remote upstream
+  Fetch URL: git@github.com:purcell/emacs.d.git
+  Push  URL: git@github.com:purcell/emacs.d.git
+  HEAD branch: master
+  Remote branches:
+    company-again      new (next fetch will store in remotes/upstream)
+    master             new (next fetch will store in remotes/upstream)
+    patch-1            new (next fetch will store in remotes/upstream)
+    smartparens-take-2 new (next fetch will store in remotes/upstream)
+  Local ref configured for 'git push':
+    master pushes to master (fast-forwardable)
+
+
+Now pull the data from purcell/emacs.d master branch
+$ git pull upstream master
+From github.com:purcell/emacs.d
+ * branch            master     -> FETCH_HEAD
+ * [new branch]      master     -> upstream/master
+Already up to date.
+
+
+We are in 'master' branch of local. Now merge my local master branch with purcell's master branch
+
+$ git merge upstream/master 
+Already up to date.
+
+[There is no update now that's it's very clean.. :-)]
+
+Now push your local updated repo to your fork in github.
+
+$ git pull origin master
+
