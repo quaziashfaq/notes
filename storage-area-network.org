@@ -1,0 +1,14 @@
+https://www.ciscolive.com/c/dam/r/ciscolive/us/docs/2014/pdf/TECSAN-2301.pdf
+https://arstechnica.com/civis/viewtopic.php?f=21&t=1438379
+https://blogs.cisco.com/datacenter/storage-distance-by-protocol-part-iii-fibre-channel
+https://blogs.cisco.com/datacenter/storage-distance-by-protocol-fc-fcoe-and-fcip-part-i
+https://fibrechannel.org/wp-content/uploads/2017/10/FCIA-Long-Distance-Fibre-Channel-Final.pdf
+
+https://blogs.cisco.com/datacenter
+
+
+Good sites
+Broadcom Blog
+Cisco Blog
+SNIA
+fibrechannel

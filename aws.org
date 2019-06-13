@@ -1,0 +1,7 @@
+AWS Documentation
+Guides and API references: https://docs.aws.amazon.com/index.html
+
+Blogs to read
+
+Perspectives: https://perspectives.mvdirona.com/
+All Things Distributed: https://www.allthingsdistributed.com/

@@ -1,0 +1,856 @@
+#+STARTUP: hidestars
+#+STARTUP: indent
+
+
+
+The master server manages backups, archives, and restores. You configure backup policies on the master server to determine the computers (clients) and the files that you want to back up. The master server is also responsible
+for media and device selection for NetBackup. The master server contains
+the NetBackup catalog. The catalog contains the internal databases that
+contain information about NetBackup backups and configuration.
+■ Media servers provide additional storage by allowing NetBackup to use the
+storage devices that are attached to them. Media servers can also increase
+performance by distributing the network load. Media servers can also be
+referred to as device hosts.
+■ Client software resides on the computers that contain data to back up. (Servers
+also contain client software and can be backed up.)
+
+* Concepts
+Master server manages backups, archives, and restores.
+
+
+Master server contains the catalog. The catalog contains the internal database that has information about Netbackup backups and configuration.
+
+Master server is responsible for media and device selection.
+
+Media servers provide additional storage by allowing Netbackup to use attached storage devices.
+
+Media servers are also referred to as:
+ - Device Hosts (when tape devices are present)
+ - Storage Servers (when I/O is directly to disk)
+ - Data movers (when data is sent to independent, external disk devices like OpenStorage appliances.)
+
+
+Policies are the rules that the master server follows
+ - They say when backups occur.
+   Schedules for automatic and unattended client backups.
+ - Whether the users can manually take their own backup.
+ - When you can manually take backup and restore.
+ - The administrator can define any number of backup policies, each of which can apply to one or more clients. A NetBackup client must belong to at least one backup policy to be backed up.
+
+
+
+
+Storage
+ - Storage units
+ - Storage unit groups
+ - Storage lifecycle policies (SLPs)
+ - windows for secondary operations in SLPs
+
+
+Catalog
+Use to create and configure a catalog backup, which is a special type of backup that NetBackup requires for its
+own internal databases.
+These databases, called the NetBackup catalog, are located on the NetBackup master and media server. The
+catalog contains information on every client backup. Catalog backups are tracked separately from other backups
+to ensure recovery in case of a server crash.
+The Catalog utility is also used for the following actions:
+ - To duplicate a backup image
+ - To promote a backup image from a copy to the primary backup copy
+ - To manually expire backup images
+ - To import expired backup images or images from another NetBackup server
+ - To search for a backup image to verify the contents of the media with what is recorded in the NetBackup catalog
+
+
+SLP Windows ?? WHAT THE HELL IS IT?
+SLP Windows contains any schedules that are defined for secondary operations in a storage lifecycle policy.
+A window can better define when the job for a secondary operation can run, making sure that the job does not
+interfere with jobs of a higher priority.
+
+
+* Book names:
+Restore operation
+Book name: Nebcakup Backup, Archive, and Restore Getting Started
+
+Policy creation / Netbackup Administration
+Netbackup Administrator's Guide for UNIX, Windows, Linux vol 1
+
+* Learn Extra
+** Security Certificates
+Certificate Hash
+Root Certificate Authority fingerprint
+
+* Learning from sites
+** Nbemm don't start
+Solved Go to solution
+Ivan_Niagara
+ Level 3
+Ivan_Niagara
+‎05-15-2012 10:42 PM
+
+
+Hi all,
+
+I have a problem with starting nbemm service.
+
+
+
+First of all - my environment:
+
+
+
+Start environment
+
+
+UNIX station Node-2 works as NetBackup Master server and Media Manager server.
+
+
+
+# ./netbackup/bin/admincmd/bpgetconfig -g node-2 -L
+
+Client/Master = Master
+
+NetBackup Client Platform = RS6000, AIX5
+
+NetBackup Client Protocol Level = 6.0.0.0.4.4
+
+Product = NetBackup
+
+Version Name = 6.0
+
+Version Number = 600000
+
+NetBackup Installation Path = /usr/openv/netbackup/bin
+
+Client OS/Release = AIX 5.3
+
+
+
+# cat -s ./netbackup/bin/version
+
+NetBackup-AIX5 6.0MP5
+
+
+
+Hostname: node-2
+
+
+
+File /etc/hosts:
+
+
+
+127.0.0.1               loopback localhost
+
+192.168.2.1     node-1m
+
+10.208.2.201    node-1  node-1.test.ts
+
+192.168.2.6     node-2m
+
+10.208.2.202    node-2  node-2.test.ts
+
+
+
+10.208.2.205    clora
+
+10.208.2.203    clapp
+
+
+
+Local IP:
+
+
+
+en1:
+
+        inet 10.208.2.202 netmask 0xffff0000 broadcast 10.208.255.255
+
+        inet 10.208.2.203 netmask 0xffffff00 broadcast 10.208.2.255
+
+
+
+en3:
+
+        inet 192.168.2.6 netmask 0xffffff00 broadcast 192.168.2.255
+
+
+
+lo0:
+
+        inet 127.0.0.1 netmask 0xff000000 broadcast 127.255.255.255
+
+
+
+******************************** End environment ***********************
+
+
+
+When I starting command
+
+/usr/openv/netbackup/bin/nbemm
+
+I have this on log file :
+
+
+
+1,51216,111,111,25,1337191197619,884866,1,0:,0:,33:ConnectionManager:Smiley SurprisedpenConnection,1,(1049|A122:Can't connect to the database ([Sybase][ODBC Driver][Adaptive Server Anywhere]Request to start/stop database denied <-1> )|)
+
+1,51216,111,111,26,1337191198627,884866,1,0:,0:,14:EMMServer::run,1,(1051|)
+
+1,51216,111,111,27,1337191198628,884866,1,0:,0:,14:EMMServer::run,1,(1049|A39:Can not establish initial DB connection|)
+
+0,51216,137,111,56,1337191198628,884866,1,0:,56:shutting down the service: block = 0(OrbService.cpp:421),16Smiley SurprisedrbService::stop,1
+
+0,51216,137,111,57,1337191198651,884866,1,0:,77:=========================================================(OrbService.cpp:440),16Smiley SurprisedrbService::stop,1
+
+0,51216,137,111,58,1337191198651,884866,1,0:,57:                 Service Going Down! (OrbService.cpp:441),16Smiley SurprisedrbService::stop,1
+
+0,51216,137,111,59,1337191198651,884866,1,0:,77:=========================================================(OrbService.cpp:442),16Smiley SurprisedrbService::stop,1
+
+0,51216,111,111,28,1337191198652,884866,1,0:,24:EMM Server shutting down,15:EMMServer::fini,1
+
+2,51216,111,111,29,1337191198652,884866,1,0:,0:,0:,0,(1003|A15:EMMServer::fini|)
+
+1,51216,111,111,30,1337191198652,884866,1,0:,0:,15:EMMServer::fini,1,(1049|A49:Exception caught for IORTable clean up <NotFound>|)
+
+0,51216,111,111,31,1337191198652,884866,1,0:,29:EMM Server shut down complete,15:EMMServer::fini,1
+
+
+
+Is there a solution to this problem?
+
+Thanks
+
+7.1.x and Earlier  Backup and Recovery  NetBackup
+1 Solution
+ mph999
+ Level 6
+mph999
+EMPLOYEE ACCREDITED
+‎05-15-2012 11:21 PM
+Database is probably down.
+
+Run ...
+
+/usr/openv/db/bin/nbdb_ping
+
+You should see a message like this ...
+
+Database [NBDB] is alive and well on server [NB_womble].
+
+If not, then check for full file systems.  Then try this :
+
+Follow these steps exactly ...
+
+
+
+
+
+/usr/openv/netbackup/bin/goodies/netbackup stop
+
+/usr/openv/db/bin/nbdb_admin -auto_start NONE
+
+. /usr/openv/db/vxdbms_env.sh
+
+cd /usr/openv/db/data
+
+mv NBDB.log NBDB.log.bad
+
+/usr/openv/db/bin/dbeng9 -f NBDB  (use dbeng11 if NBU 7)
+
+/usr/openv/db/bin/nbdb_admin -auto_start NBDB
+
+( /usr/openv/db/bin/nbdb_admin -auto_start BMRDB  -  If using BMR)
+
+
+
+/usr/openv/db/bin/nbdbms_start_server
+
+/usr/openv/db/bin/nbdb_ping
+
+
+
+Martin
+** nbemm command from Veritas NetBackup Command Reference Guide
+Name
+nbemm — run the NetBackup EMM daemon to manage volumes, volume pools, barcode rules, and devices
+
+SYNOPSIS
+nbemm [-console] [-terminate]
+
+
+On UNIX systems, the directory path to this command is /usr/openv/netbackup/bin/
+
+On Windows systems, the directory path to this command is install_path\NetBackup\bin\
+
+DESCRIPTION
+The Enterprise Media Manager daemon or service manages volumes, volume pools, barcode rules, and devices. This daemon performs media, drive, drive path, and storage unit selection.
+
+Note:
+
+The nbemm daemon or service must be active to change the volume configuration, device configuration, storage unit configuration, and for any tape mount activity.
+
+To start nbemm, enter nbemm.
+
+To stop nbemm, enter nbemm -terminate.
+
+OPTIONS
+-console
+This option enables you to start NetBackup in console mode.
+
+-terminate
+This option enables you to stop the nbemm binary.
+
+SEE ALSO
+See nbemmcmd.
+** How to monitor and restart the Veritas Private Branch Exchange process
+Article: 100017236
+Last Published: 2010-01-08
+Ratings:  12 1
+Product(s): NetBackup
+Description
+
+What is PBX?
+The Veritas Private Branch Exchange (PBX) software is part of the Infrastructure Core Services.  This service provides single port access to clients outside the firewall connecting to various services running as part of NetBackup or OpsCenter.
+
+
+Stopping PBX
+Stop NetBackup before restarting the PBX process. Stopping PBX will interrupt communication between NetBackup processes and clients until PBX is restarted.  If processes are actively using PBX, unpredictable behavior maybe the result if PBX is restarted. For example, stopping PBX while there are active or queued NetBackup jobs will cause backups to fail with a Status 12 (file open failed), a Status 25 (cannot connect on socket),  or a Status 50 (client process aborted), as well as other possible errors.
+
+
+
+Restarting PBX (Windows)
+For Windows systems,  the Services tool can be used to view the status of the PBX service.  It can also be used to stop, start, or restart the service.
+
+Right Click on My Computer and select Manage to open the Computer Management tool
+Select Services under the Services and Applications section to display a list of services
+Scroll down the list of services to display Veritas Private Branch Exchange
+The Status column will display if the service is started
+To stop, start, or restart the service, right click on Veritas Private Branch Exchange and select Stop, Start or Restart from the menu
+
+
+Restarting PBX (Unix)
+For UNIX systems use the ps -ef | grep pbx command to determine if the pbx_exchange process is running.  On NetBackup servers the bpps -x command can also be used to verify if PBX is running.  The "-x" switch is new in NetBackup 6.0 and will display Veritas Shared Processes such as pbx_exchange.
+
+The following example is from a Solaris 9 server running NetBackup 6.0:
+
+# /usr/openv/netbackup/bin/bpps-x
+...
+SharedVERITASProcesses
+------------------------
+ root  827  1  0  Sep23 ?  1:26 /opt/VRTSpbx/bin/pbx_exchange
+
+To stop the pbx_exchange daemon:
+#/opt/VRTSpbx/bin/vxpbx_exchanged stop
+
+To start the pbx_exchange daemon:
+#/opt/VRTSpbx/bin/vxpbx_exchanged start
+** Media Server De-duplication Pool (MSDP) comes online after long time.
+After Startup of NetBackup on a server with Media Server De-Duplication Pool (MSDP) configured the PureDisk Volume will be down until spoold's Connection Manager has completed it's startup - this can take an extended amount of…
+
+Article: 100002068
+Last Published: 2010-01-11
+Ratings:  3 1
+Product(s): NetBackup
+Problem
+After Startup of NetBackup on a server with Media Server De-Duplication Pool (MSDP) configured the PureDisk Volume will be down until spoold's Connection Manager has completed it's startup - this can take an extended amount of time.
+Solution
+On Startup theinternal MSDP spoold daemon has to perform a number of initialization functionsand until these are completed the Pool will not respond to queries fromNetBackup and the PureDisk volume will remain down.
+As a resultNetBackup will not be able to direct any backups this Disk Pool. Once the starthas completed the Pool will automatically become available for backups. The DiskVolume will show as down when queried:
+#/usr/openv/netbackup/bin/admincmd/nbdevquery -listdv -stypePureDisk
+-U
+DiskPool Name      : dedup_pool
+DiskType           : PureDisk
+DiskVolume Name    : PureDiskVolume
+DiskMedia ID       : @aaaae
+TotalCapacity (GB) : 24414.06
+FreeSpace (GB)     : 8562.09
+Use%                :64
+Status              :DOWN
+Flag                :ReadOnWrite
+Flag                :AdminUp
+Flag                :InternalDown
+
+Attemptsto change the state of the PureDiskVolume to UP will report assuccessful:
+#/usr/openv/netbackup/bin/admincmd/nbdevconfig -changestate -stype PureDisk -dpdedup_pool -dv PureDiskVolume -state UP
+successfullychanged the state of disk volume
+
+but the volumewill still be down if queried again:
+#/usr/openv/netbackup/bin/admincmd/nbdevquery -listdv -stype PureDisk -U
+DiskPool Name      : dedup_pool
+DiskType           : PureDisk
+DiskVolume Name    : PureDiskVolume
+DiskMedia ID       : @aaaae
+TotalCapacity (GB) : 24414.06
+FreeSpace (GB)     : 8562.09
+Use%                :64
+Status              :DOWN
+Flag                :ReadOnWrite
+Flag                :AdminUp
+Flag                :InternalDown
+
+Above exampleis from a Linux system - Windows command is located in"<INSTALL_PATH>\VERITAS\NetBackup\bin\admincmd".
+
+To determine ifthe startup has completed review the<STORAGE_LOCATION>/log/spoold/spoold.log file. Until the ConnectionManager has started the daemon will not respond. This is reported in the logfile at the default log level as:
+June10 06:17:48 INFO [47732887389760]: Connection Manager:started
+
+The value of<STORAGE_LOCATION> in the above path can be determined with the followingcommands.
+UNIX:
+/usr/openv/netbackup/bin/admincmd/nbdevquery-listconfig -stype PureDisk -storage_server STORAGE_SERVER_NAME-U
+WINDOWS:
+<INSTALL_PATH>\VERITAS\NetBackup\bin\admincmd\nbdevquery-listconfig -stype PureDisk -storage_server STORAGE_SERVER_NAME-U
+replaceSTORAGE_SERVER_NAME with the name of the storage server (normally the systemname of the media server.
+
+Normally thisis quickly reached after the startup of the process but if for example there are a large number transaction logs (tlogs) outstanding this can take an extended length of time. For example below the Disk Pool was unavailable for over an hourafter a restart of NetBackup on the media server:
+June10 05:00:23 INFO [ 47732887389760 ]:Connection Manager: initializing
+June10 05:00:23 INFO [ 47732887389760 ]:Connection Manager: initialization complete
+June10 06:17:48 INFO [ 47732887389760 ]:Connection Manager: started
+** A PureDisk (PDDO) or MSDP disk pool is in a "DOWN" (InternalDown) state causing backups to fail with a status code 213.
+Article: 100006075
+Last Published: 2011-08-25
+Ratings:  2 3
+Product(s): NetBackup
+Problem
+A PureDisk (PDDO) or a MSDP disk pool is constantly displaying that it is in a "DOWN" state.  When executing an `nbdevquery` command, we can confirm the state of the disk volume in question.  After trying to change the state of the disk pool to UP, the disk pool remains DOWN.
+
+Command to change the state of the disk pool to "UP":
+
+# nbdevconfig -changestate -stype PureDisk -dp Disk_Pool_name -state UP
+Even when attempting to reset the disk pool, it makes no difference - the disk pool remains in a DOWN state.
+
+Command to "Reset" a disk pool:
+
+# nbdevconfig -changestate -stype PureDisk -dp Disk_Pool_name -state RESET
+
+
+Error Message
+Example of output:
+
+# nbdevquery -listdv -stype PureDisk -U
+
+
+Disk Pool Name      : Disk_Pool_Name
+Disk Type           : PureDisk
+Disk Volume Name    : PureDiskVolume
+Disk Media ID       : @aaaas
+Total Capacity (GB) : 11612.91
+Free Space (GB)     : 2660.58
+Use%                : 77
+Status              : DOWN
+Flag                : ReadOnWrite
+Flag                : AdminUp
+Flag                : InternalDown
+Num Read Mounts     : 0
+Num Write Mounts    : 1
+Cur Read Streams    : 0
+Cur Write Streams   : 0
+
+Cause
+Possible missing or corrupted ost-plugin configuration file on the media server.
+
+Solution
+Verify the existance of the ost-plugin config file on the media server.
+
+Unix:
+
+/usr/openv/lib/ost-plugins/svrname.cfg
+
+Windows:
+
+<Install_path>\NetBackup\bin\ost-plugins\srvrname.cfg
+If this file is missing or corrupted (perhaps 0 byte size), you will need to copy this configuration file from another media server and edit the file to meet this specific media server's information.  Another option (if it exists) is to restore the configuration file from a previous backup of this media server.  Once the file is in place, please restart NetBackup daemons/services.  The disk pool will go into an "UP" state; backups will complete without a status code 213.
+** Windows MSDP Disk pool is down, backups and duplications failing with status 213, no storage units available for use
+Article: 100024315
+Last Published: 2013-05-06
+Ratings:  0 1
+Product(s): NetBackup
+Problem
+Backups, restores and duplications failing with status 213 when accessing a media server deduplication storage server.
+
+Error Message
+Status Code: 213 - no storage units available for use
+
+Cause
+Disk pool is down
+The NetBackup MSDP media server is so busy that that the disk pool gets marked as down.
+The NetBackup services are not running on the media server with MSDP configured (spoold.exe, spad.exe, postgreSQL)
+The NetBackup deduplication engine (spoold.exe) is running but has stopped responding
+The NetBackup Deduplication Manager (spad.exe) is running but has stopped responding
+The database processes (postgres) is not running
+Queue processing is not able to run due to issues in the <MSDP install path\queue folder (transaction logs, sorted.delayed or other .delayed files)
+Patch version of the NetBackup binaries on the MSDP media server
+Solution
+To trouble shoot the above possible causes:
+
+1. Disk pool is down.
+
+Try to put the disk pool up from the GUI.
+
+If there is an error, record the error and search for possible causes of that error.
+If the disk pool does not change to an UP state, try bringing up the disk pool using command line.
+
+<NBU install path>\NetBackup\bin\admincmd\nbdevconfig -changestate -stype PureDisk -dp <disk pool name> -state UP
+2. The MSDP media server is so busy that the disk pool gets marked as down.
+
+Check to see if the status 213 is happening only at certain  high volume times.  If yes, create these files on the MSDP media server using the steps in 000012819 to adjust the DPS polling interval time.
+
+DPS_PROXYDEFAULTSENDTMO (value of 1800 inside)
+DPS_PROXYDEFAULTRECVTMO (value of 1800 inside)
+
+Warning: if the issue persists after one daily or nightly backup schedule window after employing the above configuration changes, please remove the touchfiles and troubleshoot the issue further via logs (nbrmms, dps, spoold, spad) to determine root cause.
+
+3. Check the services on the MSDP media server.
+
+Verify that these are running.
+
+spoold.exe
+spad.exe
+postgreSQL
+If they are not running, start them.  If they do not start, and there is an error, record the error and search to determine what is the usual cause for the error.
+
+Additional information about why a services is not starting is located in these log folders on the MSDP server.
+
+<MSDP install path\log\spoold\spoold.log
+<MSDP install path\log\spad\spad.log
+<MSDP install path\log\spoold\storaged.log
+4. The NetBackup deduplication engine (spoold.exe) is running but has stopped responding.
+
+Check the <MSDP install path\log\spoold\storaged.log to see if the queue processing stopped on a particular transaction log.  Look for messages like this:
+
+WARNING [xxxx]: 25000: Transaction log <install path>\queue\sorted-xxxxxxx-yyyyyyy.tlog failed: Could not process tlog entries: zero-sized object
+Transaction will be retried.
+ERR [xxxx]: 25004: Queue processing failed five times in a row. Queue processing will be disabled and the CR will no longer accept new backup data. Content router has been totally shut down.
+Check to see if the last line in the storaged.log file contains a string similar to this.
+
+sorted-123456-789101.delayed
+
+If yes, check the <msdp install path>\queue folder to see what is the date and time associated with that file, if it exists.
+
+Stop and restart the NetBackup services to see if that allows the MSDP pool to come back to an UP status.
+
+5. The NetBackup Deduplication Manager (spad.exe) is running but has stopped responding.
+
+Check the <MSDP install path\log\spad\spad.log file for errors.
+Run this command to see what spad.exe may be doing.
+<NBU install path>\veritas\pdde\spad.exe  --trace -v If this error is returned,
+Error: 25053: Could not establish a connection to 127.0.0.1:10102: connect failed (No connection could be made because the target machine actively refused it.)
+7.1 and earlier, see troubleshooting steps in article 000012709.
+
+Stop and restart the NetBackup services to see if that allows the MSDP pool to come back to an UP status.
+
+6. The database processes (postgres) is not running
+
+Try to restart the postgresql service.  If there is an error, and it won't start:
+
+Check to make sure the user running postgresSQL has permissions to the MSDP install folder.
+Disable any any internal firewall that may be running.
+Look at Windows Event viewer, Application Log for indications of why it won't start.
+It is possible the user running the postgresql service does not have permission to access <msdp install path>\databases\pddb\data folder.
+
+Amend the security policy to allow the purediskdbuser account to have the "log on as a service" right.
+Change the postgresql-8.3 service manually to a new domain account or to any other account that can run the services.
+Change the postgresql-8.3 service to run as Local System.
+Note: If the 2nd or 3rd solution is being implemented, then the account from step 2 and the SYSTEM account both need to be granted full NTFS permissions to the <msdp install path>\databases\pddb\data folder.
+
+7. Queue processing is not able to run due to issues in the <MSDP install path\queue folder (transaction logs, sorted.delayed or other .delayed files)
+
+Review these log files from the MSDP media server.
+<MSDP install path\log\spoold\spoold.log
+<MSDP install path\log\spoold\storaged.log
+
+Check to see how many files exist in the <MSDP install path\queue folder, what is the time stamp on the oldest and newest file in that folder.  If queue processing is run, does that information change?
+8. Patch version of the NetBackup binaries on the MSDP media server.
+
+If the NetBackup MSDP media server is running NetBackup 7.01, make sure the engineering binary bundle Rocksolid version 7 is installed.  If not, install it.
+
+rocksolid EEB 2233961EEB 7
+See article https://www.veritas.com/docs/000011884
+
+Helpful log files to enable on the NetBackup media server with MSDP configured
+
+<MSDP install path\log\spad\spad.log
+<MSDP install path\log\spoold\spoold.log
+<MSDP install path\log\spoold\storaged.log
+Enable logging level 5 using NetBackup GUI for bptm on the MSDP server and create this folder.
+
+<NetBackup install path>\NetBackup\logs\bptm
+Windows Event viewer, Application Log and System log. Look for errors or warnings reported for spood, spad, service control manager, or any other NetBackup service reporting an error.
+
+Edit the <MSDP install path>\etc\spa.cfg file so that the line Logging=long,thread reads:
+Logging=full,thread
+
+Edit the <NBU install path>\NetBackup\bin\ost-plugins\pd.conf file so that these two lines are uncommented:
+
+DEBUGLOG = <some_dir_path_with_space> pdplugin.log
+LOGLEVEL = 10
+
+When the error happens again, gather these and review.
+
+<NBU install path>\NetBackup\logs\bptm\log.mmddyy
+
+<MSDP install path\log\spad\spad.log
+<MSDP install path\log\spoold\spoold.log
+<MSDP install path\log\spoold\storaged.log
+
+pdplugin.log (location listed in pd.conf file)
+
+Event Viewer, Application log and System Log.
+
+
+Applies To
+
+NetBackup 7.01 master server
+NetBackup 7.01 Windows media server with NetBackup Deduplication Storage server configured.
+
+The same investigations below can be used on a UNIX MSDP storage server.  This article is specific to windows syntax.  For more UNIX syntax, see article 000082056.
+** UNIX or Linux MSDP Disk pool is down, backups and duplications failing with status 213, no storage units available for use
+Article: 100024420
+Last Published: 2013-05-06
+Ratings:  0 0
+Product(s): NetBackup
+Problem
+Backups, restores and duplications failing with status 213 when accessing a media server deduplication storage server.
+
+Error Message
+Status Code: 213 - no storage units available for use
+
+Cause
+Disk pool is down
+The NetBackup MSDP media server is so busy that that the disk pool gets marked as down.
+The NetBackup services are not running on the media server with MSDP configured (spoold spad)
+Queue processing is not able to run due to issues in the <MSDP install path\queue folder (transaction logs, sorted.delayed or other .delayed files)
+Patch version of the NetBackup binaries on the MSDP media server
+Solution
+To trouble shoot the above possible causes:
+
+1. Disk pool is down.
+
+Try to put the disk pool up from the GUI.
+
+If there is an error, record the error and search for possible causes of that error.
+If the disk pool does not change to an UP state, try bringing up the disk pool using command line.
+
+/usr/openv/NetBackup/bin/admincmd/nbdevconfig -changestate -stype PureDisk -dp <disk pool name> -state UP
+
+2. Check to see if the status 213 is happening only at certain  high volume times.  If yes, create these files on the MSDP media server using the steps in 000012819 to adjust the DPS polling interval time.
+
+DPS_PROXYDEFAULTSENDTMO (value of 1800 inside)
+DPS_PROXYDEFAULTRECVTMO (value of 1800 inside)
+
+Warning: if the issue persists after one daily or nightly backup schedule window after employing the above configuration changes, please remove the touchfiles and troubleshoot the issue further via logs (nbrmms, dps, spoold, spad) to determine root cause.
+
+3. Check the services on the MSDP media server.  Verify that these are running.
+
+spoold
+spad
+
+
+If they are not running, start them.  If they do not start, and there is an error, record the error and search to determine what is the usual cause for the error.
+
+Additional information about why a services is not starting is located in these log folders on the MSDP server.
+
+/MSDP install path/log/spoold/spoold.log
+/MSDP install path/log/spad/spad.log
+/MSDP install path/log/spoold/storaged.log
+
+4. The NetBackup deduplication engine (spoold.exe) is running but has stopped responding.
+
+Check the /MSDP install path/log/spoold/storaged.log to see if the queue processing stopped on a particular transaction log.  Look for messages like this:
+
+WARNING [xxxx]: 25000: Transaction log /MSDP install path/queue/sorted-xxxxxxx-yyyyyyy.tlog failed: Could not process tlog entries: zero-sized object
+Transaction will be retried.
+ERR [xxxx]: 25004: Queue processing failed five times in a row. Queue processing will be disabled and the CR will no longer accept new backup data. Content router has been totally shut down.
+
+Check to see if the last line in the storaged.log file contains a string similar to this.
+
+sorted-123456-789101.delayed
+
+If yes, check the <msdp install path>/queue folder to see what is the date and time associated with that file, if it exists.
+
+Stop and restart the NetBackup services to see if that allows the MSDP pool to come back to an UP status.
+
+See troubleshooting steps in article 000012709.
+
+Stop and restart the NetBackup services to see if that allows the MSDP pool to come back to an UP status.
+
+Disable any any internal firewall that may be running.
+
+Look at Windows Event viewer, Application Log for indications of why it won't start.
+It is possible the user running the postgresql service does not have permission to access /msdp install path/databases/pddb/data folder.
+
+7. Queue processing is not able to run due to issues in the <MSDP install path\queue folder (transaction logs, sorted.delayed or other .delayed files)
+
+Review these log files from the MSDP media server.
+/MSDP install path/log/spoold/spoold.log
+/MSDP install path/log/spoold/storaged.log
+
+Check to see how many files exist in the /MSDP install path/queue folder, what is the time stamp on the oldest and newest file in that folder.  If queue processing is run, does that information change?
+8. Patch version of the NetBackup binaries on the MSDP media server.
+
+If the NetBackup MSDP media server is running NetBackup 7.01, make sure the engineering binary bundle Rocksolid version 7 is installed.  If not, install it.
+
+rocksolid EEB 2233961EEB 7
+See article 000011884.
+
+Helpful log files to enable on the NetBackup media server with MSDP configured
+
+/MSDP install path/log/spad/spad.log
+/MSDP install path/log/spoold/spoold.log
+/MSDP install path/log/spoold/storaged.log
+
+Enable logging level 5 using NetBackup GUI for bptm on the MSDP server and create this folder.
+
+/usr/openv/netbackup\logs\bptm
+
+Windows Event viewer, Application Log and System log. Look for errors or warnings reported for spood, spad, service control manager, or any other NetBackup service reporting an error.
+
+Edit the /MSDP install path/etc/spa.cfg file so that the line Logging=long,thread reads:
+Logging=full,thread
+
+Edit the /usr/openv/lib/ost-plugins/pd.conf file so that these 2 lines are uncommented:
+
+DEBUGLOG = <some_dir_path_with_space> pdplugin.log
+LOGLEVEL = 10
+
+When the error happens again, gather these and review.
+
+/MSDP install path/log/spad/spad.log
+/MSDP install path/log/spoold/spoold.log
+/MSDP install path/log/spoold/storaged.log
+
+<install path>\NetBackup\logs\bptm
+
+pdplugin.log (location listed in bp.conf file)
+
+/var/adm/messages/
+
+/var/log/messages
+
+/var/log/syslog
+
+
+Applies To
+
+NetBackup 7.01 master server
+NetBackup 7.01 UNIX or Linux media server with NetBackup Deduplication Storage server configured.
+
+Related Knowledge Base Articles
+Windows MSDP Disk pool is down, backups and duplications failing with status 213, no storage units available for use
+Was this content helpful?
+
+VOX Community Veritas.com
+Visit our social dashboard
+Privacy Policy Legal User agreement
+
+** Disk storage server is down(2106)
+Article: 100008864
+Last Published: 2013-09-11
+Ratings:  2 9
+Product(s): NetBackup
+Problem
+All backups to the Windows MSDP media server are failing with "NBU status: 2106, EMM status: Storage Server is down or unavailable"
+
+The "nbdevquery -listdv -stype PureDisk -U" output shows the MSDP disk volume down.
+
+Error Message
+Status 2106
+
+The backup job details shows this error:-
+
+7/17/2012 10:25:06 AM - Info nbjm(pid=6732) starting backup job (jobid=9442) for client rbm-svr, policy Exchange, schedule Full
+7/17/2012 10:25:06 AM - Info nbjm(pid=6732) requesting MEDIA_SERVER_ONLY resources from RB for backup job (jobid=9442, request id:{A163A2A9-88BB-4837-991E-2CD496E2D436})
+7/17/2012 10:25:06 AM - requesting resource MSDP_STU01
+7/17/2012 10:25:06 AM - requesting resource nbmaster.NBU_CLIENT.MAXJOBS.rbm-svr
+7/17/2012 10:25:06 AM - requesting resource nbmaster.NBU_POLICY.MAXJOBS.Exchange
+7/17/2012 10:25:06 AM - requesting resource EXCHANGE_RESOLVER.nbmaster.Exchange.rbm-svr
+7/17/2012 10:25:06 AM - Error nbjm(pid=6732) NBU status: 2106, EMM status: Storage Server is down or unavailable
+7/17/2012 10:25:06 AM - Error nbjm(pid=6732) NBU status: 2106, EMM status: Storage Server is down or unavailable
+Disk storage server is down(2106)
+
+Cause
+On the MSDP media server, the "bpps.exe" output shows no spoold or spad processes running.
+The Windows event viewer shows this error relating to spad...
+
+The description for Event ID 1 from source spad cannot be found. Either the component that raises this event is not installed on your local computer or the installation is corrupted. You can install or repair the component on the local computer.
+If the event originated on another computer, the display information had to be saved with the event.
+The following information was included with the event:
+2: Cannot access S:\MSDP\etc\pdregistry.cfg during Symantec PureDisk Storage Pool Authority startup. Quitting.
+
+There are currently only 2 drives mounted, C:\ and D:\ , there is no S\ drive mounted.
+
+Solution
+Remount the missing MSDP drive (S:\) and restart Netbackup services on the media server.
+
+
+Applies To
+
+Windows 2008, Netbackup 7.5.0.1
+
+** NBU Administration GUI/Console showing Drive status in MIXED or PEND Status
+Article: 100007400
+Last Published: 2013-10-26
+Ratings:  0 0
+Product(s): NetBackup
+Problem
+Drive status of defined drives show MIXED/PEND-TLD statuses
+
+Error Message
+Observation on GUI.
+
+Backup jobs sometimes report failures allocating drives in a timely manner
+
+Cause
+Reservation conflicts.
+
+Restart of a Media Server daemons or Services.
+
+Solution
+Restart affected Media Server and Master Server.
+
+In regards to the drives showing up in the GUI in a Mixed or PEND-TLD state, the explanation is as below.
+PEND-<robot_designation>
+
+For example, PEND-TLD.
+
+The drive is in a pending status.  Applies only to robotic drives.
+
+MIXED
+"The control mode for a shared drive may not be the same on all hosts sharing the drive.
+For shared drives, each host can have a different status for the drive. If the control modes are all the same, that mode is displayed."
+
+Reference:- DOCUMENTATION: The following list describes the current drive status field descriptions for drives within a Veritas NetBackup (tm) configuration.
+https://www.veritas.com/docs/000026908
+This would happen when some Media Servers sharing tape drives (i.e SSO) are restarted, while others are still up and running (sometimes even doing backups).
+
+The best method to fix this would be to get a window, when NBU Daemons/Services can be Stopped and Started on ALL the Media Servers and the Master Server.
+
+Suggest these steps to 'clean up' the drive control modes.
+
+Note: The first set of commands are for UNIX, and the second set for Windows.
+
+a. Cancel All Jobs                                         (Master Server)
+    "bpdbjobs -cancel_all"
+b. Suspend jobs and reset allocations and close GUI.                (Master Server)
+    "nbpemreq -suspend_scheduling"
+    "nbtbutil -resetAll"
+    Close all NBU GUI's everywhere.                        (yes Everywhere)
+c. Shut down NBU services/daemons                       (Master and ALL Media Servers)
+    "bp.kill_all"    or   "bpdown -f -v"
+d. Terminate all NBU Processes if any are found lingering around.           (Master and ALL Media Servers)
+     "bpps -x"   or "bpps"
+     "kill -9 <PID>"    or     "taskkill /PID <PID>"
+e. Stop and start PBX on                                        (Master and ALL Media Servers)
+    "vxpbx_exchanged stop"                                     (for Windows stop and start from Services.)
+    "vxpbx_exchanged start"
+f.  Start NBU daemons/services on Master
+    "bp.start_all"  or "bpup -f -v"
+g. Start NBU daemons/services on Media Servers which have Robotic Control
+    "bp.start_all"  or "bpup -f -v"
+h. Start NBU daemons/services on remaining Media Servers
+    "bp.start_all"  or "bpup -f -v"
+i.  Open GUI's NOW.
+
+
+Applies To
+
+NetBackup Servers.
