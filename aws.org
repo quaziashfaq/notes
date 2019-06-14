@@ -1,3 +1,7 @@
+#+STARTUP: indent
+#+STARTUP: hidestars
+
+* Documents to Read
 AWS Documentation
 Guides and API references: https://docs.aws.amazon.com/index.html
 
@@ -5,3 +9,103 @@ Blogs to read
 
 Perspectives: https://perspectives.mvdirona.com/
 All Things Distributed: https://www.allthingsdistributed.com/
+
+* Snapshot
+** From snapshot -> Create volume
+Can be changed:
+volume type
+volume size
+availability zone
+encryption
+
+** From snapshot -> Create snapshot
+Can be changed:
+Region
+Encryption
+
+
+* In memeory caching engines
+ElasticCache is a web service that makes it easy to deploy, operate, and scale and in-memory cache in the cloud.
+ElasticCache supports two opensouce in-memory caching engines
+memcached
+redis
+
+* databases
+** RDS (OLTP)
+SQL
+MySQL
+Oracle DB
+PostGreSQL
+Amazon Aurora
+MariaDB
+Amazon DynamoDB (No SQL)
+Redshift OLAP - Amazon Data Warehouse Solution
+
+* Bootstrap script
+** For RDS
+#!/bin/bash
+yum update -y
+yum install httpd php php-mysql -y
+cd /var/www/html
+curl -O https://wordpress.org/latest.tar.gz
+tar -xfz latest.tar.gz
+cp -r wordpress/* /var/www/html
+rm -rf wordpress
+rm -rf latest.tar.gz
+chmod -R 755 wp-content
+chown -R apache:apache wp-content
+chkconfig httpd on
+service httpd start
+
+** Test RDS
+db instance = ashdb
+
+* bits to check
+Storage
+SAN
+ISM
+Vmax
+
+lsblk
+iscsi
+parted
+fdisk
+ext2
+ext3
+ext4
+init vs sytemd
+
+
+vol-0abca1990211ca66d, vol-0a235245407550301, vol-0f1f97963cff17a1a
+
+
+sudo mount -t efs fs-e08e4503:/ efs
+[root@ip-172-31-92-143 mnt]# mount
+sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime)
+proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
+devtmpfs on /dev type devtmpfs (rw,nosuid,size=485720k,nr_inodes=121430,mode=755)
+securityfs on /sys/kernel/security type securityfs (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000)
+tmpfs on /run type tmpfs (rw,nosuid,nodev,mode=755)
+tmpfs on /sys/fs/cgroup type tmpfs (ro,nosuid,nodev,noexec,mode=755)
+cgroup on /sys/fs/cgroup/systemd type cgroup (rw,nosuid,nodev,noexec,relatime,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd)
+pstore on /sys/fs/pstore type pstore (rw,nosuid,nodev,noexec,relatime)
+cgroup on /sys/fs/cgroup/blkio type cgroup (rw,nosuid,nodev,noexec,relatime,blkio)
+cgroup on /sys/fs/cgroup/cpu,cpuacct type cgroup (rw,nosuid,nodev,noexec,relatime,cpu,cpuacct)
+cgroup on /sys/fs/cgroup/net_cls,net_prio type cgroup (rw,nosuid,nodev,noexec,relatime,net_cls,net_prio)
+cgroup on /sys/fs/cgroup/perf_event type cgroup (rw,nosuid,nodev,noexec,relatime,perf_event)
+cgroup on /sys/fs/cgroup/pids type cgroup (rw,nosuid,nodev,noexec,relatime,pids)
+cgroup on /sys/fs/cgroup/freezer type cgroup (rw,nosuid,nodev,noexec,relatime,freezer)
+cgroup on /sys/fs/cgroup/memory type cgroup (rw,nosuid,nodev,noexec,relatime,memory)
+cgroup on /sys/fs/cgroup/devices type cgroup (rw,nosuid,nodev,noexec,relatime,devices)
+cgroup on /sys/fs/cgroup/cpuset type cgroup (rw,nosuid,nodev,noexec,relatime,cpuset)
+cgroup on /sys/fs/cgroup/hugetlb type cgroup (rw,nosuid,nodev,noexec,relatime,hugetlb)
+/dev/xvda1 on / type xfs (rw,noatime,attr2,inode64,noquota)
+systemd-1 on /proc/sys/fs/binfmt_misc type autofs (rw,relatime,fd=31,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=14171)
+hugetlbfs on /dev/hugepages type hugetlbfs (rw,relatime,pagesize=2M)
+debugfs on /sys/kernel/debug type debugfs (rw,relatime)
+mqueue on /dev/mqueue type mqueue (rw,relatime)
+sunrpc on /var/lib/nfs/rpc_pipefs type rpc_pipefs (rw,relatime)
+tmpfs on /run/user/1000 type tmpfs (rw,nosuid,nodev,relatime,size=100728k,mode=700,uid=1000,gid=1000)
+fs-e08e4503.efs.us-east-1.amazonaws.com:/ on /mnt/efs type nfs4 (rw,relatime,vers=4.1,rsize=1048576,wsize=1048576,namlen=255,hard,noresvport,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=172.31.92.143,local_lock=none,addr=172.31.84.29)

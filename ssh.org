@@ -1,0 +1,24 @@
+#+STARTUP: indent
+#+STARTUP: hidestarts
+
+* Password less ssh login
+Let's say my remote host is 192.168.56.21 and my login username is sakib
+
+So in my local machine, generate the public keys'
+
+$ ssh-keygen -t rsa
+
+Check the following file is created. '.ssh/id_rsa.pub'
+$ cd ~
+$ cd .ssh/id_rsa.pub
+
+
+Create .ssh directory in the remote host
+$ ssh sakib@192.168.56.21 'mkdir .ssh'
+
+Now copy the content of this file to a file named '~/.ssh/authorized_keys' of the remote host:
+$ cat .ssh/id_rsa.pub | ssh sakib@192.168.56.21 'cat >> .ssh/authorized_keys'
+
+And change the permission:
+$ ssh sakib@192.168.56.21 'chmod 700 .ssh; chmod 640 .ssh/authorized_keys'
+

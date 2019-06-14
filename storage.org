@@ -1,0 +1,100 @@
+#+STARTUP: indent
+#+STARTUP: hidestars
+
+* What is SSD?
+
+* Module 1
+Data
+Digital Data = digitally stored, transmitted and retrieved.
+INformation = processed data
+Information storage management = Effectively store, protect, process, manage and leverage information.
+Types of digital data -
+- structured = rdbms
+- semi-structured = spreadsheet, xml files.
+- quasi-structured = clickstream data = which is possible to convert into meaningful structured data.
+- non-structured = 90% of the data in the universe (text file, pdfs, images and videos)
+
+Storage devices - types
+- magnetic
+- optical
+- flash-based
+
+Data Center
+- Facility
+- IT Equipment
+- Support infrastructure
+
+Data Center Key Features
+- Availability
+- Security
+- Capacity
+- Scalability
+- Performance
+- Integrity
+
+Data Center Management Process
+- Monitoring
+- Reporting
+- Provisioning
+- Planning
+- Maintenance
+
+Computing Platforms
+- Platform 1 = Mainframe, Terminal PC. Highly expensive
+- Platform 2 = Client-server Model. Creation of Silos which leads to hw/sw maintenance overhead
+- Platform 3 = Big Data, Cloud, mobile, social
+
+Five essential cloud characteristics
+- On-demaind self-service
+- Broad network access
+- Resource Pooling
+- Rapid elasticity
+- Measured service
+
+Cloud Service Models
+- Infrastructure as a Service (IaaS)
+- Platform as a Service (PaaS)
+- Software as a Service (SaaS)
+
+Cloud Deployment Model
+- Public cloud
+- Private cloud
+- Community cloud
+- Hybrid cloud
+
+Big Data
+ - structruce / non-structured
+ - needs highly sclabale storage architecture to manage high volume/velocity/variety of data
+ - Strong analytics tool for better decision making.
+
+
+Key characteristics of Big Data
+| Characteristics | Meaning                             | Challenges                   |
+|-----------------+-------------------------------------+------------------------------|
+| Volume          | Massive size of data                | Storage and analysis of data |
+| Velocity        | Rapidly changing                    | Real-time analysis           |
+| Variety         | Diverse data from different sources | Integration and analysis     |
+| Variability     | Constant change in meanig of data   | gathering and interpreteion  |
+| Veracity        | Varying quality and reliability     | transforming and trusting    |
+| Value           | Business Value                      | Cost effectiveness           |
+
+
+Components of a Big Data analytics solution
+- Storage
+- MapReduce
+- Query
+
+Big Data storage
+- Distributed file systems
+- each has processing capability and storage capacity 
+
+
+
+
+
+
+
+
+
+
+

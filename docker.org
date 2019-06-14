@@ -1,3 +1,35 @@
+#+STARTUP: indent
+#+STARTUP: hidestars
+
+* Next things to learn
+Puppet
+Chef
+
+Docker Management tool
+Shipyard
+Portainer
+Kitematic
+
+Logging Drivers
+syslog
+Graylog's GELF protocl
+Fluentd
+log rotation driver
+
+Go Template
+
+Union Mount
+
+bootfs
+initrd images
+rootfs
+
+
+kernel
+namespaces
+cgroups
+grub
+
 * Installation of Docker
 Remove old installation of docker.
 $ sudo apt-get remove docker docker-engine docker.io containerd runc
@@ -40,3 +72,24 @@ $ sudo apt update
 $ sudo apt upgrade
 
 $ sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+* Operations
+** git clone from another machine
+At first create password less ssh login to ease the git clone process.
+Then just do the git clone
+$ git clone <server-ip>:/home/<username>/<repo-path>
+
+* Registry
+** Run a registry server
+** Private registry push fail: server gave HTTP response to HTTPS client
+For Docker version 18.09.2, I followed https://success.docker.com/article/using-systemd-to-control-the-docker-daemon
+
+sudo systemctl edit docker
+add below lines
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// --insecure-registry registry:5000
+
+sudo systemctl daemon-reload
+systemctl restart docker
+systemctl status docker
