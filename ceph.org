@@ -1,0 +1,14 @@
+What is SDS?
+Software defined storage
+
+What is RBD?
+RADOS Block Device
+
+What is RADOS?
+No idea at the moment.
+
+Learn Ansible
+
+Ceph is a unified storage solution providing both block, file and object-based storage.
+
+Ceph does not have central metadataba table to query to find out the data. it introduces a new approach. It's called CRUSH = Controlled Replication Under Scalable Hashing. It's a mouthful name. Go to link to see publication: [[http//ceph.com/resources/pubilcation]]
