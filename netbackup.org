@@ -1,19 +1,6 @@
 #+STARTUP: hidestars
 #+STARTUP: indent
 
-
-
-The master server manages backups, archives, and restores. You configure backup policies on the master server to determine the computers (clients) and the files that you want to back up. The master server is also responsible
-for media and device selection for NetBackup. The master server contains
-the NetBackup catalog. The catalog contains the internal databases that
-contain information about NetBackup backups and configuration.
-■ Media servers provide additional storage by allowing NetBackup to use the
-storage devices that are attached to them. Media servers can also increase
-performance by distributing the network load. Media servers can also be
-referred to as device hosts.
-■ Client software resides on the computers that contain data to back up. (Servers
-also contain client software and can be backed up.)
-
 * Concepts
 Master server manages backups, archives, and restores.
 
@@ -334,7 +321,7 @@ For UNIX systems use the ps -ef | grep pbx command to determine if the pbx_excha
 
 The following example is from a Solaris 9 server running NetBackup 6.0:
 
-# /usr/openv/netbackup/bin/bpps-x
+# /usr/openv/netbackup/bin/bpps -x
 ...
 SharedVERITASProcesses
 ------------------------
@@ -854,3 +841,143 @@ i.  Open GUI's NOW.
 Applies To
 
 NetBackup Servers.
+
+** Disk Media is not active (backupserver3)
+*** Troubleshooting steps
+1st check if the active or inactive.
+
+[root@backupserver1 ~]# /usr/openv/volmgr/bin/vmoprcmd -hoststatus -h backupserver3
+
+                       CURRENT HOST STATUS
+
+Host backupserver3 is ACTIVE-TAPE
+
+That means 'backupserver3' media server is only active for tape only. It's not active for disks. I checked for other media servers.
+
+
+[root@backupserver1 ~]# /usr/openv/volmgr/bin/vmoprcmd -hoststatus -h backupserver2
+
+                       CURRENT HOST STATUS
+
+Host backupserver2 is ACTIVE
+
+[root@backupserver1 ~]# /usr/openv/volmgr/bin/vmoprcmd -hoststatus -h backupserver4
+
+                       CURRENT HOST STATUS
+
+Host backupserver4 is ACTIVE
+
+
+*** How to activate it ?
+
+[root@backupserver1 ~]# cd /usr/openv/netbackup/bin/admincmd/
+[root@backupserver1 admincmd]# ./nbemmcmd -updatehost -machinename backupserver3 -machinetype media -machinestateop set_disk_active -masterserver backupserver1
+NBEMMCMD, Version: 7.7.3
+Command completed successfully.
+
+[root@backupserver1 admincmd]#
+[root@backupserver1 admincmd]#
+[root@backupserver1 admincmd]# /usr/openv/volmgr/bin/vmoprcmd -hoststatus -h backupserver3
+
+                       CURRENT HOST STATUS
+
+Host backupserver3 is ACTIVE
+
+
+
+To connect to master:
+
+[root@backupserver1 admincmd]# ./nbemmcmd -updatehost -machinename backupserver3 -machinetype media -machinestateop set_master_server_connectivity  -masterserver backupserver1
+NBEMMCMD, Version: 7.7.3
+Command completed successfully.
+[root@backupserver1 admincmd]# /usr/openv/volmgr/bin/vmoprcmd -hoststatus -h backupserver3
+                       CURRENT HOST STATUS
+
+Host backupserver3 is ACTIVE
+
+[root@backupserver1 admincmd]#
+
+
+*** Still it didn't solve the issue:
+Then i googled with the error "nbjm_media_request() failed: 25, cannot continue with copy 1"
+I found the following kb in Veritas.
+
+$ bpps -x
+
+pbx_exchange service is not running in media server.
+
+I started it.
+
+backupserver3:/usr/openv/netbackup/bin # /opt/VRTSpbx/bin/vxpbx_exchanged status
+Symantec Private Branch Exchange is not running
+backupserver3:/usr/openv/netbackup/bin # /opt/VRTSpbx/bin/vxpbx_exchanged start
+Started Symantec Private Branch Exchange
+
+
+
+*** Media server showing offline. Not active for tape and disk.
+Article: 100006171
+Last Published: 2018-10-01
+Ratings:  15 2
+Product(s): NetBackup
+Problem
+After adding new TEMP license keys, media servers are showing offline.
+
+The same may happen too when Netbackup on affected media server was shutdown, before performing system/SAN changes or maintenance on the media server. Media server is not active for tape devices.
+
+Error Message
+Media server showing offline
+
+Media server not showing "Active for Tape and Disk"
+
+Solution
+nbemmcmd command is located in:
+
+Unix: /usr/openv/netbackup/bin/admincmd/
+Windows: \Netbackup\bin\admincmd\
+
+nbemmcmd -updatehost -machinename <mediaserver hostname> -machinetype media -machinestateop set_tape_active -masterserver <masterserver hostname>
+(do this if media server is NOT active for tape)
+
+nbemmcmd -updatehost -machinename <mediaserver hostname> -machinetype media -machinestateop set_disk_active -masterserver <masterserver hostname>
+(do this if media server is NOT active for disk)
+
+Sometimes the above may not work because connection is still not established between PBX, then you need to:
+
+nbemmcmd -updatehost -machinename <mediaserver hostname> -machinetype media -machinestateop set_master_server_connectivity -masterserver <masterserver hostname>
+(this shall reconnect master to media server)
+
+Refresh Netbackup Admin console and media server status will be back to previous state.
+
+
+Applies To
+
+Netbackup 6.x & 7.x, applicable to all Operating System
+
+
+
+*** Getting "nbjm_media_request() failed: 25, cannot continue with copy 1" on backups
+https://www.veritas.com/support/en_US/article.100027075
+Article: 100027075
+Last Published: 2012-07-28
+Ratings:  4 0
+Product(s): NetBackup
+Problem
+Seeing the following error when running a backup
+
+Error Message
+From activity monitor:
+
+17.4.2012 22:54:19 - Error bptm(pid=1514) nbjm_media_request() failed: 25, cannot continue with copy 1
+17.4.2012 22:54:19 - Error bptm(pid=1514) INF - cannot connect on socket (25), cannot continue with copy 1
+17.4.2012 22:54:19 - Info bptm(pid=1514) EXITING with status 25 <----------
+17.4.2012 22:55:20 - Info bpbkar(pid=1513) done. status: 25: cannot connect on socket
+17.4.2012 22:55:30 - awaiting resource media-hcart-robot-tld-1 Reason: Drives are in use, Media Server: media.domainname.com,
+Robot Number: 1, Robot Type: TLD, Media ID: N/A, Drive Name: N/A,
+Volume Pool: NetBackup, Storage Unit: media-hcart-robot-tld-1, Drive Scan Host: N/A
+
+Cause
+pbx_exchange is not running
+
+Solution
+Start pbx_exchange and then restart NetBackup
