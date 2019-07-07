@@ -2,13 +2,38 @@
 #+STARTUP: hidestars
 
 * What is DNS?
+Domain Name System
+
 * How DNS works?
 - Web browser ask the computer to provide the IP for the inserted URL.
 - If computer does not have it in cache, then it will ask the recursive name server, or name resolver, to provide.
-- If the name resolver server does not have it, then it will ask the Rood Domain Name Server to provide the IP of the top level domain name server (TLDs) matching the top level domain name of the URL by reading from right to left.
-- The
-* A record
-* CNAME
+- If the name resolver server does not have it, then it will ask the Root Domain Name Server.
+- Root domain name server will provide the IP of the top level domain name server (TLDs) matching the top level domain name of the URL by reading from right to left.
+- Then name resolver will inquire TLD server. The TLD server will provide the authoritative name server IP which has the A record of the URL.
+- Then the authoritative name server will provide the IP of the URL to the recursive name server (name resolver)
+- The name resolver will send the IP to the iquiring computer.
+- Then the computer will give the IP to browser.
+
+* Common DNS Tyes
+- SOA record
+- NS record
+- A record
+- CNAMES
+- MX record
+- PTR record
+
+
+* Understand the difference between alias and CNAME
+
+* AWS Routing policies
+- simple routing
+- weighted routing
+- latency-based routing
+- failover routing
+- geolocation routing
+- geoproximting routing
+- multivalue answer routing
+
 
 * Links
 [[https://www.cloudflare.com/learning/][Cloudfare explanation]]
