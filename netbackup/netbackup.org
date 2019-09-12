@@ -981,3 +981,181 @@ pbx_exchange is not running
 
 Solution
 Start pbx_exchange and then restart NetBackup
+Veritas support Support
+* How to avoid tape drives showing as DOWN, or Device Path Missing in NetBackup (in a Windows environment) after a Media Server/s reboot.
+Support
+Knowledge base
+100002002
+Search all support & community content...
+
+Article: 100002002
+Last Published: 2019-05-06
+Ratings:  3 3
+Product(s): NetBackup
+Problem
+How to avoid tape drives showing as DOWN, or Device Path Missing in NetBackup (in a Windows environment) after a Media Server/s reboot.
+
+Error Message
+How to avoid tape drives showing as DOWN or Device Path Missing in NetBackup in a Windows environment after a Media Server(s) reboot.
+
+Solution
+Any changes made to devices or switches through which devices are connected require the following steps to be done to establish proper connectivity.
+
+MASTER SERVER:
+
+Suspend NB Scheduling by running:  ....\Veritas\netbackup\bin\admincmd\nbpemreq -suspend_scheduling
+Suspend User initiated backups by running:   ...\Veritas\netbackup\bin\admincmd\bprdreq -terminate
+
+Reference:-       How to prevent backup jobs from starting while running job complete so that maintenance can occur once all jobs have completed?
+                          https://www.veritas.com/support/en_US/article.000038919
+
+
+
+MEDIA SERVER:
+Confirm from the Operating System perspective that the devices are being presented properly. Use the Windows Device Manager.
+Delete phantom Devices
+
+Reference:-       DOCUMENTATION: How to delete "ghost" or "phantom" devices from the Windows Device Manager when using Veritas NetBackup (tm)
+                          https://www.veritas.com/docs/000042456
+
+
+
+
+ON SAN SWITCHES:
+Confirm that the switch is able to see the devices connected to it properly.
+A switch reboot is best option. If switch reboot is not possible, disabling and enabling the ports on the switch allows a re-scan to find the devices connected.
+
+
+MEDIA SERVERS:
+
+Confirm that the robot(s) and tape drives are visible from the NetBackup perspective for each Media Server by running the following commands
+Windows
+Install_Location\Veritas\volmgr\bin\scan -tape
+
+Install_Location\Veritas\volmgr\bin\tpautoconf -t
+
+Install_Location\Veritas\volmgr\bin\scan -changer
+
+Install_Location\Veritas\volmgr\bin\tpautoconf -r
+
+ Linux
+/usr/openv/volmgr/scan -tape
+
+/usr/openv/volmgr/tpautoconf -t
+
+/usr/openv/volmgr/scan -changer
+
+/usr/openv/volmgr/tpautoconf -r
+
+
+MASTER SERVER:
+
+Reset all NBRB allocations in NetBackup (from Master Sever) by running:  ..\Veritas\netbackup\bin\admincmd\nbrbutil -resetAll
+
+
+LOCALLY ON THE MEDIA SERVER OR FROM THE MASTER SERVER:
+
+Gather a list of configured drives by running on the media server:  ...\Veritas\volmgr\bin\tpconfig -d
+For each drive marked DOWN manually UP the drive by running the following on the media server:  ...\veritas\volmgr\bin\vmoprcmd -up <drive Index>
+Or use this command to UP the drive from the Master Server :  ...\veritas\volmgr\bin\vmoprcmd -up <drive Index> -h <MEDIA-SERVER-HOSTNAME>
+
+Note: The <drive Index> is the first column in the 'tpconfig -d' output.
+
+
+
+ON THE MASTER SERVER:
+
+Run the device configuration wizard to confirm devices are configured properly.
+Perform a robot inventory update on all configured robots.
+Resume NB Scheduling by running :  ...\veritas\netbackup\bin\admincmd\nbpemreq -resume_scheduling
+Resume User initiated jobs by running:  ...\veritas\netbackup\bin\initbprd
+
+Reference:-       How to prevent backup jobs from starting while running job complete so that maintenance can occur once all jobs have completed?
+                        https://www.veritas.com/docs/000038919
+
+
+
+Was this content helpful?
+
+VOX Community Veritas.com
+Visit our social dashboard
+Privacy Policy Legal User agreement
+
+* Veritas support Support
+Support
+Knowledge base
+100023371
+Search all support & community content...
+How to delete "ghost" or "phantom" devices from the Windows Device Manager when using NetBackup
+Article: 100023371
+Last Published: 2012-06-06
+Ratings:  4 4
+Product(s): NetBackup
+Problem
+There are "ghost" or "phantom" devices from the Windows Device Manager when using NetBackup
+
+Cause
+Several things can contribute to the addition of ghost devices in the Windows Device Manager.  Some of these include adding or removing hardware, changes to tape drives or tape libraries, failure to use persistent binding, static indexing, or hard ALPAs on storage area network (SAN) equipment.  These sort of things allow changes to the SCSI device path presentation of a device to the operating system.  These "ghost" devices can retain Port, SCSI, Target, and logical unit number (LUN) information that conflict with the active devices being used by Windows.  Under these circumstances, hardware instability can result.
+
+Running the device discovery wizard in NetBackup, for example, may list 20 tape drives when only 10 tape drives physically exist.  This information is being pulled from the operating system and can incorrectly associate tape device information with the NetBackup hardware configuration.  Also, when there are ghost devices, tape device drivers may "disappear" or roll back to the previous drivers after a tape device driver update.
+Solution
+To identify and remove the ghost devices from the Windows Device Manager, do the following:
+
+
+1.  From the command prompt on the problem media server, run:
+
+C:\>set devmgr_show_nonpresent_devices=1
+
+C:\>start devmgmt.msc
+
+
+
+2.  Then, select View from the drop down and select to Show Hidden Devices.
+
+
+At this point, any ghost tape devices will be seen with lighter, transparent icon and can be removed.  This is done by right-clicking the ghost tape device and selecting " Uninstall".  A reboot of the machine should be performed following this action.  It may also be necessary to delete and re-add any of these devices being used by NetBackup, as the current NetBackup configuration may have been pointing to one of these ghost devices, rather than the active one.  Prior to re-configuring any devices for use with NetBackup, ensure no additional ghost entries have been created following the reboot of the server.
+
+
+
+
+Was this content helpful?
+
+VOX Community Veritas.com
+Visit our social dashboard
+Privacy Policy Legal User agreement
+
+
+* Veritas support Support
+Support
+Knowledge base
+100021232
+Search all support & community content...
+How to prevent backup jobs from starting while running job complete so that maintenance can occur once all jobs have completed?
+Article: 100021232
+Last Published: 2009-01-11
+Ratings:  0 0
+Product(s): NetBackup
+Problem
+How to prevent backup jobs from starting while running job complete so that maintenance can occur once all jobs have completed?
+Solution
+To preventuser initiated jobs from starting:
+$/usr/openv/netbackup/bin/admincmd/bprdreq -terminate
+
+To prevent scheduled backups from starting:
+$/usr/openv/netbackup/bin/admincmd/nbpemreq-suspend_scheduling
+
+To resumeprocessing of both user initiated and scheduled jobs:
+$/usr/openv/netbackup/bin/initbprd
+$/usr/openv/netbackup/bin/admincmd/nbpemreq-resume_scheduling
+
+Please beaware that terminating bprd while Oracle or SAP backup jobs are active willresult in the indirect failure of the jobs.  The Oracle RMAN and SAPbrbackup utilities do not consider a backup operation complete until both theapplication backup job has completed and a subsequent image lookup has beensuccessful.  If bprd is terminated, the image lookup will fail and Oracleor SAP will discard the information for those backups.  The next backup forthe instances will include a second copy of the data.
+In rareinstances, this may cause problems for Oracle if running NetBackup 6.5.5 orprior.  See E-Track 1633407 in the Related Documents section for additionaldetails.
+
+
+Related Knowledge Base Articles
+BUG REPORT: Oracle process crashes doing sbtinfo2 or sbtremove2 if client temporarily cannot connect to bprd on the master server.
+Was this content helpful?
+
+VOX Community Veritas.com
+Visit our social dashboard
+Privacy Policy Legal User agreement
