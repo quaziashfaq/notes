@@ -1,0 +1,120 @@
+#+OPTIONS: H:4
+#+STARTUP: overview
+#+STARTUP: indent
+#+STARTUP: inlineimages
+#+STARTUP: hidestars
+
+* HTML5 elements
+
+h1
+h2
+p
+header, footer, nav, video, article, section
+
+The main HTML5 tag helps search engines and other developers find the main content of your page.
+
+img self-closing
+
+You can use anchor elements to link to content outside of your web page.
+
+  <a href="http://freecatphotoapp.com" target="_blank">cat photos</a>
+
+  <form action="/submit-cat-photo">
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+
+
+
+<a href="#my-id">Paragraph page</a>
+<a href="#">link to dead page</a>
+
+
+#+BEGIN_SRC html
+
+<form action="/submit-cat-photo">
+  <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" checked>Indoor</label>
+  <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor">Outdoor</label>
+  <input type="text" placeholder="cat photo URL" required>
+  <button type="submit">Submit</button>
+
+    <label for="good"><input id="good" type="checkbox" name="personality">Good</label>
+    <label for="bad"><input id="bad" type="checkbox" name="personality">Bad</label>
+    <label for="ugly"><input id="ugly" type="checkbox" name="personality">Ugly</label>
+
+    <button type="submit">Submit</button>
+
+ <button type="submit">Submit</button>
+
+</form>
+
+
+#+END_SRC
+
+
+You can add another level of organization in your HTML document within the html tags with the head and body elements. Any markup with information about your page would go into the head tag. Then any markup with the content of the page (what displays for a user) would go into the body tag.
+
+Metadata elements, such as link, meta, title, and style, typically go inside the head element.
+
+* CSS Style
+** inline
+images<h2 style="color: red">CatPhotoApp</h2>
+
+
+** Separate but in the same html file
+*** Changing the element style
+<style>
+  h2 {
+    color: blue;
+  }
+</style>
+*** Changing the style using class
+<style>
+  h2 {
+    color: blue;
+  }
+  .red-text {
+    color: red;
+  }
+</style>
+
+<h2 class="red-text">CatPhotoApp</h2>
+
+*** Importing google font library
+
+To import a Google Font, you can copy the font(s) URL from the Google Fonts library and then paste it in your HTML. For this challenge, we'll import the Lobster font. To do this, copy the following code snippet and paste it into the top of your code editor(before the opening style element):
+
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+
+*** Border and Applying 2 style classes on an element
+<style>
+  .red-text {
+    color: red;
+  }
+
+  h2 {
+    font-family: Lobster, monospace;
+  }
+
+  p {
+    font-size: 16px;
+    font-family: monospace;
+  }
+
+  .smaller-image {
+    width: 100px;
+  }
+
+  .thick-green-border {
+    border-color: green;
+    border-width: 10px;
+    border-style: solid;
+  }
+</style>
+
+<h2 class="red-text">CatPhotoApp</h2>
+<main>
+  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+

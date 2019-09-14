@@ -1,0 +1,43 @@
+#+OPTIONS: H:4
+#+STARTUP: overview
+#+STARTUP: indent
+#+STARTUP: inlineimages
+#+STARTUP: hidestars
+
+This is a Netbackup guide book I am preparing for myself and next Netbackup admins. The outline is taken from the Netbackup training course description found in the Netbackup training site. The details will be taken from the Netbackup documentation.
+
+Disclaimer:
+I didn't attend any Veritas Netbackup training yet.
+I don't have any copy of the Netbackup training materials.
+It is not a copy of training material.
+It is by no means replacement of the official training material.
+
+(Did I cover myself well??)
+
+* Introducing NetBackup
+** Data protection and the NetBackup environment
+*** Summary
+Today, IT enterprises are undergoing a digital transformation as part of their hybrid cloud strategy. The cost and complexity of managing fragmented point products without adopting a unified dataprotection strategy can often lead to disaster. In a recent ESG study1, 320 IT professionals wereasked to characterize their organizations’ biggest challenges with current data protection processes and technologies. Although 34 percent of respondents listed cost as their top challenge, they also said protecting public cloud and virtual environments, managing multiple data protection solutions
+and the lack of disaster recovery (DR) plans were among their major challenges.
+
+If organizations choose to simplify and automate DR in the cloud, ensuring backup data is optimized while in transit to the cloud and enabling quick recovery of data from the cloud are both vital to their success. And data protection for hybrid cloud environments can pose a variety of challenges ranging from containing total cost of ownership (TCO) to ensuring regulatory compliance. In general, most organizations are wrestling with how to reduce cost and complexity, manage business risks and prepare for the technologies of the future.
+
+*** Reduce cost and complexity
+How do you drive down operational costs in your data center? Managing separate components from different vendors not only creates complexity, but it increases operational costs. Excess components in the data center also require extra space, power and cooling, further boosting OpEx. Plus, the inability to integrate existing technologies with third-party components and new cloud workloads can derail efforts to increase operational efficiencies.
+
+*** Manage business risks
+Have you calculated your business risks recently? Today’s risks take many forms, including everything from natural disasters to security lapses or actual attacks. For example, manual processes can create vulnerabilities in your IT environment due to human error. If you routinely 
+miss RPOs and RTOs, your organization could face unmet service-level agreements (SLAs) and possibly disgruntled customers. And don’t
+forget to add preparing for malicious attacks to your data protection strategy.
+PREPARE FOR THE FUTURE
+Are you prepared to adopt a hybrid cloud model? Have you created an intelligent data protection strategy to support your new plan? That
+strategy should include a migration path to securely back up your steadily growing amounts of data to the cloud. Wherever possible, simplify
+your IT processes with automated, efficient backups and recovery along with self-service. In fact, if you’re spending all your time maintaining
+your current environment, you won’t be able to prepare to adopt the new cloud and virtualization technologies of the future. 
+
+
+ NetBackup concepts
+ NetBackup Appliance Overview
+ Using the NetBackup Administration Console
+ Using the NetBackup web interface
+ Using NetBackup OpsCenter

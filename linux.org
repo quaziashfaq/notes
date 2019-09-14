@@ -1,0 +1,350 @@
+#+STARTUP: indent
+#+STARTUP: hidestars
+
+* Package Management
+** yum
+yum info httpd
+yum search httpd
+yum install httpd
+yum list installed httpd
+yum deplist httpd
+
+yum remove httpd
+yum autoremove httpd
+
+cd /etc/yum.repos.d
+ls
+
+
+yum clean all
+
+yum update
+
+** rpm
+rpm -ivh ***.rpm
+
+Query the version
+rpm -qi
+rpm -ql
+rpm -qd
+
+
+To check the dependency list of the package.
+rpm -qR <package.rpm>
+rpm -qpR <package.rpm>
+
+Update package
+rpm -Uvh <package name>
+
+Remove the package
+rpm -e --test <package name>
+rpm -e <package name
+
+Qurey
+rpm -q <package name>
+
+** apt
+apt update
+
+To search for a package
+apt-cache search <package name>
+
+To install a package
+apt install <package name>
+
+To remove a package
+apt remove <package name>
+
+To remove configuration files too with removal of a package
+apt remove --purge <pacage name>
+
+To remove package installer in cache
+apt clean
+
+apt full-upgrade
+
+** dpkg
+Get the list of packages that are installed
+dpkg --get-selections
+dpkg --get-selections <package name.deb>
+
+Check package dependencies
+ dpkg-deb -I google-chrome-stable_current_amd64.deb
+
+Check the contents of the package
+dpkg-deb --contents google-chrome-stable_current_amd64.deb
+
+Install package
+dpkg -i <package name.deb>
+Then missing dependencies. System has requested for some packages but it does not have them. So give in command line
+apt update
+Then force to install which are flagged that they are not found in the system.
+apt -f upgrade
+
+To remove
+dpkg -r <package name>
+
+To purge left configuration files
+dpkg -P <package name>
+
+*** dpkg --list output header flags description.
+Where to find this information in the system
+You can find this information out in the head of dpkg -l output, as it's just a formatting convention:
+
+dpkg -l | head -3
+Copied here for reference:
+
+Desired=Unknown/Install/Remove/Purge/Hold                                     
+| Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
+|/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)                    
+Description of each field
+As you can see from the first three lines:
+
+First letter -> desired package state ("selection state"):
+
+u ... unknown
+i ... install
+r ... remove/deinstall
+p ... purge (remove including config files)
+h ... hold
+Second letter -> current package state:
+
+n ... not-installed
+i ... installed
+c ... config-files (only the config files are installed)
+U ... unpacked
+F ... half-configured (configuration failed for some reason)
+h ... half-installed (installation failed for some reason)
+W ... triggers-awaited (package is waiting for a trigger from another package)
+t ... triggers-pending (package has been triggered)
+Third letter -> error state (you normally shouldn't see a third letter, but a space, instead):
+
+R ... reinst-required (package broken, reinstallation required)
+
+*** Find the package dependencies
+apt-cache showpkg pkgname
+
+apt-cache depends pkg...
+depends shows a listing of each dependency a package has and all the possible other packages that can fulfill that dependency.
+
+apt rdepends pkg...
+rdepends shows a listing of each reverse dependency a package has.
+
+** pacman
+To find the package dependency.
+$ pactree vim
+
+
+* Commands
+ls
+ls -a
+ls -R
+ls -al
+ls -alt
+ls -altr
+ls -alS
+ls -alSr
+
+.  = Current directory
+.. = Parent directory
+
+*env* command to print all variables set in the environment of the currently logged in shell.
+
+*echo $PATH* to print PATH variable
+
+reboot
+init 6
+
+poweroff
+
+To halt the system
+shutdown --halt
+
+To poweroff the system
+shutdown -
+
+whoami
+echo $LOGNAME
+
+
+To display the name of system kernel
+$ uname
+
+To get kernel release numebr
+$ uname -r
+
+To get kernel build version
+$ uname -v
+
+To get machine type
+$ uname -m
+$ uname -p
+
+To get name of the operating system
+$ uname -o
+
+
+$ pwd
+$ echo $PWD
+
+$ cat .bash_history
+$ history
+
+$ echo $HISTFILESIZE
+
+Environment variable that modifies Bash's history behavior
+$ echo $HISTCONTROL
+
+re-runs command from .bash_history
+$ !<history number>
+
+*The Bash Configuration File Order - Login SHell*
+During a login shell, these configuration script files are called in this order:
+- /etc/profile
+- Then the order branches out, the first file that is found is used, all of the others are ignored even if they exist:
+  - ~/.bash_profile
+  - ~/.bash_login
+  - ~/.profile
+
+Next, .bashrc is called, followed by /etc/bashrc
+
+
+*Descriptions of login files*
+/etc/bashrc - system-wide functions and aliases
+
+/etc/profile - system-wide environment and startup programs, used during a login shell.
+
+/etc/profile.d - directory of extra environment setup scripts
+
+The following files are in the home directory of the user (note that not all distributions will use all of these files):
+
+.bash_profile - used to set user specific shell environent preferences
+
+.bash_logout - ran when the user logs out of a login hell, not a terminal, does not exist on every system.
+
+.bashrc - non-login file that stores user specific functions and aliases
+
+What is a non-login shell?
+When user runs an application/script or runs 'Terminal' application, it's non-login shell. And then it requires .bashrc in user's home directory and /etc/bashrc file to set up the environment variables.
+
+echo $PWD
+echo $OLDPWD
+cd -
+
+set - list out all environment variables in alphabetical order
+
+VARIABLENAME=value
+export VARIABLENAME
+
+PATH=$PATH:/opt
+echo $PATH
+export PATH
+
+*Globbing* = Global Commands
+'*' -matches zero or more characters
+
+? - matches any single characeter
+
+[abc] - matches any one of the characeters in the list, case sensitive
+
+[^abc] = matches any one character except those in the list, case sensitive
+
+[0-9] - matches a range of numbers
+
+
+" " - double quotes, contains stirngs and any variables or commands within them get evaluated or acted on.
+
+' ' - single quotes, anything within these gets treated literally, disables any special character functionality.
+
+\ - backslash, escape character, disables any special character functionality that immediately follows it.
+
+Quotaes around spaces or an escape character preceding a space will be treated literally.
+
+Commands have parameters.
+Paremeters with leading dash (-) are called flags or switches
+Parameters with no leading dash are called arguments
+
+locate - searches a local database of files and folders looking for items that match the search criteria. Example: locate cd
+
+find - searches the file system for files that match the search citeria. When using the 'find' command to search for part of a filen name, use globbing within single quotes. Example: find /path/to/folder -name '*file'
+
+whereis - locates binary, source and/or manual pages for a command
+
+*Manual Sections*
+Section Numbers
+1 - Executable programs and shell commands
+2 - System calls provided by the kernel
+3 - Library calls provided by the program libraries
+4 - Device file (usually stored in /dev)
+5 - File formats
+6 - Games
+7 - Miscellaneous (macro packages, conventions and so on)
+8 - System admiministration commands (program run mostly by exclusively by root)
+9 - Kernel routines
+
+whatis - Command that lists summaries and related man pages based on search item.
+$ whatis <command>
+$ man -f <command>
+
+apropos - command that searches man page for appearances of the keyword provided, invoked by entering
+$ apropos <keyword>
+$ man -k <keyword>
+
+info <command>
+
+
+More help materials
+cd /usr/share/doc
+
+Als check the files in //etc/ directory to get more documentattion
+
+Filesystem Hierarchy Standard (FHS)
+http://www.pathname.com/fhs/
+
+
+* Linux
+** Merge 2 pdfs into one - Errors
+29
+
+$ vim /etc/Imagemaghic/policy.xml
+
+emcconville is correct. More specifically edit the Imagemagick policy.xml file to uncomment this line:
+
+  <!-- <policy domain="module" rights="none" pattern="{PS,PDF,XPS}" /> -->
+
+And change it from rights="none" to rights="read|write"
+
+  <policy domain="module" rights="read|write" pattern="{PS,PDF,XPS}" />
+
+This was a recent addition to the policy.xml file, I believe, due to a security flaw found in the Ghostscript delegate. I think that flaw has now been fixed in the current version of Ghostscript, which is 9.25.
+
+Then merge into one.
+$ convert 1.pdf 2.pdf output.pdfs
+
+
+
+
+
+
+* Virtualization
+** Different Tools
+Virtualbox
+KVM
+Qemu
+Xen
+LXC
+Docker
+
+** Orchestration Tools
+Docker Swarpm
+Apache Mesos
+kubernetes
+
+
+* Git
+Always remember that git commands and their outputs are context sensitive. For example, git checkout command will take a snapshot of committed state of the current branch. Any new untracked file will be visible in all branches.
+Once I add that file in a branch, then that new file gets attached with that branch.
+
+Each checkout is a snapshot. So if there are 2 branches A->B where B is a branch of A, then if I add a new file to A, it will not be visible to B. Because, B branched out earlier to addition of new file.
+
+git merge command.. it is also context sensitive. It will merge the named branch to the current branch.
