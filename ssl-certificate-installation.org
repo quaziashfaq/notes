@@ -1,0 +1,40 @@
+#+STARTUP: indent
+#+STARTUP: hidestars
+
+This document is not ready yet. Need a lot of attention.
+
+* What is SSL?
+* What is CA certificate?
+
+* TODO How to update CA Certificates in office? [Need update]
+In AAA office, there is a proxy and as my laptop or this machine is not part of the AAA domain, this machine does not get automatically certificates pushed into from the AD.
+
+So here is kind of my way installing the serucity certificates in Ubuntu (that is my machine).
+
+After you downloaded the certificates
+$ cd certificates/
+$ mv certnew.cer AAA-cert.cer
+
+Copy them to the location */usr/local/share/ca-certificates/*
+$ sudo cp AAA-cert.cer /usr/local/share/ca-certificates/
+
+openssl x509 -inform der -in AAA-cert.crt -outform PEM -out AAA-cert.pem
+
+Update
+$ sudo update-ca-certificates
+
+Check
+$ ls -l /etc/ca-certificates/update.d/
+
+1239  cd /usr/local/share/ca-certificates/
+ 1240  ls -al
+ 1241  mv AAA-cert.cer AAA-cert.crt
+ 1242  sudo mv AAA-cert.cer AAA-cert.crt
+ 1243  sudo update-ca-certificates
+ 1244  ls /etc/ca-certificates/update.d/
+
+
+
+ 1253  sudo update-ca-certificates -refresh
+ 1254  sudo update-ca-certificates -fresh
+ 1255  sudo update-ca-certificates --verbose --fresh
