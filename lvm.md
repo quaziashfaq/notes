@@ -101,8 +101,8 @@ root@magpie:~# pvcreate /dev/sdc1
 
 Then create a volume group (vg) named as _additionalvg_ on top of **/dev/sdc1**
 ```
-root@magpie:~# vgcreate additonalvg /dev/sdc1
-  Volume group "additonalvg" successfully created
+root@magpie:~# vgcreate additionalvg /dev/sdc1
+  Volume group "additionalvg" successfully created
 ```
 
 Then create a logical volume (lv) with 1G size named as _lvol1_ out of the volume group _additionalvg_.
