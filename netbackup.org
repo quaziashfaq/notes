@@ -827,6 +827,7 @@ d. Terminate all NBU Processes if any are found lingering around.           (Mas
      "bpps -x"   or "bpps"
      "kill -9 <PID>"    or     "taskkill /PID <PID>"
 e. Stop and start PBX on                                        (Master and ALL Media Servers)
+$ cd /opt/VRTSpbx/bin/
     "vxpbx_exchanged stop"                                     (for Windows stop and start from Services.)
     "vxpbx_exchanged start"
 f.  Start NBU daemons/services on Master
