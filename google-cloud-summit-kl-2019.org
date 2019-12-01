@@ -1,0 +1,115 @@
+#+STARTUP: indent
+#+STARTUP: hidestars
+
+
+
+* Containers
+** Consistent environmetn
+** run anywhere
+** effective isolation
+*** Process isolation
+*** What is cgroups? developed by G
+
+* Challenges of containers
+
+** scheduling
+** lfecycle andhealth
+** scaling
+** naming and discovery
+** load balancing
+** storage volumes
+
+* Kubernetes
+This is introduced to solve the challenges of containers
+Created 5 years ago.
+
+Book name: Kubernetes The Hard Way
+
+Google Kubernetes Engine
+Getting Started Guides
+Quarterly release
+
+Google Kubernetes Engine = GKE
+
+GKE on-prem
+Single pane of glass dashboard
+VPC Service Controls
+
+kubeception
+
+* GKE on-prem architecture
+** Admin cluster
+** TODO Check in web how GKE on-prem works
+** GKE = Kubernetes cluster
+
+* Anthos Control Panel
+** Cluster Management
+To manage your workload in GCP, on-prem, and other cloud infra using kubernetes cluster.
+
+** Policy management
+Name: Anthos config management
+Policy as code
+git as source of truth
+YAML applied to every cluster
+Integrates with your SCM
+Pre-commit validation
+
+** Service Management
+Problem:
+Hundreds of applications/micro-services --> It becomes hard to understand the service dependency and its related security
+Solution: *Istio & Google Cloud Service Mesh*
+To route the application traffics coming from a subset of users and get telemetry data, it will greatly help us.
+It's transparent. It's language agnostic. Security enabled
+
+* SRE has to montior these 4 health indicators
+The request rate
+error rate
+latency
+saturation rate
+
+
+
+* What else in Anthos?
+Cloud Run on GKE
+Multi-dimensional autoscaling
+
+** Workload
+HPA
+VPA
+** Infrastructure
+CA
+NAP
+** Sandbox Pops
+gAdvisor
+
+
+* Site Reliability Engineering
+** What is SRE
+Core problem: Software's long-term cost
+SE as a sicipline focuses on designing and ubilding rather than operating andmaintainng, despite estimates that 40% to 90%
+Incentive's aren't allowed.
+Devolopers = agility
+Operators = stability, scalability and maintenance
+*** Reducing product lifecycle friction
+concept
+ideas
+development
+deplayment
+*** DevOps
+1. Reducet organizational silos
+2. Accept failure as normal
+3. Implement gradual changes
+4. Leverage tooling andautomation
+5. Measure everyithng
+
+
+SRE approach to operations
+Use data to guide
+
+What do SRE teams do?
+SRE develop
+
+** Key principles of SRE
+** Practices of SRE
+** How bto get starrted
+** Ways to get help

@@ -1,9 +1,29 @@
-;; Happy hacking, ashfaq - Emacs ♥ you!
+#+STARTUP: indent
+#+STARTUP: hidestars
 
-Python keywords
+* Python keywords
 and	as	assert	break	class	continue
 def	del	elif	else	except	exec
 finally	for	from	global	if	import
 in	is	lambda	nonlocal	not	or
 pass	raise	return	try	while	with
 yield	True	False	None
+
+* Making python development environment ready
+sudo apt install python3-dev python3-pip python3-virtualenv
+mkdir project-dir
+cd project-dir
+
+Creating the virtualenv in the project directory
+python3 -m venv venv
+
+Setting the python runtime version
+virtualenv -p pytohn3 ./venv
+
+Activating the virtual environment
+source ./venv/bin/activate
+
+Upgrade and install packages
+pip install --upgrade pip
+pip install --upgrade tensorflow
+pip install --upgrade jupyterlab

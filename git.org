@@ -73,3 +73,22 @@ Now push your local updated repo to your fork in github.
 
 $ git pull origin master
 
+* Merging repo from another machine with github repository
+** Clone the repo from another machine
+$ git clone ssh://ash@192.168.56.21/home/ash/docker/docker-config
+$ git remote -v
+origin	ssh://ash@192.168.56.21/home/ash/docker/docker-config (fetch)
+origin	ssh://ash@192.168.56.21/home/ash/docker/docker-config (push)
+
+** Now add the github repo
+Change directory.
+$ cd docker-config/
+$ git remote -v
+
+Now add the github url
+$ git remote add githubrepo git@github.com:quaziashfaq/docker-config.git
+$ git remote -v
+githubrepo	git@github.com:quaziashfaq/docker-config.git (fetch)
+githubrepo	git@github.com:quaziashfaq/docker-config.git (push)
+origin	ssh://ash@192.168.56.21/home/ash/docker/docker-config (fetch)
+origin	ssh://ash@192.168.56.21/home/ash/docker/docker-config (push)
