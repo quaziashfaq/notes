@@ -348,3 +348,33 @@ Once I add that file in a branch, then that new file gets attached with that bra
 Each checkout is a snapshot. So if there are 2 branches A->B where B is a branch of A, then if I add a new file to A, it will not be visible to B. Because, B branched out earlier to addition of new file.
 
 git merge command.. it is also context sensitive. It will merge the named branch to the current branch.
+
+* How to use tar and zip commands
+tar - maniplate archive files
+-c = create a new archive
+-z = pass the archive through gzip compression
+-j = pass the archive through bzip2 compression
+-J
+-f = file name of archie to create
+-x = extract an archive
+-v = verbose output
+
+
+zip - create a new compressed file
+-r = recursively create a compressed file of directory and its contents
+
+unzip - extract a zip archive
+
+gzip - create gzip archive
+
+gunzip - extract a gzip archive
+
+bzip2 - create a bzip2 archive
+
+bunzip2 - extract bzip2 archive
+
+tar xfv <tar.file.name> --directory=<where-I-want-to-extract>
+ 
+
+
+

@@ -983,7 +983,7 @@ pbx_exchange is not running
 Solution
 Start pbx_exchange and then restart NetBackup
 Veritas support Support
-* How to avoid tape drives showing as DOWN, or Device Path Missing in NetBackup (in a Windows environment) after a Media Server/s reboot.
+* How to avoid tape drixves showing as DOWN, or Device Path Missing in NetBackup (in a Windows environment) after a Media Server/s reboot.
 Support
 Knowledge base
 100002002
@@ -1160,3 +1160,12 @@ Was this content helpful?
 VOX Community Veritas.com
 Visit our social dashboard
 Privacy Policy Legal User agreement
+
+
+* Cleaning up catalog
+Shows the catalog cleanup time and wait time
+$ bpconfig -U
+
+
+After expiration of backup images, the following command is used to run the clean up process to free up space from the deduped storage
+$ bpimage -cleanup -allclients
