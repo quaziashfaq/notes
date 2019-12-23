@@ -12,20 +12,30 @@
 #+END_SRC
 
 * Making python development environment ready
-sudo apt install python3-dev python3-pip python3-virtualenv
-mkdir project-dir
-cd project-dir
+#+BEGIN_SRC bash
+  $ sudo apt install python3-dev python3-pip python3-virtualenv
+  $ mkdir project-dir
+  $ cd project-dir
+#+END_SRC
 
 Creating the virtualenv in the project directory
-python3 -m venv venv
+#+BEGIN_SRC bash
+  $ python3 -m venv venv
+#+END_SRC
 
 Setting the python runtime version
-virtualenv -p pytohn3 ./venv
+#+BEGIN_SRC bash
+  $ virtualenv -p pytohn3 ./venv
+#+END_SRC
 
 Activating the virtual environment
-source ./venv/bin/activate
+#+BEGIN_SRC bash
+  $ source ./venv/bin/activate
+#+END_SRC
 
 Upgrade and install packages
-pip install --upgrade pip
-pip install --upgrade tensorflow
-pip install --upgrade jupyterlab
+#+BEGIN_SRC bash
+  $ pip install --upgrade pip
+  $ pip install --upgrade tensorflow
+  $ pip install --upgrade jupyterlab
+#+END_SRC
