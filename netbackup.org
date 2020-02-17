@@ -1143,7 +1143,7 @@ To preventuser initiated jobs from starting:
 $/usr/openv/netbackup/bin/admincmd/bprdreq -terminate
 
 To prevent scheduled backups from starting:
-$/usr/openv/netbackup/bin/admincmd/nbpemreq-suspend_scheduling
+$/usr/openv/netbackup/bin/admincmd/nbpemreq -suspend_scheduling
 
 To resumeprocessing of both user initiated and scheduled jobs:
 $/usr/openv/netbackup/bin/initbprd

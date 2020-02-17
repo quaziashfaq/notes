@@ -1,0 +1,104 @@
+#+STARTUP: indent
+#+STARTUP: hidestars
+
+
+* Countable Nouns
+
+| die Frau         | die Frauen        |             |
+| der Mann         | die Männer        |             |
+| das Mädchen      | die Mädchen       |             |
+| der Junge        | die Jungen        |             |
+| Sie (she)        | Sie (they)        |             |
+| Er (he)          | Sie (they)        |             |
+| das Ei           | die Eier          | egg         |
+| das belegta Brot | die belegta Brote | like burger |
+| der Apfel        | die Äpfel         | apple       |
+| das Brot         | die Brote         | bread       |
+| der Hund         |                   | dog         |
+| die Katze        |                   | cat         |
+| das Pferd        |                   | horse       |
+| das Auto         |                   | care        |
+| die Zietung      |                   | newspaper   |
+| das Fahrrad      |                   | bicycle     |
+| ein Buch         | die Bücher        | book        |
+| Fisch            |                   | fish        |
+| der/ dasStift    | die Stifte        | pen         |
+| der Erwachsene   | die Erwachsenen   | adults      |
+| das Kind         | die Kinder        | children    |
+|                  |                   |             |
+
+
+* Uncountable Nouns
+der Kaffee
+die Milch
+
+
+* Verbs
+
+| isst     | essen     | eat             |
+| trinkt   | trinken   | drink           |
+| rennt    | rennen    | run             |
+| liest    | lesen     | read            |
+| kocht    | kochen    | cook            |
+| schwimmt | schwimmen | swim            |
+| schreibt | schreiben | write           |
+| fährt    |           | drive           |
+| läuft    | laufen    | walk            |
+| hat      | haben     | have            |
+| schläft  | schlafen  | sleep           |
+| frisst   |           | frisst (animal) |
+|          |           |                 |
+
+
+
+* Sentences
+Auf Wiedersehen
+Guten Tag
+
+eine Frau und ein Mädchen
+ein belegtes Brot und Milch
+ein Junge und ein Mann
+Reis und ein Apfel
+Brot und Wasser
+
+Sie haben eine Zeitung --> They have a newspaper.
+Er hat eine Katze.
+Sie hat einen Hund.
+Sie haben ein Pferd.
+Der Mann und der Junge trinken Wasser.
+Das Mädchen isst Brot.
+Der Mann und die Frau essen Reis.
+Der Mann isst ein Ei.
+Der Junge trinkt Milch.
+Die Frau trinkt Kaffee.
+Sie isst einen Apfel.
+Sie essen belegta Brote.
+Er isst Reis.
+Sie essen Eier.
+Der Mann fährt Auto.
+Das Mädchen läuft.
+Sie liest ein Buch.
+Zie hat einen Hund.
+Er hat eine Katze.
+Er schläft nicht. --> He does not sleep.
+
+Der Junge hat einen Stift.
+Das Mädchen hat keinen Stift.
+
+Das Mädchen hat einen Fahrrad.
+Das Mädchen hat kein Fahrrad.
+
+Der Junge hat Milch.
+Der Junge hat keine Milch.
+
+Der Hund rennt.
+Der Hund rennt nich.
+
+Die Junge haben Wasser.
+Die Junge haben kein Wasser.
+
+Was ist Das?
+Das ist ein Apfel.
+Das ist eine Zeitung.
+Das ist eine Katze.
+Das ist ein Fahrrad.
