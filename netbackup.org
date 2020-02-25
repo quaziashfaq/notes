@@ -1169,3 +1169,82 @@ $ bpconfig -U
 
 After expiration of backup images, the following command is used to run the clean up process to free up space from the deduped storage
 $ bpimage -cleanup -allclients
+
+* Windows client firewall issue solve.
+1. Stop the firewall.
+2. Test connection
+3. Add the program bpcd, vnetd, pbx_exchange.
+4. Open the ports
+   pbx_exchange --> 1556 (most important))
+   bpcd --> 13782
+   vnetd --> 13724
+5. Start the firewall.
+
+Test client connectivty
+$ bptestbpcd -client <client_machine_name> -debug -verbose
+
+* StoreOnce integration with the Netbackup.
+Create stores under storeonce catalyst
+Note down the storeonce catalyst identifier.
+Note down the target device pwwn.
+
+Check in the san switch if you fcping pwwn.
+Then zone the storeonce catalyst pwwn with media server.
+
+Open Netbackup GUI console.
+Select the top item --> server name.
+Select 'Configure Disk Storage Servers'.
+Select 'Open Storage'.
+
+Media Server --> Media server name.
+Storage server type: hp-StoreOnceCatalyst
+Storage server name: Put the catalyst identifier name 'COFC-.....'
+Credentials is the same which we use to login.
+
+Then under 'Media and Device Management' -> Credentials -> 'Storage servers', the catalyst will be visible.
+
+Then under 'Media and Device Management' -> Devices -> 'Disk Pools',
+[1] Restart the 'Media Manager Device Daemon'
+[2] Then right click -> select 'New Disk Pool'.
+[3] Select the Storage server type -> OpenStorage (hp-StoreOnceCatalyst). Select Next.
+[4] Select the desired storage server name. Select Next.
+[5] It will show the list of volume names. Select that you want to add. It will ask if I want to create storage unit automatically corresponding to this disk pool. Select 'Yes'
+[6] Then go to 'NetBackup Management' -> 'Storage Units'. You will find that stu created.
+
+Now you can use this stu in backup job policy or in storage lifecycle policy.
+
+* Checking the policy in screen mode
+
+./nbpemreq -policies screen TSP01 | less
+
+* Need to fix the number of entries in the activity monitor
+
+C:\Program Files\Veritas\NetBackup\bin\admincmd>bpgetconfig | findstr KEEP
+KEEP_DATABASE_COMM_FILE = NO
+KEEP_LOGS_DAYS = 3
+KEEP_LOGS_SIZE_GB = 0
+KEEP_VAULT_SESSIONS_DAYS = 30
+KEEP_JOBS_SUCCESSFUL_HOURS = 78
+KEEP_JOBS_HOURS = 78
+KEEP_DBM_IMAGECHANGELOG_DAYS = 7
+CLIENT_KEEP_LOG_DAYS = 0
+NBRNTD_MIN_KEEP_ALIVE_TIME = 30
+NBRNTD_MAX_KEEP_ALIVE_TIME = 60
+
+
+Need to change all the synthetic backups.
+
+echo KEEP_JOBS_HOURS = 744 | bpsetconfig
+echo KEEP_JOBS_SUCCESSFUL_HOURS = 744 | bpsetconfig
+
+
+* Time issue
+Be very careful of the time settings in the master server and media servers.
+If there is time mismatch or even timezone mismatch between the netbackup console host and netbackup master server, then scheduling and firing up jobs will mismatch and even jobs might not fire. 
+Finding out how the timezone mismatch can create this issue is mind-boggling.
+
+Better follow below steps in Netbackup master, media and console hosts:
+Correct the time.
+Correct the timezone.
+
+
