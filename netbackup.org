@@ -1248,3 +1248,8 @@ Correct the time.
 Correct the timezone.
 
 
+
+* Add the following processes in Sophos on-access scanning exclusion list.
+C:\Program Files\Veritas\NetBackup\bin\bpbkar32.exe
+
+C:\Program Files\Symantec\Backup Exec\RAWS\beremote.exe
