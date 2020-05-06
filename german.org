@@ -4,34 +4,35 @@
 
 * Countable Nouns
 
-| die Frau         | die Frauen        |             |
-| der Mann         | die Männer        |             |
-| das Mädchen      | die Mädchen       |             |
-| der Junge        | die Jungen        |             |
-| Sie (she)        | Sie (they)        |             |
-| Er (he)          | Sie (they)        |             |
-| das Ei           | die Eier          | egg         |
-| das belegta Brot | die belegta Brote | like burger |
-| der Apfel        | die Äpfel         | apple       |
-| das Brot         | die Brote         | bread       |
-| der Hund         |                   | dog         |
-| die Katze        |                   | cat         |
-| das Pferd        |                   | horse       |
-| das Auto         |                   | care        |
-| die Zietung      |                   | newspaper   |
-| das Fahrrad      |                   | bicycle     |
-| ein Buch         | die Bücher        | book        |
-| Fisch            |                   | fish        |
-| der/ dasStift    | die Stifte        | pen         |
-| der Erwachsene   | die Erwachsenen   | adults      |
-| das Kind         | die Kinder        | children    |
-|                  |                   |             |
+| die Frau         | die Frauen        | eine Frau   |             |
+| der Mann         | die Männer        | ein Mann    |             |
+| das Mädchen      | die Mädchen       | ein Mädchen |             |
+| der Junge        | die Jungen        | ein Junge   |             |
+| Sie (she)        | Sie (they)        |             |             |
+| Er (he)          | Sie (they)        |             |             |
+| das Ei           | die Eier          | ein Ei      | egg         |
+| das belegta Brot | die belegta Brote |             | like burger |
+| der Apfel        | die Äpfel         |             | apple       |
+| das Brot         | die Brote         |             | bread       |
+| der Hund         |                   |             | dog         |
+| die Katze        |                   | eine Katze  | cat         |
+| das Pferd        |                   |             | horse       |
+| das Auto         |                   |             | care        |
+| die Zietung      |                   |             | newspaper   |
+| das Fahrrad      |                   | ein Fahrrad | bicycle     |
+| ein Buch         | die Bücher        | ein Buch    | book        |
+| Fisch            |                   | ein Fisch   | fish        |
+| der/ das Stift   | die Stifte        | ein Stift   | pen         |
+| der Erwachsene   | die Erwachsenen   |             | adults      |
+| das Kind         | die Kinder        |             | children    |
+|                  |                   |             |             |
 
 
 * Uncountable Nouns
 der Kaffee
 die Milch
-
+Wasser
+Reis
 
 * Verbs
 
@@ -46,7 +47,7 @@ die Milch
 | läuft    | laufen    | walk            |
 | hat      | haben     | have            |
 | schläft  | schlafen  | sleep           |
-| frisst   |           | frisst (animal) |
+| frisst   |           | eat (animal) |
 |          |           |                 |
 
 
@@ -75,30 +76,106 @@ Sie isst einen Apfel.
 Sie essen belegta Brote.
 Er isst Reis.
 Sie essen Eier.
+Sie isst einen Apfel.
 Der Mann fährt Auto.
 Das Mädchen läuft.
 Sie liest ein Buch.
-Zie hat einen Hund.
+Sie hat einen Hund.
 Er hat eine Katze.
+Sie haben eine Zeitung.
+
+Der Junge fährt nicht.
+
 Er schläft nicht. --> He does not sleep.
 
+* Grammar - transformation of der/das/die and ein before object of verb.
+die Zeitung.
+Sie haben die Zeitung.
+Das ist eine Zeitung
+Sie haben eine Zeitung.
+
+das Ei.
+Der Mann isst das Ei.
+Der Mann isst ein Ei.
+Das ist ein Ei.
+Er isst ein Ei.
+Sie hat ein Ei.
+Die Erwaschsenen essen Eier.
+
+der Apfel.
+Sie isst den Apfel.
+Das ist ein Apfel.
+Er isst einen Apfel.
+Die Kinder haben Äpfel.
+
+
+der Stift.
+Der Junge hat einen Stift.
+Der Junge hat keinen Stift.
+Sie haben Stifte.
+
+Die Frau trinkt Kaffee.
+Die Frau trinkt keinen Kaffee.
+
+das Buch
+Der Junge hat ein Buch.
+Das Mädchen hat kein Buch.
+
+der Reis
+Die Frauen haben Reis.
+Die Männer haben keinen Reis.
+
+
+* How ein will change?
+der Stift (countable)
 Der Junge hat einen Stift.
 Das Mädchen hat keinen Stift.
 
-Das Mädchen hat einen Fahrrad.
+das Fahrrad (countable)
+Das Mädchen hat ein Fahrrad.
 Das Mädchen hat kein Fahrrad.
 
+die Milch (uncountable)
 Der Junge hat Milch.
 Der Junge hat keine Milch.
+
+das Wasser
+Die Junge haben Wasser.
+Die Junge haben kein Wasser.
 
 Der Hund rennt.
 Der Hund rennt nich.
 
-Die Junge haben Wasser.
-Die Junge haben kein Wasser.
 
+Die Männer haben keinen Reis.
+
+
+* Question - Was ist? What is it?
 Was ist Das?
 Das ist ein Apfel.
 Das ist eine Zeitung.
 Das ist eine Katze.
 Das ist ein Fahrrad.
+
+* Is he (do)ing?
+Schläft er? -> is he sleeping?
+Ja. Er schläft.
+
+Schläft sie?
+Nein. Sie schläft nicht.
+
+Schwimmt der Hund?
+Swchimmt das Pferd?
+Liest sie Zeitung?
+Liest sie ein Buch? -> is she reading a book?
+Isst er einen Apfel?
+
+
+* Conversion from der/das/die to ein/eine
+| der/das/die | ein/eine    |
+|-------------+-------------|
+| der Junge   | ein Junge   |
+| der Mann    | ein Mann    |
+| die Frau    | eine Frau   |
+| das Mädchen | ein Mädchen |
+|             |             |

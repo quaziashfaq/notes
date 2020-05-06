@@ -378,3 +378,52 @@ tar xfv <tar.file.name> --directory=<where-I-want-to-extract>
 
 
 
+
+* Reference of old commands
+mkpasswd -l [-d] > /etc/passwd
+mkgroup  -l [-d] > /etc/group
+
+
+scp root@10.120.110.16:/etc/multipath.conf /etc
+chkconfig multipathd on
+modprobe dm-multipath
+service multipathd start
+
+lsmod | grep multi
+dm_multipath           15177  4 dm_round_robin
+
+/etc/lvm/lvm.conf
+filter = [ "a|/dev/sda|", "r|/dev/sd.*|"]
+
+
+reboot
+
+
+[root@ebs-pre-ebs fc_host]# ls /sys/class/fc_host
+host7  host8
+
+
+
+echo '- - -' > /sys/class/scsi_host/host7/scan
+echo '- - -' > /sys/class/scsi_host/host8/scan
+echo '- - -' > /sys/class/scsi_host/host9/scan
+echo '- - -' > /sys/class/scsi_host/host10/scan
+
+fdisk
+kpartx -a /dev/mpath/mpath2
+
+
+
+pvcreate
+vgcreate <vgname> /dev/mpath/mpath1p1
+lvcreate --size nG <vgname>
+
+
+
+
+
+
+chkconfig --list | grep multi
+multipath -l
+lsmod | grep multi
+cat /etc/lvm/lvm.conf | grep filter | sed '/^\s*#/d'
