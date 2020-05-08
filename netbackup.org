@@ -1253,3 +1253,150 @@ Correct the timezone.
 C:\Program Files\Veritas\NetBackup\bin\bpbkar32.exe
 
 C:\Program Files\Symantec\Backup Exec\RAWS\beremote.exe
+C:\Program Files\Veritas\Backup Exec\beremote.exe
+
+C:\Program Files\Veritas\Backup Exec\beremote.exe
+C:\Program Files\Veritas\Backup Exec\benetns.exe
+C:\Program Files\Veritas\Backup Exec\bedbg.exe
+C:\Program Files\Veritas\Backup Exec\bengine.exe
+C:\Program Files\Veritas\Backup Exec\pvlsvr.exe
+C:\Program Files\Veritas\Backup Exec\beserver.exe
+C:\Program Files\Veritas\Backup Exec\BackupExec.exe
+
+
+* SAP HANA Backup
+** Create 2 policies
+*** HANA
+This policy will have the policty type as SAP.
+Schedule type is 'Automatic Full Backup'
+*** Log
+Log backup is standard for Linux
+
+** Add the below backup script.
+Location is under /usr/openv/netbackup/ext/db_ext/sap/scripts/sap_hanadb_backup.sh
+
+*** Script
+#+BEGIN_SRC bash
+
+# cat /usr/openv/netbackup/ext/db_ext/sap/scripts/sap_hanadb_backup.sh
+#!/bin/sh
+
+#bcpyrght
+#***************************************************************************
+#* $VRTScprght: Copyright 2013 Symantec Corporation, All Rights Reserved $ *
+#***************************************************************************
+#ecpyrght
+
+#
+# NOTE:
+#       1. Provide the path of "hdbsql" as "/usr/sap/<SID>/HDB01/exe/hdbsql"
+#       2. Need to modify below hdbsql command according to your configuration with options as
+#          ../hdbsql -i <instance_id> -n <database_host>
+#                    -u <database_user> -p <database_user_password>
+#          Modify the below "hdbsql" commands by using proper <SID> name
+#       3. SAP HANA Master name and hostname of that Node must be same
+#
+
+SID="<SID>"
+INSTANCE_ID="INSTANCE_ID"
+DATABASE_HOST="Server Host Name"
+DATABASE_USER="Database user name"
+DATABASE_USER_PASSWORD="database user password"
+
+
+RETURN_STATUS=0
+#
+# Get the SAP HANA master server
+#
+SAP_SERVER="`/usr/sap/$SID/HDB10/exe/hdbsql -i $INSTANCE_ID -n $DATABASE_HOST -u $DATABASE_USER -p $DATABASE_USER_PASSWORD -j -a -x \"select HOST from M_SERVICES WHERE COORDINATOR_TYPE='MASTER' LIMIT 1\"`"
+#
+RETURN_STATUS=$?
+#
+
+if [ "$RETURN_STATUS" -ne 0 ] ; then
+                                echo "Could not get SAP HANA master node, db connection failed"
+                                exit $RETURN_STATUS
+fi
+# Check if SAP HANA master node is present
+#
+if [ "$SAP_SERVER" == "" ] ; then
+        echo "SAP HANA Master node is not present"
+fi
+#
+# Remove quotes from SAP_SERVER (HANA master) name string
+#
+SAP_SERVER="`echo "$SAP_SERVER" | sed s'/\"//g'`"
+#
+# Convert the SAP HANA master name to small letters
+#
+SAP_SERVER=`echo $SAP_SERVER | tr "[A-Z]" "[a-z]"`
+echo "SAP_SERVER = $SAP_SERVER"
+#
+# Get HOST NAME
+#
+HOST_NAME="`hostname`"
+#
+# Convert the current node host name to small letters
+#
+HOST_NAME=`echo $HOST_NAME | tr "[A-Z]" "[a-z]"`
+echo "HOST_NAME = $HOST_NAME"
+#
+# Check SAP HANA MASTER with HOST NAME
+# IF both are same then start backup
+# Then trigger backup from SAP HANA master node
+#
+HOST_NAME=`echo $HOST_NAME | tr "[A-Z]" "[a-z]"`
+echo "HOST_NAME = $HOST_NAME"
+
+if [ "$SAP_SERVER" == "$HOST_NAME" ] ; then
+#
+# Get the current date and time
+#
+        DATE_TIME="`date \"+%Y%m%d_%H_%M_%S\"`"
+#
+# Build the BACKUP PREFIX by appending DATE and TIME
+#
+        BACKUP_PREFIX="COMPLETE_DATA_BACKUP"
+        BACKUP_PREFIX="$BACKUP_PREFIX"_"$DATE_TIME"
+        echo "HANA_BACKUP_PREFIX = $BACKUP_PREFIX"
+#
+# Start BACKUP Query on SAP HANA master
+#
+        #/usr/sap/<SID>/HDB01/exe/hdbsql -i 0 -n localhost -u SYSTEM -p Pa55w0rd "backup data using backint ('$BACKUP_PREFIX')"
+        /usr/sap/$SID/HDB10/exe/hdbsql -i $INSTANCE_ID -n $DATABASE_HOST -u $DATABASE_USER -p $DATABASE_USER_PASSWORD "backup data using backint ('$BACKUP_PREFIX')"
+#
+        RETURN_STATUS=$?
+        exit $RETURN_STATUS
+else
+#
+# For Worker node exit bphdb with 0
+# So all bphdb jobs which are invoked on Worker node will be get successful compelete
+#
+        echo "Backup is started from SAP HANA Master"
+        echo "Worker Node will exit with sucess status"
+        exit 0
+fi
+IDWIKVDSRMJ01:~ #
+
+#+END_SRC
+
+** Create the init<SID>.utl file
+Place the file in /usr/openv/netbackup/ext/db_ext/sap/scripts/init<SID>.utl
+$ cat /usr/openv/netbackup/ext/db_ext/sap/scripts/init<SID>.utl | grep -v ^#
+
+switch_list /hana/data/<SID>/mnt00001/.switch.lis
+switch_sem /hana/data/<SID>/mnt00001/.switch.sem
+switch_log /hana/data/<SID>/mnt00001/.switch.log
+server <netbackup-master-server-name>
+client <netbackup-client-name>
+drives 2
+policy <netbackup-client-hana-policy-name>
+schedule Default-Application-Backup
+policy_log <netbackup-client-log-policy-name>
+sched_log Save_Archive_Log
+retry_backup 2
+
+** Create the folder for param file
+mkdir /usr/sap/DSR/SYS/global/hdb/opt/hdbconfig
+cd /usr/sap/DSR/SYS/global/hdb/opt/hdbconfig
+ln -s /usr/openv/netbackup/ext/db_ext/sap/scripts/init<SID>.utl param

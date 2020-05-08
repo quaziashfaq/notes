@@ -11,6 +11,16 @@
   yield	True	False	None
 #+END_SRC
 
+#+BEGIN_SRC pyhton
+False	class	finally	is	return
+None	continue	for	lambda	try
+True	def	from	nonlocal	while
+and	del	global	not	with
+as	elif	if	or	yield
+assert	else	import	pass
+break	except	in	raise
+#+END_SRC
+
 * Making python development environment ready
 #+BEGIN_SRC bash
   $ sudo apt install python3-dev python3-pip python3-virtualenv
