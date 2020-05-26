@@ -1,0 +1,9 @@
+#+STARTUP: indent
+#+STARTUP: hidestars
+
+
+
+[1] Understand the problem statement. What's the input and what's the output?
+[2] Research
+[3] Planning - Write down the plan, write down the design document
+[4] Writing the code
