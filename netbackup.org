@@ -1400,3 +1400,43 @@ retry_backup 2
 mkdir /usr/sap/DSR/SYS/global/hdb/opt/hdbconfig
 cd /usr/sap/DSR/SYS/global/hdb/opt/hdbconfig
 ln -s /usr/openv/netbackup/ext/db_ext/sap/scripts/init<SID>.utl param
+
+* Reporting
+To accomplish this backup reporting task, you will have to install Opscenter server on a separate server and then you can schedule any template report or create a custom report and it can also be scheduled to deliver on your email in desired format (Csv/Html/etc).
+
+https://www.veritas.com/support/en_US/doc/27537447-127427700-0/index
+
+Also shared below KB articles for some important Netbackup commands to generate custom reports from master server:
+
+> bpimagelist : produce status report on client NetBackup images or removable media.
+
+https://www.veritas.com/support/en_US/doc/123533878-127136857-0/v123538598-127136857
+
+> bpdbjobs : interact with NetBackup jobs database.
+
+https://www.veritas.com/support/en_US/doc/123533878-127136857-0/v123536850-127136857
+
+> nbdeployutil
+
+https://www.veritas.com/support/en_US/doc/123533878-127136857-0/v123549289-127136857
+
+> Some other commands:
+
++ bpclimagelist command generates status reports on client NetBackup images or removable media.
+
++ bperror displays information from either the same source as the online troubleshooter (in the Activity Monitor or Reports applications) or from the NetBackup error catalog.
+
++ bpflist command shows a list of previously archived or backed up files according to the options that you specify.
+
++ bpimage : perform functions on stored images in a database.
+
++ bpimmedia queries the NetBackup image catalog and produces the following two types of reports on the images:
+
+■ An Images-on-Media report
+■ A Spanpools report
+
++ bpmedialist queries one or more NetBackup media catalogs and produces a report on the status of the NetBackup media.
+
+For more set of commands refer the Netbackup command line pdf guide for detailed information and examples with options.
+
+https://www.veritas.com/content/support/en_US/doc/ka6j00000000A9vAAE
