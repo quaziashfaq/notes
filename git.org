@@ -274,15 +274,88 @@ Author: Ashfaq <quazi.ashfaq@gmail.com>
 Date:   Sun May 17 18:07:55 2020 +0800
 
     Add README.md file.
+    
+ 
 
     
 ** Cheat Sheet
 
 Command	Explanation & Links
-git remote 	Lists remote repos
-git remote -v	List remote repos verbosely
-git remote show <name>	Describes a single remote repo
-git remote update	Fetches the most up-to-date objects
-git fetch	Downloads specific objects
-git branch -r	Lists remote branches; can be combined with other branch arguments to manage remote branches
+| Command                | What it does?                                                                                |
+|------------------------+----------------------------------------------------------------------------------------------|
+| git remote             | Lists remote repos                                                                           |
+| git remote -v          | List remote repos verbosely                                                                  |
+| git remote show <name> | Describes a single remote repo                                                               |
+| git remote update      | Fetches the most up-to-date objects                                                          |
+| git fetch              | Downloads specific objects                                                                   |
+| git branch -r          | Lists remote branches; can be combined with other branch arguments to manage remote branches |
+
+
+* Git Rebasing
+** Fast forward merging
+If a branch is created and some commit is done. But there is no commit in master branch. So when we are merging the branch with master, it's called fast-forward merging.
+** 3-way merge
+If a branch is created and some commit is done. And there is commit in master branch. So when we are merging the branch with master, it's called 3-way merging. If same files are changed or same lines are changed in the same files then there could be conflict which need to be remedied.
+** git rebasing
+New branches are created to bring new changes for improvement or to solve the bugs. Then merging happens in 3-way and the git commit history becomes complex. So to make it linear and easy to understand, we rebase it. Rebasing replays the change on the other branch.
+
+# Create a new branch
+$ git checkout -b refactor
+
+# Changes are committed.
+$ git commit
+
+# Push the new branch
+$ git push origin refactor
+
+# Now rebase on the master: move the current branch (refactor) on top of master
+# This makes debugging easier and prevents three-way merges by transferring the completed work from one branch to another.
+git rebase --verbose master
+
+# Check the git commit history log and find it in linear format.
+$ git log --graph --oneline -all
+
+# check out the master
+$ git checkout master
+
+# git merge 
+$ git merge refactor
+
+# Check the git commit history log and find it in linear format.
+$ git log --graph --oneline -all
+
+# Now get rid of the refactor branch both remotely and locally.
+$ git push --delete origin refactor
+$ git branch -d refactor
+
+# Now push the master branch
+$ git push --verbose
+
+
+* How to work with github
+# Fork a repo from another account to your account.
+# clone it to local pc
+$ git clone github-repo-url
+
+# Create a new branch add a feature 
+$ git checkout -b add-readme
+$ vim README.md
+$ git add README.md
+$ git commit
+
+# Push local repo to remote repo
+git push --set-upstream origin local-branch
+
+Create a pull request in Github.com
+
+* Git Help Links
+Check out the following links for more information:
+
+https://arp242.net/diy.html 
+https://help.github.com/en/articles/closing-issues-using-keywords
+https://help.github.com/en/articles/setting-guidelines-for-repository-contributors 
+https://www.infoworld.com/article/3271126/what-is-cicd-continuous-integration-and-continuous-delivery-explained.html
+https://stackify.com/what-is-cicd-whats-important-and-how-to-get-it-right/
+https://docs.travis-ci.com/user/tutorial/
+https://docs.travis-ci.com/user/build-stages/
 
