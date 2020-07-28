@@ -427,3 +427,11 @@ chkconfig --list | grep multi
 multipath -l
 lsmod | grep multi
 cat /etc/lvm/lvm.conf | grep filter | sed '/^\s*#/d'
+
+
+* set keyboard
+
+/Downloads/workman/workman-layout-Workman-75eb557/xorg$ sudo cp workman /usr/share/X11/xkb/symbols/workman
+setxkbmap -v workman && xset r 66
+setxkbmap -v us && xset r 66
+
