@@ -1440,3 +1440,67 @@ https://www.veritas.com/support/en_US/doc/123533878-127136857-0/v123549289-12713
 For more set of commands refer the Netbackup command line pdf guide for detailed information and examples with options.
 
 https://www.veritas.com/content/support/en_US/doc/ka6j00000000A9vAAE
+
+* Error "NOT using change journal data" while running backup job with Accelerator
+Support
+Knowledge base
+100010315
+Search all support & community content...
+Article: 100010315
+Last Published: 2018-01-03
+Ratings:  3 1
+Product(s): NetBackup
+Problem
+Change Journal is enabled but it cannot be validated.
+
+
+Error Message
+10/09/2012 10:04:31 - Info bpbkar(pid=12460) change journal enabled for <C:\>
+10/09/2012 10:04:41 - Info bpbkar(pid=12460) NOT using change journal data for <C:\>: unable to validate change journal usage <reason=snapshot needed to flush open files to databases>
+10/09/2012 10:10:09 - Info bpbkar(pid=12460) change journal enabled for <E:\>
+10/09/2012 10:10:09 - Info bpbkar(pid=12460) NOT using change journal data for <E:\>: unable to validate change journal usage <reason=snapshot needed to flush open files to databases>
+10/09/2012 10:10:31 - Info bpbkar(pid=12460) change journal enabled for <F:\>
+10/09/2012 10:10:32 - Info bpbkar(pid=12460) NOT using change journal data for <F:\>: unable to validate change journal usage <reason=snapshot needed to flush open files to databases>
+ 
+Cause
+(Windows) Change Journal corruption.
+
+ 
+
+Solution
+1. Stop NetBackup services on the client.
+
+Open Command Prompt with "Run As Administrator"
+Change directories to: install_path\NetBackup\bin\
+Run command: bpdown -v -f
+Verify all NetBackup processes are stopped by running: bpps.exe
+If there are still running NetBackup processes, such as bpfis.exe, terminate them manually.
+2. Delete the NTFS change journal for each problem drive letter, or disk volume:
+
+For each drive letter, or disk volume, run the following commands:
+Go to a command prompt and query the USN Change Journal using command:
+fsutil usn queryjournal <drive letter:>
+To delete the NTFS journal, run the following command:
+fsutil usn deletejournal /D <drive letter:>
+For example using the C: drive: 
+fsutil usn deletejournal /D C:
+Also, remove the three Veritas NetBackup Change Journal database files on the root of the related drive letter, or disk volume.
+For example using the C: drive:
+C:\VxCJinfo.dat
+C:\VxCJdelete.dat
+C:\VxCJmon.dat
+3. Start NetBackup services on the client:
+
+Open Command Prompt with "Run As Administrator"
+Change directories to: install_path\NetBackup\bin\
+Run command: bpup -v -f
+ 
+
+Was this content helpful?
+ 
+VOX Community Veritas.com
+Visit our social dashboard     
+Privacy policy Legal User agreement
+
+* DFSR backup configuration notes
+
