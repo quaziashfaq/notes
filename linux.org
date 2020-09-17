@@ -439,3 +439,10 @@ Linux server1 2.6.18-348.1.1.el5 #1 SMP Fri Dec 14 05:26:02 EST 2012 i686 i686 i
 
 [root@server1 ~]# dmidecode -s system-serial-number
 [root@server1 ~]# dmidecode | grep "Serial Number:"
+=======
+* set keyboard
+
+/Downloads/workman/workman-layout-Workman-75eb557/xorg$ sudo cp workman /usr/share/X11/xkb/symbols/workman
+setxkbmap -v workman && xset r 66
+setxkbmap -v us && xset r 66
+
