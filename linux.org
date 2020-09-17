@@ -1,5 +1,6 @@
 #+STARTUP: indent
 #+STARTUP: hidestars
+#+STARTUP: overview
 
 * Package Management
 ** yum
@@ -427,3 +428,14 @@ chkconfig --list | grep multi
 multipath -l
 lsmod | grep multi
 cat /etc/lvm/lvm.conf | grep filter | sed '/^\s*#/d'
+
+
+* Find machine info
+
+[root@server1 ~]# uname -a
+Linux server1 2.6.18-348.1.1.el5 #1 SMP Fri Dec 14 05:26:02 EST 2012 i686 i686 i386 GNU/Linux
+
+[root@server1 ~]# cat /etc/os-release
+
+[root@server1 ~]# dmidecode -s system-serial-number
+[root@server1 ~]# dmidecode | grep "Serial Number:"

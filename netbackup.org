@@ -1,5 +1,6 @@
 #+STARTUP: hidestars
 #+STARTUP: indent
+#+STARTUP: overview
 
 * Concepts
 Master server manages backups, archives, and restores.
@@ -1440,3 +1441,141 @@ https://www.veritas.com/support/en_US/doc/123533878-127136857-0/v123549289-12713
 For more set of commands refer the Netbackup command line pdf guide for detailed information and examples with options.
 
 https://www.veritas.com/content/support/en_US/doc/ka6j00000000A9vAAE
+
+
+* Process Names:
+NetBackup Policy Execution Manager (nbpem) triggers a backup job once the policy, schedule, virtual machine combination is due and backup window is open. It works in conjunction with NetBackup Job Manager (nbjm), NetBackup Resource Broker (nbrb) and NetBackup Enterprise Media Manager (nbemm) to identify the resources (media server, storage unit etc.) for backup.
+
+| Process Name | Description                        |
+|--------------+------------------------------------|
+| nbpem        | NetBackup Policy Execution Manager |
+| nbjm         | NetBackup Job Manager              |
+| nbrb         | NetBackup Resource Broker          |
+| nbemm        | NetBackup Enterprise Media Manager |
+| bpbrm        |                                    |
+| bpfis        |                                    |
+|              |                                    |
+
+* How to check if a VMware datastore is presented on SAN to a Linux NetBackup host or a NetBackup Appliance
+Article: 100039119
+Last Published: 2020-02-28
+Ratings:  12 4
+Product(s): Appliances, NetBackup
+Description
+
+For VMware backups to use the SAN transport mode, the Datastore LUNs must be accessible to the VM backup host.
+
+Here is how to check if a datastore has been presented to a NetBackup Appliance or a Linux VM backup host :
+
+Find a VMware ESXi host connected to the datastore in question.
+Enable SSH on the ESXi host and log into the shell prompt under the root account. For more information, refer to this VMware KB article: https://kb.vmware.com/kb/2004746
+Run the following command at the ESXi shell prompt, replacing <Datastore name> with the name of the Datastore in question: vmkfstools -P -v10 /vmfs/volumes/<Datastore name> | grep device
+Observe the output: Logical device: 58cdf60d-ba933b51-4ae6-00505605cc16
+Note the Logical device number  this is the same as the Datastore Logical Volume Identifier - LVID.
+On the NetBackup Appliance elevated prompt or superuser (root) prompt on a Linux backup host, run the following command filtering the output to find the Logical device value from step 4:
+lsblk -l -o +UUID | grep 58cdf60d-ba933b51-4ae6-00505605cc16
+If the lsblk command is not available, use the blkid command instead:
+blkid | grep 58cdf60d-ba933b51-4ae6-00505605cc16
+Observe the output:
+bh1:/home/maintenance # lsblk -l -o +UUID | grep 58cdf60d-ba933b51-4ae6-00505605cc16
+sdb1 8:17 0 40G 0 part 58cdf60d-ba933b51-4ae6-00505605cc16
+If the output is not empty then the Datastore is presented to the backup host over the path(s) shown - /dev/sdb1 in the example above.
+If the output is empty then the Datastore is not presented and backups with SAN transport will fail with error status 23.   In case of a backup failure, the same LVID can be seen in VxMS provider log  search for “No path to device”:
+8:21:41.0806 : g_vixInterfaceLogger:libvix.cpp:1800 <DEBUG> : [VFM_ESINFO] 2017-05-05T08:21:41.806-04:00 trivia -[03732] [Originator@6876 sub=Default] Attempting to open LVID:58cdf60e-ed802bbf-66d2-00505605cc16/58cdf60d-ba933b51-4ae6-00505605cc16/1. 08:21:41.0806 : g_vixInterfaceLogger:libvix.cpp:1800 <DEBUG> : [VFM_ESINFO] 2017-05-05T08:21:41.806-04:00 error -[03732] [Originator@6876 sub=Default] No path to device LVID:58cdf60e-ed802bbf-66d2-00505605cc16/58cdf60d-ba933b51-4ae6-00505605cc16/1 found.
+In case of VMFS6 Datastore, we can verify LUNs using disk WWID.
+In the ESXi host, search the Datastore for naa (Disk WWID) -
+On the ESX search the datastore for the naa (Disk WWID)
+# vmkfstools -P -v10 /vmfs/volumes/<datastore name>/ | grep naa
+  <we will get a naa output, like naa.abcxyz123abc>
+Next, on the Appliance search for that WWID:
+# lsscsi --scsi_id | grep abcxyz123abc
+<we will see the corresponding output here>
+Example -
+lsscsi --scsi_id | grep abcxyz123abc
+[5:0:7:3]    disk    3PARdata VV               3313  /dev/sdazd  369002acdbxyfr0000000000800025409
+
+* How to do device discovery from command line for NetBackup device configuration.
+Article: 100029577
+Last Published: 2020-04-09
+Ratings:  10 4
+Product(s): NetBackup
+Problem
+How to do device discovery from command line for NetBackup device configuration.
+
+Solution
+The commands to scan and discover attached robots and tape devices are tpautoconf and scan.  On Solaris platform the script sgscan can also be used.
+These commands are located under the default "volmgr/bin" path:
+
+
+Windows: C:\Program Files\Veritas\Volmgr\bin\
+UNIX: /usr/openv/volmgr/bin/
+
+How-to:
+A) Scan and discover locally attached tape drives: tpautoconf -t
+B) Scan and discover locally attached robotic devices (via SCSI and SAN): tpautoconf -r
+C) Scan all locally attached devices: scan (or sgscan - Solaris only)
+D) Scan and provide detailed robotic inquiry (for locally attached robot): scan -changer
+For complete usage and additional switches, please review the NetBackup Command Reference Guide
+
+* How to identify the HBA cards/ports and WWN in Linux
+There are several commands to determine the WWN of a Fibre Channel (FC) HBA and their status (online/offline). The post discusses few of the most commonly used methods.
+
+** Method 1
+To find the HBA cards installed on your system use :
+
+# lspci -nn | grep -i hba
+07:00.0 Fibre Channel [0c04]: QLogic Corp. ISP2532-based 8Gb Fibre Channel to PCI Express HBA [1077:2532] (rev 02)
+07:00.1 Fibre Channel [0c04]: QLogic Corp. ISP2532-based 8Gb Fibre Channel to PCI Express HBA [1077:2532]
+
+To check the available HBA ports :
+# ls -l /sys/class/fc_host
+total 0
+drwxr-xr-x 3 root root 0 Feb  3  2015 host2
+drwxr-xr-x 3 root root 0 Feb  3  2015 host3
+To find the state of HBA ports (online/offline) :
+
+# more /sys/class/fc_host/host?/port_state
+::::::::::::::
+/sys/class/fc_host/host2/port_state
+::::::::::::::
+Online
+::::::::::::::
+/sys/class/fc_host/host3/port_state
+::::::::::::::
+Online
+To find the WWN numbers of the above ports :
+
+# more /sys/class/fc_host/host?/port_name
+::::::::::::::
+/sys/class/fc_host/host2/port_name
+::::::::::::::
+0x500143802426baf4
+::::::::::::::
+/sys/class/fc_host/host3/port_name
+::::::::::::::
+0x500143802426baf6
+
+** Method 2 : Using systool
+Another useful command to find the information about HBAs is systool. If not already install, you may need to install the sysfsutils package.
+
+# yum install sysfsutils
+To check the available HBA ports :
+
+# systool -c fc_host
+Class = "fc_host"
+
+  Class Device = "host2"
+    Device = "host2"
+
+  Class Device = "host3"
+    Device = "host3"
+To find the WWNs for the HBA ports :
+
+# systool -c fc_host -v | grep port_name
+    port_name           = "0x500143802426baf4"
+    port_name           = "0x500143802426baf6"
+To check the state of the HBA ports (online/offline) :
+
+# systool -c fc_host -v | grep port_state
+    port_state          = "Online"
+    port_state          = "Online"
