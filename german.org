@@ -4,8 +4,8 @@
 
 * Countable Nouns
 
-| die Frau         | die Frauen        | eine Frau   |             |
-| der Mann         | die Männer        | ein Mann    |             |
+| die Frau         | die Frauen        | eine Frau   | woman       |
+| der Mann         | die Männer        | ein Mann    | man         |
 | das Mädchen      | die Mädchen       | ein Mädchen |             |
 | der Junge        | die Jungen        | ein Junge   |             |
 | Sie (she)        | Sie (they)        |             |             |
@@ -28,6 +28,13 @@
 |                  |                   |             |             |
 
 
+* Pronouns
+| Singular | Plular |
+|----------+--------|
+| Er       | Sie    |
+| Sie      | Sie    |
+|          |        |
+
 * Uncountable Nouns
 der Kaffee
 die Milch
@@ -36,19 +43,21 @@ Reis
 
 * Verbs
 
-| isst     | essen     | eat             |
-| trinkt   | trinken   | drink           |
-| rennt    | rennen    | run             |
-| liest    | lesen     | read            |
-| kocht    | kochen    | cook            |
-| schwimmt | schwimmen | swim            |
-| schreibt | schreiben | write           |
-| fährt    |           | drive           |
-| läuft    | laufen    | walk            |
-| hat      | haben     | have            |
-| schläft  | schlafen  | sleep           |
+| Singular | Plural    | Meaning      |
+|----------+-----------+--------------|
+| isst     | essen     | eat          |
+| trinkt   | trinken   | drink        |
+| rennt    | rennen    | run          |
+| liest    | lesen     | read         |
+| kocht    | kochen    | cook         |
+| schwimmt | schwimmen | swim         |
+| schreibt | schreiben | write        |
+| fährt    |           | drive        |
+| läuft    | laufen    | walk         |
+| hat      | haben     | have         |
+| schläft  | schlafen  | sleep        |
 | frisst   |           | eat (animal) |
-|          |           |                 |
+|          |           |              |
 
 
 
