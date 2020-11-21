@@ -2,6 +2,9 @@
 #+STARTUP: hidestars
 
 * Next things to learn
+Continous integration (CI) tool
+Jenkins CI
+
 Puppet
 Chef
 
@@ -29,6 +32,115 @@ kernel
 namespaces
 cgroups
 grub
+
+chroot jail
+
+
+Different container technologies
+OpenVZ
+Solaris Zones
+lxc
+Moby -> docker
+
+Linux Kernel Features
+native Linux container format. Docker called it libcontainer
+control groups or cgroups
+namespaces
+copy-on-write filesystems
+
+
+Service Architecture
+Microservices
+
+RESTful API
+full RESTful API
+
+
+Docker compose
+Docker swarm
+Docker cluster
+Docker provides the primary underlying compute layer in the orchestration tool Kubernetes
+
+* What's Docker?
+Docker adds an application deployment engine on top of a virtualized container execution environment. It is designed to provide a lightweight and fast environment in which to run your code as well as an efficient workflow to get that code from your laptop to your test environment and then into production.
+
+** Docker Daemon
+Docker Daemon listens to /var/run/docker.sock
+root        1102       1  0 14:05 ?        00:00:03 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+ls -l /var/run/docker.sock
+srw-rw---- 1 root docker 0 Nov 21 14:05 /var/run/docker.sock
+
+
+** TODO Binding Docker daemon to different to multiple places.
+[need more explanation]
+
+** Checking docker daemon status.
+ sudo systemctl status docker
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; vendor preset: disabled)
+     Active: active (running) since Sat 2020-11-21 14:05:29 +08; 3h 53min ago
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 1102 (dockerd)
+      Tasks: 7
+     Memory: 32.8M
+     CGroup: /system.slice/docker.service
+             └─1102 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+
+Nov 21 14:05:28 magpie dockerd[1102]: time="2020-11-21T14:05:28.824876675+08:00" level=warning msg="Your kernel does not support cgroup blkio weight"
+Nov 21 14:05:28 magpie dockerd[1102]: time="2020-11-21T14:05:28.824927445+08:00" level=warning msg="Your kernel does not support cgroup blkio weight_>
+Nov 21 14:05:28 magpie dockerd[1102]: time="2020-11-21T14:05:28.825107427+08:00" level=info msg="Loading containers: start."
+Nov 21 14:05:28 magpie dockerd[1102]: time="2020-11-21T14:05:28.990942072+08:00" level=info msg="Default bridge (docker0) is assigned with an IP addr>
+Nov 21 14:05:29 magpie dockerd[1102]: time="2020-11-21T14:05:29.064489300+08:00" level=info msg="Loading containers: done."
+Nov 21 14:05:29 magpie dockerd[1102]: time="2020-11-21T14:05:29.103053661+08:00" level=warning msg="Not using native diff for overlay2, this may caus>
+Nov 21 14:05:29 magpie dockerd[1102]: time="2020-11-21T14:05:29.103983592+08:00" level=info msg="Docker daemon" commit=4484c46d9d graphdriver(s)=over>
+Nov 21 14:05:29 magpie dockerd[1102]: time="2020-11-21T14:05:29.104361315+08:00" level=info msg="Daemon has completed initialization"
+Nov 21 14:05:29 magpie systemd[1]: Started Docker Application Container Engine.
+Nov 21 14:05:29 magpie dockerd[1102]: time="2020-11-21T14:05:29.153834999+08:00" level=info msg="API listen on /run/docker.sock"
+lines 1-21/21 (END)
+
+** Run and check a container
+Run a container in interactive mode
+$ docker run --interactive --tty --name bob ubuntu:20.04 /bin/bash
+It gives entry to the container and bash prompt. exit command will stop the container
+
+Check the stopped container
+$ docker ps -a
+$ docker ps
+
+To start the stopped container
+$ docker start bob
+$ docker attach bob
+
+$ docker run --name bob --detach ubuntu:20.04 /bin/bash -c "while true; do echo hello bob; sleep 3; done"
+$ docker logs bob
+$ docker logs --tail 0 -f -t bob
+
+$sudo docker run --log-driver="syslog" --name daemon_dwayne -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done"
+
+$ docker top bob
+$ docker stats bob
+
+$ docker run --name bob --detach ubuntu:20.04 /bin/bash -c "while true; do echo hello bob; sleep 3; done"
+
+Running a background task inside a running container
+$ docker exec --detach bob touch /etc/new_touch_file
+
+Running an interactive command inside a container
+$ docker exec --interactive --tty bob /bin/bash
+root@d166afd90939:/# ps -aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.3  0.2   3984  2968 ?        Ss   11:02   0:00 /bin/bash -c while true; do echo hello bob; sleep 3; done
+root          42  6.7  0.3   4116  3472 pts/0    Ss   11:03   0:00 /bin/bash
+root          50  0.0  0.0   2516   516 ?        S    11:03   0:00 sleep 3
+root          51  0.0  0.2   5896  2836 pts/0    R+   11:03   0:00 ps -aux
+root@d166afd90939:/# ls -l /etc/new_touch_file
+-rw-r--r-- 1 root root 0 Nov 21 11:03 /etc/new_touch_file
+
+
+
+
 
 * Installation of Docker
 Remove old installation of docker.
