@@ -1,0 +1,3 @@
+
+* Technical Learning
+** [[file:./linux/README.org][linux]]
