@@ -1,0 +1,16 @@
+#+startup: indent
+
+There are currently 7 types of namespaces Cgroup, IPC, Network, Mount, PID, User, UTS.
+
+* Cgroup
+
+* IPC
+
+* Network
+Network namespace encapsulates system resources related to networking such as network interfaces (e.g wlan0, eth0), route tables etc,
+A network namespace is logically another copy of the network stack, with its own routes, firewall rules, and network devices. By default a process inherits its network namespace from its parent. Initially all the processes share the same default network namespace from the init process.
+
+* Mount
+Mount namespace encapsulates files and directories in the system
+* PID
+ PID contains process IDs
