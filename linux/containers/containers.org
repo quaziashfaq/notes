@@ -1,0 +1,22 @@
+#+TITLE: Containers
+
+
+There are four basic primitives to learn to get you from Linux administrator to feeling comfortable with containers:
+
+    Container Images
+    Container Registries / Registry Server
+    Container Hosts
+    Container Orchestration
+
+Once, you understand the basic four primitives, there are some advanced concepts that will be covered in future labs including:
+
+    Container Standards: Understanding OCI, CRI, CNI, and more
+    Container Tools Ecosystem - Podman, Buildah, Skopeo, cloud registries, etc
+    Production Image Builds: Sharing and collaborating between technical specialists (performance, network, security, databases, etc)
+    Intermediate Architecture: Production environments
+    Advanced Architecture: Building in resilience
+    Container History: Context for where we are at today
+
+
+Container Engines:
+All major container engines including Podman, Docker, RKT, CRI-O and containerd build and consume these bundles.

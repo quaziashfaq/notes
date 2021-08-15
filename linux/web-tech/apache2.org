@@ -20,8 +20,6 @@ Open up the main configuration file with your text edit:
 
 Inside, at the bottom of the file, add a ~ServerName~ directive, pointing to your primary domain name. If you do not have a domain name associated with your server, you can use your server's public IP address:
 
-Note
-
 : /etc/apache2/apache2.conf
 : . . .
 : ServerName server_domain_or_IP
@@ -37,5 +35,5 @@ Since we added the global ServerName directive, all you should see is:
 
 Then restrat apache2
 : sudo systemctl restart apache2
-OR
+Or
 : service apache2 restart

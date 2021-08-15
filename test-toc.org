@@ -1,6 +1,0 @@
-#+startup: index
-#+startup: hidestars
-
-* Chapters
-** [[file:chapter01/README.md][Chapter 01]]
-** [[file:chapter02/README.md][Chapter 02]]
