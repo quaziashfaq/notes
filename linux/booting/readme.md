@@ -4,7 +4,7 @@
 
 
 
-![bios >](./bios.jpg)
+![image alt >](./bios.jpg)
 
 Starting an x86-based Linux system involves a number of steps. When the computer is powered on, the Basic Input/Output System (BIOS) initializes the hardware, including the screen and keyboard, and tests the main memory. This process is also called POST (Power On Self Test).
 
