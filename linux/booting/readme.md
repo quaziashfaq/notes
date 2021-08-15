@@ -1,6 +1,5 @@
 # The whole booting process
 
-![](./boot-process.jpg)
-
+<img src="./boot-process.jpg" align="right"/>
 
 1st level is [powering on the machine](./poweron-bios.md)
