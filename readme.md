@@ -5,4 +5,12 @@ The most important thing I learned is taking notes what I learned. :-)
 Otherwise all are in the air and got blown away!!
 
 - [Linux](./linux/readme.md)
+- [Backup](./backup/readme.md)
+- [Cloud](./cloud/readme.md)
+- [Storage](./storage/readme.md)
 
+
+languages
+pls
+sde
+windows

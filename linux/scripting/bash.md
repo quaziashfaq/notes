@@ -1,23 +1,29 @@
-#+STARTUP: indent
-#+STARTUP: hidestars
-
-
-
 This list includes a bunch of different commands that are useful to know when working with Linux. Not all of these commands are covered in the videos, so feel free to investigate them on your own.
 
-* Managing files and directories
-cd directory: changes the current working directory to the specified one
-pwd: prints the current working directory
-ls: lists the contents of the current directory
-ls directory: lists the contents of the received directory
-ls -l: lists the additional information for the contents of the directory
-ls -a: lists all files, including those hidden
-ls -la: applies both the -l and the -a flags
-mkdir directory: creates the directory with the received name
-rmdir directory: deletes the directory with the received name (if empty)
-cp old_name new_name: copies old_name into new_name
-mv old_name new_name: moves old_name into new_name
-touch file_name: creates an empty file or updates the modified time if it exists
+# Managing files and directories
+Creating useful aliases and add them in $HOME/.bashrc
+```
+alias ls='ls --color=auto'
+alias ll='ls -l'
+alias la='ls -a'
+alias l='ls -CF'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias diff='diff --color=auto'
+alias ip='ip --color=auto'
+
+#alias dir='dir --color=auto'
+#alias vdir='vdir --color=auto'
+
+```
+
+
+Copying dot-files (hidden files) without creating a new directory in the target locaiton
+`$ cp -rv /etc/skel/. /home/bob/data`
+
+
 chmod modifiers files: changes the permissions for the files according to the provided modifiers; we've seen +x to make the file executable
 *chown user files*: changes the owner of the files to the given user
 chgrp group files: changes the group of the files to the given group
