@@ -1,33 +1,5 @@
 This list includes a bunch of different commands that are useful to know when working with Linux. Not all of these commands are covered in the videos, so feel free to investigate them on your own.
 
-# Managing files and directories
-Creating useful aliases and add them in $HOME/.bashrc
-```
-alias ls='ls --color=auto'
-alias ll='ls -l'
-alias la='ls -a'
-alias l='ls -CF'
-
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias diff='diff --color=auto'
-alias ip='ip --color=auto'
-
-#alias dir='dir --color=auto'
-#alias vdir='vdir --color=auto'
-
-```
-
-
-Copying dot-files (hidden files) without creating a new directory in the target locaiton
-`$ cp -rv /etc/skel/. /home/bob/data`
-
-
-chmod modifiers files: changes the permissions for the files according to the provided modifiers; we've seen +x to make the file executable
-*chown user files*: changes the owner of the files to the given user
-chgrp group files: changes the group of the files to the given group
-
 * Operating with the content of files
 cat file: shows the content of the file through standard output
 wc file: counts the amount of characters, words, and lines in the given file; can also count the same values of whatever it receives via stdin
