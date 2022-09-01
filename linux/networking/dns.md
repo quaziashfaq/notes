@@ -19,7 +19,7 @@ listen-on port 53 {any};
 
 allow-query {localhost;};
 allow-query {localhost; 192.168.0.0/24};
-allow-query {any};
+allow-query {any;};
 
 recursion yes;
 ```

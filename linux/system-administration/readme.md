@@ -20,6 +20,7 @@ alias ip='ip --color=auto'
 ```
 
 
+
 ### Copying dot-files (hidden files) without creating a new directory in the target locaiton
 `$ cp -rv /etc/skel/. /home/bob/data`
 
@@ -29,9 +30,21 @@ chmod modifiers files: changes the permissions for the files according to the pr
 chgrp group files: changes the group of the files to the given group
 
 
-Make sure that this command gets executed for any user that logs in to the system:
+## /etc/profile.d : Changing default behaviour of the system for all users
+### Make sure that this command gets executed for any user that logs in to the system:
 `$ sudo vi /etc/profile.d/welcome.sh`
 
+### Disable the beeping sound in the system console
+```
+$ sudo vim /etc/profile.d/disable-beep.sh
+setterm -blength 0
+```
+
+## Changing default keyboard
+```
+$ sudo vim /etc/vconsole.conf
+KEYMAP="us-dvorak"
+```
 
 # Limiting the resources
 `$ sude vim /etc/security/limits.conf`
@@ -43,5 +56,6 @@ At the end the of the file, you will see some examples of limiting resources for
 `type` is hard limit or soft limit or -
 `item` <- What this limit is for?
 `value` <- how many/much resources can be allocated?
+
 
 
