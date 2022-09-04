@@ -108,7 +108,7 @@ nvme0n8     259:9    0    1G  0 disk
 nvme0n9     259:10   0    1G  0 disk
 ```
 
-Creating a _RAID 0_ device
+Creating a __RAID 0__ device
 ```
 [root@dove ~]# mdadm --create /dev/md0 --level=0 --raid-devices=3 /dev/nvme0n{2..4}
 mdadm: Defaulting to version 1.2 metadata
@@ -134,7 +134,7 @@ nvme0n8     259:9    0    1G  0 disk
 nvme0n9     259:10   0    1G  0 disk
 ```
 
-Creating _xfs_ filesystem on top of `/dev/md0` and mounting it
+Creating __xfs__ filesystem on top of `/dev/md0` and mounting it
 ```
 [root@dove ~]# mkfs.xfs /dev/md0
 log stripe unit (524288 bytes) is too large (maximum is 256KiB)
