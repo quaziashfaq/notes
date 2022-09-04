@@ -7,3 +7,4 @@
 - [DNS](./dns.md)
 - [Email](./email.md)
 - [Imap][./imap.md)
+- [Autoshare][./autoshare.md]
