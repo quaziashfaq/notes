@@ -109,6 +109,7 @@ nvme0n9     259:10   0    1G  0 disk
 ```
 
 Creating a _RAID 0_ device
+```
 [root@dove ~]# mdadm --create /dev/md0 --level=0 --raid-devices=3 /dev/nvme0n{2..4}
 mdadm: Defaulting to version 1.2 metadata
 mdadm: array /dev/md0 started.
