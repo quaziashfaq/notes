@@ -1,3 +1,4 @@
+# Topics
 # Managing files and directories
 
 ## Creating useful aliases and add them in $HOME/.bashrc
@@ -193,3 +194,46 @@ $ sudo cryptsetup close myceruedisk
 
 
 
+# Swapspace managing
+- How to convert a block device as swap space?  
+  ``` sh
+  $ mkswap /dev/sdb2
+  $ swapon /dev/sdb2
+  ```
+  
+  
+- How to increase swap size (/swapfile)  
+  ```
+  $ ls -lh /swapfile 
+  -rw-------. 1 root root 2.0G Dec  4  2020 /swapfile
+  
+  $ sudo dd if=/dev/zero of=/swapfile bs=1M count=1024 oflag=append conv=notrunc
+  1024+0 records in
+  1024+0 records out
+  1073741824 bytes (1.1 GB, 1.0 GiB) copied, 1.40341 s, 765 MB/s
+  
+  $ ls -lh /swapfile
+  -rw-------. 1 root root 3.0G Aug 30 16:51 /swapfile
+  
+  $ sudo free -m
+                total        used        free      shared  buff/cache   available
+  Mem:            968         175          73           3         720         648
+  Swap:          2047          11        2036
+  ```
+    
+    
+    
+  The file size has increased by 1 GB but the actual swap space has not increased. So we need to recreate the swap filesysstem.  
+  ```
+  $ sudo swapoff /swapfile
+  $ sudo mkswap /swapfile 
+  mkswap: /swapfile: warning: wiping old swap signature.
+  Setting up swapspace version 1, size = 3 GiB (3221221376 bytes)
+  no label, UUID=6bd3923e-85e5-4b74-af71-529da8f24318
+  
+  $ sudo swapon /swapfile
+  $ sudo free -m
+                total        used        free      shared  buff/cache   available
+  Mem:            968         180          62           8         726         639
+  Swap:          3071           0        3071
+  `

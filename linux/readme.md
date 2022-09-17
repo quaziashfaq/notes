@@ -4,4 +4,9 @@
 - [System Adiminstration](./system-administration/readme.md)
 - [Networking](./networking/readme.md)
 - [Editors](./editors/readme.md)
-
+- [GUI](./gui/readme.md)
+- [Namespace](./namespace/readme.md)
+- [Scripting](./scripting/readme.md)
+- [Storage](./storage/readme.md)
+- [Tools](./tools/readme.md)
+- [Web-Tech](./web-tech/readme.md)

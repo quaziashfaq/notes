@@ -2,7 +2,7 @@
 
 The most important thing I learned is taking notes what I learned. :-)
 
-Otherwise all are in the air and got blown away!!
+Otherwise all are in the air and get blown away!!
 
 - [Linux](./linux/readme.md)
 - [Backup](./backup/readme.md)
