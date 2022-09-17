@@ -1,7 +1,7 @@
 # Topics
 
 - [Booting process](./booting/readme.md)
-- [System Adiminstration](./system-administration/readme.md)
+- [System Adiminstration](./system-administration.md)
 - [Networking](./networking/readme.md)
 - [Editors](./editors/readme.md)
 - [GUI](./gui/readme.md)
