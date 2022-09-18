@@ -32,7 +32,7 @@ list sessions:
 
 In tmux, hit the prefix `ctrl+b` (my modified prefix is ctrl+a) and then:
 
-## List all shortcuts
+# List all shortcuts
 to see all the shortcuts keys in tmux simply use the `bind-key ?` in my case that would be `CTRL-B ?`
 
 ## Sessions

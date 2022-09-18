@@ -1,15 +1,13 @@
-#+STARTUP: hidestars
-#+STARTUP: indent
-#+STARTUP: overview
+# Concepts
 
-* Concepts
+## Master Server
 Master server manages backups, archives, and restores.
-
 
 Master server contains the catalog. The catalog contains the internal database that has information about Netbackup backups and configuration.
 
 Master server is responsible for media and device selection.
 
+## Media Server
 Media servers provide additional storage by allowing Netbackup to use attached storage devices.
 
 Media servers are also referred to as:
@@ -18,6 +16,7 @@ Media servers are also referred to as:
  - Data movers (when data is sent to independent, external disk devices like OpenStorage appliances.)
 
 
+## Policies
 Policies are the rules that the master server follows
  - They say when backups occur.
    Schedules for automatic and unattended client backups.
@@ -28,6 +27,7 @@ Policies are the rules that the master server follows
 
 
 
+## Storage
 Storage
  - Storage units
  - Storage unit groups
@@ -35,7 +35,7 @@ Storage
  - windows for secondary operations in SLPs
 
 
-Catalog
+## Catalog
 Use to create and configure a catalog backup, which is a special type of backup that NetBackup requires for its
 own internal databases.
 These databases, called the NetBackup catalog, are located on the NetBackup master and media server. The
@@ -49,66 +49,46 @@ The Catalog utility is also used for the following actions:
  - To search for a backup image to verify the contents of the media with what is recorded in the NetBackup catalog
 
 
-SLP Windows ?? WHAT THE HELL IS IT?
+## SLP Windows ?? WHAT THE HELL IS IT?
 SLP Windows contains any schedules that are defined for secondary operations in a storage lifecycle policy.
 A window can better define when the job for a secondary operation can run, making sure that the job does not
 interfere with jobs of a higher priority.
 
 
-* Book names:
+# Book names:
 Restore operation
 Book name: Nebcakup Backup, Archive, and Restore Getting Started
 
 Policy creation / Netbackup Administration
 Netbackup Administrator's Guide for UNIX, Windows, Linux vol 1
 
+# Misc
 * Learn Extra
 ** Security Certificates
 Certificate Hash
 Root Certificate Authority fingerprint
 
-* Learning from sites
-** Nbemm don't start
+
+# Learning from sites
+Nbemm don't start
 Solved Go to solution
 Ivan_Niagara
  Level 3
 Ivan_Niagara
-‎05-15-2012 10:42 PM
-
-
-Hi all,
-
-I have a problem with starting nbemm service.
 
 
 
-First of all - my environment:
 
 
-
-Start environment
-
-
-UNIX station Node-2 works as NetBackup Master server and Media Manager server.
-
-
-
-# ./netbackup/bin/admincmd/bpgetconfig -g node-2 -L
+$ ./netbackup/bin/admincmd/bpgetconfig -g node-2 -L
 
 Client/Master = Master
-
 NetBackup Client Platform = RS6000, AIX5
-
 NetBackup Client Protocol Level = 6.0.0.0.4.4
-
 Product = NetBackup
-
 Version Name = 6.0
-
 Version Number = 600000
-
 NetBackup Installation Path = /usr/openv/netbackup/bin
-
 Client OS/Release = AIX 5.3
 
 
