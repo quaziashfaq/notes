@@ -13,5 +13,5 @@
 ## World Wide Name
 - A World Wide Name (WWN) is a globally unique addres used to identify each FC node and node port
 - A node is a switch, HBA or storage controller
-- A storage can have ane or more controllers and a server an have one or more HBAs.
+- A storage can have one or more controllers and a server can have one or more HBAs.
 

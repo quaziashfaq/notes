@@ -7,6 +7,6 @@
 - [GUI](./gui/readme.md)
 - [Namespace](./namespace/readme.md)
 - [Scripting](./scripting/readme.md)
-- [Storage](./storage/readme.md)
+- [Storage](./storage.md)
 - [Tools](./tools/readme.md)
 - [Web-Tech](./web-tech/readme.md)
