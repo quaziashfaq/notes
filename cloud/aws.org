@@ -1,5 +1,3 @@
-#+STARTUP: indent
-#+STARTUP: hidestars
 
 * Documents to Read
 AWS Documentation
@@ -112,3 +110,72 @@ fs-e08e4503.efs.us-east-1.amazonaws.com:/ on /mnt/efs type nfs4 (rw,relatime,ver
 * aws cli
 To attach a gateway with VPC
 aws ec2 attach-internet-gateway --vpc-id "vpc-0814b4de9f8f93524" --internet-gateway-id "igw-09d552c517992113d" --region us-east-1
+
+
+
+# Notes from a youtube course
+AWS Certified Cloud Practitioner Certification Course (CLF-C01) - Pass the Exam!
+Link: https://www.youtube.com/watch?v=SOTamWNgDKc&t=3366s
+
+
+
+Peijun Wu
+3 months ago (edited)
+Tracking my progress: 12:27:30
+Notes:
+1. Allocate 120 minutes. Actual exam is 90 minutes.
+2. 50 scored questions and 15 unscored (too hard / too easy / unseen)
+3. Always create IAM user instead of using root account. IAM user common policies are Admin, PowerUsers, etc
+4. General computing : EC2. GPU Computing : Infer1. (compete against tpu in gcp). Quantum: AWS Bracket.
+5. Data centers within a region are isolate from each other (different buildings), but close enough to provide low latency (< 10ms), therefore they usually have the same impact, and HA is defined as being available in 2/3 different AZs. Subnets are associated with AZs. You pick subnets instead of picking AZs for EC2, for instance. Default subnets are created one subnet per AZ. Managed HA services will replicate in multiple AZs behind the scene in each region so you don't need to pick (e.g., S3.). CloudFront distribution uses "area" which covers many regions. Global services like IAM doesn't even have concept of region.
+6. Fault Domain: isolated physical construct where failure / fault will not impact other fault domains. Fault level: A collection of fault domains. Fault Domains can be nested.
+
+Network:
+1. AWS Global Network: interconnections between AWS Global Infrastructure. Commonly referred to as "the backbone of AWS". It's private networks, where things can move very fast/consistent/reliable/secure without internet topology disruptions between data centers.
+    A. Edge Locations: on and off ramps to the AWS Global Network.
+    B. AWS Global Accelerator : Use edge locations as on-ramps to quickly reach AWS resources by traversing the fast Global Network. One great use case is when you deploy your web application in one region, and you can use AWS global accelerator to boost your response time globally.
+    C. Amazon CloudFront (CDN): Uses edge locations as an off-ramp to provide at the edge storage and compute near the end user
+    D. VPC endpoints: Ensuring your resources stay within AWS network and do not traverse over the public internet.
+2. PoP: data center for content delivery or expedited upload.
+    A. Edge locations: holds cached copy of the popular files
+    B. Regional Edge Locations: hold large cache of less-popular files to reduce full round trip and reduce cost of transfer fees.
+3. AWS Direct Connect: Private / Dedicated connection that provides private, consistent and reliable network between your on-prem data center to the AWS Cloud.
+4. Local Zones (Opt-in feature): data centers close to densely populated area to provide single-digit millisecond low latency performance for that area. The identifier looks like us-west-2-lax--1a. Only certain services are available.
+5. Wavelength Zones: ultra low latency edge-computing on 5G networks. (e.g., deploy Ec2 instance to hardware in a 5G networks.)
+
+Compliance & Policy (& Permissions):
+1. Data Residency: The physical location where the servers and data reside for an organization.
+2. Compliance Boundaries: Regulatory compliance / legal rules by a government that describes where data and services are allowed to reside.
+3. Data Sovereignity: legal authority / juristic control asserted on data within juristic boundaries.
+4. AWS Config: Policy as Code service. You can create rules that continuous check AWS resource configuration. If they deviate (someone accidentally deploy to a wrong region), you can get alerted / the service can auto-fix the deviation.
+5. IAM policies: role/group - level permissions that directly deny access to certain things. Service Control Policy (SCP) on the other hand manages permissions organization/account-wide.
+6. Gov Cloud: special regions for public sectors
+
+Disaster Recover Options:
+1. Back up & Restore: Hours
+2. Pilot light(data is replicated with minimal services running) : 10 min
+3. Warm Standby (Scaled down copy of infra ready to scale up): min
+4. Hot standby (multi-site active/active, basically double the cost, scaled up copy): real-time
+
+AWS Account ID: globally unique, 12 digits, assigned for every user
+(root and non-root IAM users), can be associated with alias,  can assume cross-account roles, or assume principals in policies, to access resources under other accounts (ownerID is another account).
+
+ARN: AWS Resource Names uniquely identify AWS resources. Unambiguously specify a resource across all of AWS.
+arn:<partition>:<service>:<region>:<account-id>:<resource-id>
+arn:partition:service:region:account-id:resource-type/resource-id
+arn:partition:service:region:account-id:resource-type:resource-id
+
+where partition can be aws, aws-cn, aws-us-gov.
+
+Since ARN address is hierarchical, you can use * to specify a group of resources in policies, etc: arn:partition:service:region:account-id:*
+
+IAC:
+CloudFormation (CFN): JSON/YAML, declarative, can be huge and not as dynamic (hard to create repeated infra). The infra CFN creates is called stack.
+CDK: Imperative, web programming language e.g., Python, can be more dynamic, generates CFN. Easier to create CICD pipelines than CFN. AWS CDK vs. AWS SDK? AWS CDK ensures idempotence of your infrastructure.
+CDK constructs: reusable cloud components. constructs.dev (similar to Terraform modules).
+
+EC2: virtual machines. "instance".
+AMI: predefined configuration for EC2 - amount of CPU, amount of memory, network bandwidth, OS, storage options such as EBS.
+EC2 is considered the backbone of AWS as many services use EC2 as underlying servers -- S3, RDS, DDB, Lambdas, etc
+
+
