@@ -1,7 +1,5 @@
-#+STARTUP: indent
-#+STARTUP: hidestars
 
-* Documents to Read
+# Documents to Read
 AWS Documentation
 Guides and API references: https://docs.aws.amazon.com/index.html
 
@@ -10,7 +8,7 @@ Blogs to read
 Perspectives: https://perspectives.mvdirona.com/
 All Things Distributed: https://www.allthingsdistributed.com/
 
-* Snapshot
+# Snapshot
 ** From snapshot -> Create volume
 Can be changed:
 volume type
@@ -30,7 +28,7 @@ ElasticCache supports two opensouce in-memory caching engines
 memcached
 redis
 
-* databases
+# databases
 ** RDS (OLTP)
 SQL
 MySQL
@@ -57,8 +55,6 @@ chown -R apache:apache wp-content
 chkconfig httpd on
 service httpd start
 
-** Test RDS
-db instance = ashdb
 
 * bits to check
 Storage
@@ -79,6 +75,7 @@ init vs sytemd
 vol-0abca1990211ca66d, vol-0a235245407550301, vol-0f1f97963cff17a1a
 
 
+## Elastic File System (EFS)
 sudo mount -t efs fs-e08e4503:/ efs
 [root@ip-172-31-92-143 mnt]# mount
 sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime)
@@ -112,3 +109,117 @@ fs-e08e4503.efs.us-east-1.amazonaws.com:/ on /mnt/efs type nfs4 (rw,relatime,ver
 * aws cli
 To attach a gateway with VPC
 aws ec2 attach-internet-gateway --vpc-id "vpc-0814b4de9f8f93524" --internet-gateway-id "igw-09d552c517992113d" --region us-east-1
+
+
+## AWS Security
+
+Security
+- Amazon Maice - Discover and protect your sensitive data
+- AWS Key Management Service - Store and manage encryption keys
+- AWS CloudHSM - Hardwarebased key storage
+- AWS Certificate Manager  provision 
+- AWS secret Manager
+  - protects the secrets required to access the resources.
+  - rotates automatically
+  - stores passwords, keys and tokens
+
+
+Infrastructure Protection
+- AWS shield
+- AWS Web application fw
+- aws firewall manager
+
+threat detection
+- amazon guard duty
+- amazon inspector
+- aws config
+- aws cloudtrail
+
+Identity management
+- aws iam
+  - iam users
+    root user
+  - iam policy
+  - iam role: service or user cas assume a role.
+- aws single sign-on
+- aws directory service
+  - Managed Microsoft AD
+  - Managed Simple AD
+  - AD connector - allow on pemise users to login to aws applications with AD
+  - distributed service with automatic failover
+  - compatible with other aws services
+  - aws organizationsk
+
+Management and governance
+  - Account management services
+    - AWS control tower
+    - AWS org
+    - aws budgets
+  - Provisioning Services
+    - aws cloudformation
+      - Templates
+      - json or yaml settings.
+      - specify all the configuration to the cloudformation. It will generate the full infrastructure
+      - Full infrastructure with version control systems
+      - Nesting templates
+      - automation devops engineer can use it for automaiton
+      - scale
+    - aws service catalog
+    - aws ops works
+    - aws marketplace
+  - Operation services
+    - amazon cloudwatch
+      - monitoring
+      - collect metrics from services
+      - integrates with 70+ aws services
+      - lots of pre-defined metrics
+      - log storage
+      - ssh login logs -> cloudwatch logs -> cloudwatch filter -> cloudwatch alarm
+    - aws config
+    - aws cloudtrail
+    - aws systems manager
+    - amazon x-ray
+    - autoscaling
+      - minimum size
+      - desired size
+      - scale out to the maximum
+      - high availability
+      - better fault tolerance
+      - better cost management
+      - ec2, dynamodb, aurora
+
+Machine Learning
+  - Amazon Kendra
+  - Amazon Personalize
+
+  
+Machine learning tools
+  - Lookout for Metrics
+  - Forecast
+  - Fraud Detector
+
+
+  Rekognition - Analyze images, object and scene detection
+
+Polly
+Transcribe
+Lex
+
+
+# Storage and Database
+## Storage
+   EBS - Elastic Block Store = Block Disk
+   EFS - Elastic File Store = NFS Share
+   S3  = Simple Storage Service = Object Storage
+## Databases
+   Amazon RDS = Relational Database Service = MySQL, PostgreSQL, Oracle, Microsoft SQL
+   Amazon Aurora = MySQL or PostgreSQL compatible, redundant, highly available, auto patched and backed up.
+   DynamoDB = key-value database for simple lookup table.
+   Redshift = for dataware housing purpose where BI (business intelligence) processes will run on the past data for analysis.
+   DocumentDB = More than just key-value pair database. It's full-fledged database. NoSQL DB. Json Format. MongoDB compatible.
+   Neptune = Graph Datbaase. (like neo4j?). Recommendiation engines. Fraud database.
+   Amazon Quantum Ledger Database (QLDB) = for immutable data requried in banking sector.
+
+   
+
+
