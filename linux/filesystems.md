@@ -64,4 +64,7 @@ All installers set up some initial security features on the new system. One basi
 
 Many installers can do an installation completely automatically, using a configuration file to specify installation options. This file is called a Kickstart file for Red Hat-based systems, an AutoYAST profile for SUSE-based systems, and a Preseed file for Debian-based systems.
 
-
+# Get block info from a block device
+$ sudo blkid /dev/vdc
+$ sudo blkid -p /dev/vdc
+$ sudo blkid -i /dev/vdc

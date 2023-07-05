@@ -171,6 +171,7 @@ Unmounting and closing it
 [root@dove ~]# mdadm --stop /dev/md0
 mdadm: stopped /dev/md0
 ```
+
 # Encrypted Storage
 
 ## Plain Encrypted Disk
@@ -191,13 +192,15 @@ $ sudo cryptsetup close mysecuredisk
 ```
 
 ## luksFormat Encrypted Disk
-
+```
 $ sudo cryptsetup luksFormat /dev/vde
 $ cryptsetup
 $ sudo cryptsetup luksChangeKey /dev/vde
 $ sudo cryptsetup open /dev/vde mysecuredisk
 $ sudo mkfs.xfs /dev/mapper/mysecuredisk
 $ sudo cryptsetup close myceruedisk
+```
+
 
 
 
