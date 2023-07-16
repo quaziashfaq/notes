@@ -45,3 +45,8 @@ top: shows the processes currently using the most CPU time (press "q" to quit)
 
 * Interesting commands
 cat /var/log/syslog | cut -d' ' -f5- | sort  | uniq -c | sort -nr | less
+
+
+# Learning a script preparation
+[A test deployment scrip](test-deploy-ecommerce-application.sh)
+
