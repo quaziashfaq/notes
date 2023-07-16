@@ -8,13 +8,15 @@ Otherwise all are in the air and get blown away!!
 - [Backup](./backup/readme.md)
 - [Cloud](./cloud/readme.md)
 - [Storage](./storage/readme.md)
+- [databases](./databases/databases.md)
 
-
-These are the files I want to open
-./storage/readme.md
 
 
 languages
 pls
 sde
 windows
+
+
+
+

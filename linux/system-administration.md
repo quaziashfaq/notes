@@ -171,6 +171,7 @@ Unmounting and closing it
 [root@dove ~]# mdadm --stop /dev/md0
 mdadm: stopped /dev/md0
 ```
+
 # Encrypted Storage
 
 ## Plain Encrypted Disk
@@ -191,13 +192,15 @@ $ sudo cryptsetup close mysecuredisk
 ```
 
 ## luksFormat Encrypted Disk
-
+```
 $ sudo cryptsetup luksFormat /dev/vde
 $ cryptsetup
 $ sudo cryptsetup luksChangeKey /dev/vde
 $ sudo cryptsetup open /dev/vde mysecuredisk
 $ sudo mkfs.xfs /dev/mapper/mysecuredisk
 $ sudo cryptsetup close myceruedisk
+```
+
 
 
 
@@ -243,4 +246,44 @@ $ sudo cryptsetup close myceruedisk
                 total        used        free      shared  buff/cache   available
   Mem:            968         180          62           8         726         639
   Swap:          3071           0        3071
-  `
+  ```
+
+# Hardening
+## SELinux
+SELinux is a Mandatory Access Control (MAC) system, developed by the NSA. SELinux was developed as a replacement for Discretionary Access Control (DAC) that ships with most Linux distributions.
+
+The difference between DAC and MAC is how users and applications gain access to machines. Traditionally, the command sudo gives a user the ability to heighten permissions to root-level. Root access on a DAC system gives the person or program access to all programs and files on a system.
+
+A person with root access should be a trusted party. But if security has been compromised, so too has the system. SELinux and MACs resolve this issue by both confining privileged processes and automating security policy creation.
+
+SELinux defaults to denying anything that is not explicitly allowed. SELinux has two global modes, permissive and enforcing. Permissive mode allows the system to function like a DAC system, while logging every violation to SELinux. The enforcing mode applies a strict denial of access to anything that isn’t explicitly allowed. To explicitly allow certain behavior on a machine, you, as the system administrator, have to write policies that allow it. This guide provides a brief and basic introduction to commonly used commands and practices for SELinux system administration.
+
+```
+$ yum update
+$ yum search selinux
+$ sudo yum install policycoreutils policycoreutils-python setools setools-console setroubleshoot
+```
+
+OR
+
+yum install selinux-policy-targeted
+yum install selinux-policy-devel policycoreutils
+
+vi /etc/selinux/config
+
+- `policycoreuitls` and `policyoreutils-python` contain several management tools to administer your SELinux environment and policies.
+-`setools` provides command line tools for working with SELinux policies. Some of these tools include, 
+  - `sediff` which you can use to view differences between policies, 
+  - `seinfo` a tool to view information about the components that make up SELinux policies, and 
+  - `sesearch` used to search through your SELinux policies. 
+setools-console consists of sediff, seinfo, and sesearch. You can issue the --help option after any of the listed tools in order to view more information about each one.
+ 
+- setroubleshoot suite of tools help you determine why a script or file may be blocked by SELinux.
+ Optionally, install setroubleshoot-server and mctrans. The setroubleshoot-server allows, among many other things, for email notifications to be sent from the server to notify you of any policy violations. The mctrans daemon translates SELinux’s output to human readable text
+
+ File: /etc/selinux/config
+ SELINUX=disabled
+ SELINUXTYPE=targeted
+
+ To disable SELinux, update your SELinux configuration file using the text editor of your choice. Set the SELINUX directive to disabled as shown in the example.
+
