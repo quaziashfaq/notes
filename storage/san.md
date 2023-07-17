@@ -15,6 +15,15 @@
 - A node is a switch, HBA or storage controller
 - A storage can have one or more controllers and a server can have one or more HBAs.
 
+
+# Some Training Modules to Cover
+- FCSAN 120
+- Virutal Fabric (VF-220)
+- Fibre Channel Routing (FCR-220)
+- Flow Vision (FLVIS-220) 
+- Fibre Channel Over IP (FCIP) (FCIP-220)
+- 
+=======
 # Fleeting Notes
 A director is a chassis based modular networking device. 
 

@@ -64,5 +64,6 @@ do
         echo -e " ${app_name}    \t ${get_requests}    \t    ${post_requests}   \t   ${delete_requests}"
 done
 ```
-bob@caleston-lp10:~$ 
+## Deploying a ecommerce application
+[A test deployment scrip](test-deploy-ecommerce-application.sh)
 

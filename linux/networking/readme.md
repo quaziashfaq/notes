@@ -6,5 +6,5 @@
 - [Setting timezone and ntp](./timezone-and-ntp.md)
 - [DNS](./dns.md)
 - [Email](./email.md)
-- [Imap][./imap.md)
-- [Autoshare][./autoshare.md]
+- [Imap](./imap.md)
+- [Autoshare](./autoshare.md)
