@@ -28,6 +28,11 @@ command < file: redirects standard input from file
 command 2> file: redirects standard error to file
 command1 | command2: connects the output of command1 to the input of command2
 
+`set -o pipefail` -> It turns on the option to fail the whole commands tied with pipes if one of the command fails. For example,
+`cat somefile.txt | uniq || exit 80` -> If `somefile.txt` does not exist, the left part of the OR (||) sign will fail and then the script will exit. It increases resiliency of the script.
+
+`set -o noclobber` -> It turns on the option not to overwrite a file with '>' sign.
+
 ## Operating with processes
 These are some commands that are useful to know in Linux when interacting with processes. Not all of them are explained in videos, so feel free to investigate them on your own.
 
@@ -57,13 +62,46 @@ echo -e "------------------------------------------------------------"
 
 for app_name in $(cat /tmp/assets/apps.txt)
 do
-        filename="/var/log/apps/${app_name}_app.log"
-        get_requests=$(cat ${filename} | grep "GET" | wc -l)
-        post_requests=$(cat ${filename} | grep "POST" | wc -l)
-        delete_requests=$(cat ${filename} | grep "DELETE" | wc -l)
-        echo -e " ${app_name}    \t ${get_requests}    \t    ${post_requests}   \t   ${delete_requests}"
+    filename="/var/log/apps/${app_name}_app.log"
+    get_requests=$(cat ${filename} | grep "GET" | wc -l)
+    post_requests=$(cat ${filename} | grep "POST" | wc -l)
+    delete_requests=$(cat ${filename} | grep "DELETE" | wc -l)
+    echo -e " ${app_name}    \t ${get_requests}    \t    ${post_requests}   \t   ${delete_requests}"
 done
 ```
+
+## Learn `uniq -c`
+### kodekloud solution
+```
+#!/bin/bash
+set -o pipefail
+
+# This is the log file we're interested in
+logfile="/etc/logs/error.log"
+
+echo "Number of times each error message appears:"
+cat "${logfile}" | grep "ERROR" | sort  | uniq  -c || { echo "Error encountered in pipe commands" >&2; exit 1; }
+
+exit 0
+```
+
+### My solution
+```
+#!/bin/bash
+set -o pipefail
+set -o noclobber
+
+# This is the log file we're interested in
+logfile="/etc/logs/error.log"
+
+echo "Number of times each error message appears:"
+
+errorline="ERROR: DB_CONN_FAILURE: Connection to database failed"
+count=$(cat "$logfile" | grep -o "$errorline" | wc -l) || exit 1
+echo "<${count}> ${errorline}"
+```
+
+
 ## Deploying a ecommerce application
 [A test deployment scrip](test-deploy-ecommerce-application.sh)
 
