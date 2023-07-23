@@ -1,3 +1,528 @@
+# Features
+- On-demand software-based resources.
+- Available in seconds
+- Pay-as-you-go pricing
+
+# Regions
+- Regions are completely isolated from each other.
+- Certain resources are tied to regions.
+- Each region has datacenters which are called availability zone.
+
+# Availability Zones
+- AZs are isolated from other AZs withing the region.
+- AZs are connected with high-speed, low-latency connection within a region.
+
+# Misc
+- Web and mobile apps
+- Data processing and warehousing
+- Storage and Archiving
+
+# Core Techs
+## Compute
+### Amazon EC2 - resize compute capacity
+#### Features
+- elasticity
+- complete control
+- flexibility
+- integrated
+- reliable - highly available
+- secure
+- inexpensive
+#### Machine Types
+- General Purpose: A, T, M
+- Compute Optimized
+- Memory Optimized
+- Accelerated computing
+- Storage Optimized
+
+Amazon Machine Images (AMI)
+
+### Amazon EC2 Auto Scaling: increase or decrease number of instances
+automatically add or remove instances to adapt to demand
+monitor the health of running instances
+replace impaired instances automatically
+balance capacity across availability zones
+dynamic and predictive scaling
+
+### Elastic Load Balancing: Distribute incoming traffic
+Automatically distribute traffic across multiple EC2 instances
+Increase availability and fault tolerance
+Configure health checks
+Offload encryption and decrytion
+Types:
+    - Application load balancer
+    - Network load balancer
+    - Classic laod balancer
+
+### AWS Lambda: Run code in response to events
+
+### Amazon Elastic Containe Service
+Run applications on a managed cluster (docker)
+
+## Storage Service
+A reliable, scalable, and secure place for data
+### Amazon Elastic Block Store (EBS):
+Durable Persistent Block Level Storage
+Replicate every EBS volume.
+- Network-attached block storage for use with Amazon EC2 instance
+  - Persist independently from instance
+  - Used like a physical hard drive
+  - Automatically replicated
+  - Attached to any instance in the same az
+  - One EBS voluem to one EC2 instance
+  - One EC2 instance to many EBS volumes
+  - EBS volumes can retain data after EC2 instance termination
+  - Allow point-in-time snapshots to S3
+  - 1 GiB increments
+  - Size can be from 1 GiB to 16TiB
+  - EBS snapshots can be copied between regions
+
+### Amazon Simple Storage Service (S3)
+Durable, scalable object storage
+#### Features
+Infinite scalability, greater analysis, and faster data retrieval.
+- Highly scalable object storage with
+- Object size: can be upto 5 TiB
+- There is no limitation of how many files you can keep.
+- 11 9s durability
+- 4 9's availability
+
+Common S3 use cases:
+- backup and storage
+- application hosting
+- media hosting
+- software delivery
+
+#### S3 Classes / Varities:
+- Standard
+  Active Data
+  Stores data in 3 AZ???
+- Standard Infrequent Access
+  Lower per gb price than standard. But it has per gb retrieval fee.
+  Stores data in 3 AZs.
+- One Zone
+  Infrequent Access. Stores data in a single AZ.
+  20% lower prices than Standard IA.
+- Amazon S3 Glacier and Amazon Glacier Deep Archive (S3 Glacier Deep Archive)
+  Secure, low-cost and durable storage classes for data archiving.
+  Archive Data
+- Amazon S3 Intelligent Tiering
+  Automatic cost saings by moing data between two access tiers, configured by the customer.
+
+#### Amazon S3 Glacier: Data archiving and backup
+### Amazon Storage Gateway: Seamless and secure integration
+### Amazon Elastic File System (EFS)
+File Storage for Amazon EC2 Instance
+
+## Databse Service
+### Features
+Purpose-built for specific application use cases
+Offlod time-consuming management tasks
+### Types
+#### Amazon RDS (Relational Database Service)
+- It's called Amazon Aurora
+- Managed Backup Service
+- Automated backups
+- Database point-in-time snapshots
+- Cost-efficient and resizable capacity
+- Automatic Host relpacement
+
+#### 6 other types of databases support.d
+1. Amazon Aurora
+2. MariaDB
+3. PostgreSql
+4. Oracle Database
+5. MSSQL Server
+6. MySQL
+
+#### Amazon DynamoDB
+- NoSQL DB
+- fast and predictable performance
+
+#### Amazon ElastiCache
+- in-memory caching system
+
+#### Amazon Redshift
+- Data warehousing and processing.
+- Collecting data from multiple sources and analyze them.
+- Generate report on past events
+- Predict future
+
+## Networking
+### Amazon VPC
+Build a virtual network in the cloud.
+Networking layer for Amazon EC2
+A virtual network dedicated to a customer's AWS account.
+Subnet: A range of IP address in a VPC.
+Public and Private Subnets
+
+Flow Logs - Capture Network flow information
+Host-based firewalls - OS firewalls
+
+### Security Groups
+Control Access to instances
+
+### Network Access Control Lists (NACL)
+Control traffic/access at the subnet level
+
+### Amazon Route 53
+Route end users to internet applications
+
+## Security
+### AWS IAM (Identity and Access management)
+- Securely control access to AWS services and resources
+  - Fine-grained access control to aws resources
+  - multi-factor authentication
+  - ability to analyze accesss
+  - Integration with corporate directories
+
+- Cloud security at aws is teh highes priority
+  - Inherit benefits from AWS data center and network architecture
+
+  - similar to on premises data cetners, without maintaining facilities and hardware.
+
+  - can be easily automated
+
+  - inherit all the best practicies of aws
+
+
+
+
+
+
+### Shared Responsibility Model
+- AWS
+  AWS is responsible for the security *of* the Cloud
+  - AWS global infrastructure
+  - regions
+  - availability zones
+  - edge locations
+  - compute
+  - sotrage
+  - database
+  - networking
+- Customer
+  Customers and apn partners are responsible for the security *in* the cloud
+  - Client side data encryption and data integrity authentication
+  - Server-side encryption (file system and data)
+  - Network traffice protection (encryption / integrity / identity)
+  - Operating system, network, and firewall configuration
+  - platform, applications, identity and access management
+  - Customer Data
+
+### Cloud Compliance
+
+- Sharing Information
+  - Inustry certifications
+  - SEcurity and control practices
+  - Compliance reports directly under NDA
+
+- Assurance Programs
+  - ICertiifcation and attestations
+  - Laws, regulations, and privacy
+  - alignments and frameworks
+## Management
+REST like API
+AWS management console (GUI)
+AWS cli
+Software Development Kit (SDKs)
+
+## Other solutions
+Machine Learning
+Analytics and Data Lakes
+Internet of Things
+Serverless Computing
+Containers
+Enterprise Applications
+Storage
+Windows Workloads
+
+
+
+# From Service to Solution
+## Migration
+### Six R's
+- rehost
+  - lift and shift
+  - recreating the on-premises network, only hosted on AWS.
+  - automating with tools such as aws VM import/export
+  - easier to optimize and re-architect applicaitons after migration.
+
+- replatform
+  - lift, tinker, and shift
+  - Retaining the core architecture
+  - making targeted aws cloud optimizations
+  - examples:
+    - migrating databases to amazon RDS
+    - Migrating applications to amazon elastict beanstalk
+
+- refactor
+  - modernize
+  - re-imagining how the application is architected and developed
+  - Using cloud-native features : Turn monolithic application into containerized mini applications.
+
+- retire
+  - shutting off non-useful applications
+  - reducing spend, manageemnt, and security
+
+- retain/revisit
+  - keeping certain application on-premises
+
+- repurchase
+  - moving workflows to software as a service (SaaS)
+
+# Cloud architecture best practices
+## design for failure and nohting fails
+- avoid single points of failure
+- multiple instances
+- multiple AZs
+- separate single server into multiple tiered application
+- for amazon rds, use multi-az features
+
+## build security in every layer
+- encrypt data at rest and in transit
+- enforce principle of least privilege in IAM
+- implement both Security groups and netowkr access control lists (NACL)
+- consider advanced security features and services
+amazon inspector
+amazon guard
+amazon shield
+
+## leverage different storage options
+- move static assets to amazon s3
+- use amazon cloudfront to server globally
+- store session state in dynamodb
+- use elasticache between hosts and databases to store the database query results.
+
+## implement elasticity
+- implement auto scaling policies
+- architect resiliency to reboot and relaunch
+- leverage managed services like amazon s3 and amazon dynamodb
+
+## think parallel
+- scale horizontally, not vertically
+- decouple compute from session / state
+- use elastic load balancing
+- right-size your infrastructure
+
+## loose coupling sets you free
+- looser the systems are coulped, the larger it can scale.
+- instead of a single, ordered workflow, use multiple queues
+- use amazon simple ueue service and simple notification service (SQS & SNS)som
+
+## don't fear constraints
+
+# Five Pillars
+## Operational excellence
+## Security
+## Reliability
+## Performance efficiency
+## Cost optimizations
+- Pay for what you *need*
+- Right-sizing instances
+- Increasing elasticity
+- Chooing the right pricing model
+- Optimizng storage
+
+# Discovery
+- Discover custormer requirements
+  - Research customer's business
+  - Determine market segment
+  - Identify industry trends
+  - Identify customer's competitors
+  - Research recent news
+  - Research customer relationsihp to AWS
+
+- How to ask Questions
+  - Ask targeted questions
+  - Ask open-ended questions
+  - Dive deeper
+  - Uncover the real desired outcomes
+  - Keep track of the conversation
+  - Illustrate workflows and ideation
+
+- Objection handling best practices
+  - Data driven approach
+  - Use case studies
+  - Dive deep.
+  - Have backbone
+  - Keep the momentum going.
+
+- Security
+  - Security at AWS is our top priority
+  - Higher security posture than in legacy environments
+  - Customer inherit all the benefits of our experiencec.
+  - Validated against the strictest of third-parti assurance frameworks.
+
+- Cost or cost savings
+  - reduce tco
+  - achieve continuously optimized and predictable spned
+  - no longer overprovision infrastructure for peak demand
+  - GE Oil and Gas decreased TCO by 52%.
+
+- Scalability and response
+  - build cloud foundation team.
+  - create gourd rails around security, availablity, reliability.
+  - aws control tower gives maximum control -- with sacrificing speed and agility.
+
+- Presentation
+  - 1 hour presentation needs at least 3 hours preparation
+
+- What NOT to do
+  - Use words like definitely, never, or guaranteed.
+  - use acronyms or technical jargon
+  - focus on technology
+  - focus on the short/mid-term
+  - read the slides
+
+# Implementation
+## Migration
+- Four phases of iterative migration process
+  + Assessment
+    - Identify readiness
+    - Identify potential business outcome
+  + Readiness and Planning
+    - Analyze environment and find the dependencies.
+    - Determine migration strategies
+    - Create a well-architected landing zone
+  + Migration
+    - Design, migrate and validate each application
+    - Automatic or manual
+    - Migrate data
+  + Operations and Optimizations
+    - Operate
+    - manage
+    - Optimize
+    - Improve operating model.
+## Going to production
+## Minimum Viable Product (MVP)
+Avoid building a solution where you only discover if there is success at the end.
+Instead, start with something basic and gather feedback as you get more complex.
+## Well architected review
+
+# Modernization
+# Roles
+## Classic IT Roles
+### Architect
+Responsible for desiging IT acrhitectures based on businesss requirements.
+- Enterprise or System Architect
+  Create Holistic IT architecture designs
+- Application Architect
+  Design applications
+- Storage Architect
+  Design Storage Infrastructure
+- Network Architect
+  Design Network Architecture
+- Security Architect
+  Specify Security Requirements
+### System Adminsitrator
+- Hardawre / Software
+  install
+  repair
+  replace
+  maintain
+  monitor performance
+
+- Computer Systems
+  Support
+  Maintain
+  Monitor Network
+  Manage Log Files
+  service outage response
+
+- OS and applications
+  Install
+  update
+  patch
+
+- File Systems
+  Manage
+
+- Enntire Environment
+  Backup and Recover
+
+- Users
+  Manage users
+  Access control
+
+# Cloud Value Economics
+## Cloud Value Framework
+- Cost Savings (TCO)
+  Tool: Cost Savings Analysis
+  On Premises vs AWS
+  Customer analysis might be wrong because customer might find getting all informaiton and putting it together is very hard.
+  20% - 40% less cores on AWS
+
+- Consumption-based Pricing Model
+    Pay for what you consume.
+    Better than overprovision or underprovision because they bring inefficiency leading to financial loss.
+
+- AWS pricinng models
+  - Test
+    - on-demand
+    - reserverd = reserved instances can reduce 75% cost than on-demand
+    - Spot instances
+    - Dedicated instances
+    - Price reductions
+    customer will automatically get the reduced price. No need to renew contract
+
+Migration Cost Formula
+ROI = (Cost Savings) / (Sunk Costs + Migration Costs)
+
+- Sunk Costs
+  Customer's hardware is fully depreciated, and the company is not close to a hardware refresh.
+  and cannot sell the non-depreciated assets.
+
+  Depreciation
+  Was the asset's depreciation considered?
+
+  Recovery Value
+  Can any value be recovered by selling assets?
+
+
+- Cost of migration and decommissioning
+  Customer's existing data center is moved to cloud and data center is shutdown. It requires significant cost and effort.
+
+- Staff Productivity
+- Operational Resilience
+- Business Agility
+
+Customer Cost Saving Analysis Best Practices
+1. Make sure you have the right stakeholders in the room to discuss the cost analysis (finance, procurement, IT support, engineering).
+2. Work collaboratively with the customer.
+3. Use realistic usage percentages (%).
+4. Assign cost/value to business-value factors, such as agility and risk.
+
+Avoid these practices
+1. Focus puerly on pricing and discounts, rather than cost analysis.
+2. Compare a duplicate of an on-premises environment - problematic apples-to-apples comparisons of machines
+3. Allow all decisions and vision to be based on on an unchecked analysis -- One person should not analyze everything. A whole team must work on it to avoid failing to capture the true costs of IT, data center, and on-premises.
+4. Bring up the cost savings discussion late in the decision-making process.
+
+
+Works:
+1. 3 to 5 year depreciation
+2. 3 year reserved instances (RI) which is equivalent to purchased hardware which can't be refreshed in 3 years.
+3. Use voluem RI discounts
+4. Use volume RI discounts
+5. Use realistic ratios
+6. Use realistic ratios (VM density, servers, racks)
+7. Explore on-premises CPU and memory usage.
+8. Apply cost benefits of automation (automatic scaling, APIs, AWS Trusted Advisor, Cost Optimization)
+
+What to Avoid / What does not work
+1. Forget power/cooling (compute, storage, netwokr)
+2. Forget adiminstration costs (procurement, design, build, operations, network, security)
+3. Forget rent/real estate (building deprecation, taxes, shared service staff)
+4. Forget software and hardware maintenance costs
+5. Forget the cost of redundancy
+
+
+Delivering cost savings
+1. Kickoff
+   - cost savings, overview
+   - Timeline, scope, and roles
+2.
 
 # Documents to Read
 AWS Documentation
