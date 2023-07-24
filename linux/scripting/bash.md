@@ -1,5 +1,5 @@
 This list includes a bunch of different commands that are useful to know when working with Linux. Not all of these commands are covered in the videos, so feel free to investigate them on your own.
-
+# Learning bash
 ## Operating with the content of files
 cat file: shows the content of the file through standard output
 wc file: counts the amount of characters, words, and lines in the given file; can also count the same values of whatever it receives via stdin
@@ -27,6 +27,11 @@ command >> file: redirects standard output, appends to file
 command < file: redirects standard input from file
 command 2> file: redirects standard error to file
 command1 | command2: connects the output of command1 to the input of command2
+
+`set -o pipefail` -> It turns on the option to fail the whole commands tied with pipes if one of the command fails. For example,
+`cat somefile.txt | uniq || exit 80` -> If `somefile.txt` does not exist, the left part of the OR (||) sign will fail and then the script will exit. It increases resiliency of the script.
+
+`set -o noclobber` -> It turns on the option not to overwrite a file with '>' sign.
 
 ## Operating with processes
 These are some commands that are useful to know in Linux when interacting with processes. Not all of them are explained in videos, so feel free to investigate them on your own.
@@ -117,6 +122,26 @@ exit 0
 ```
 
 
+=======
+## Prefixes and Suffixes
+```
+$ name="Associate Dev-Ops Engineer"
+$ echo ${name#a}
+Associate Dev-Ops Engineer
+$ echo ${name#Associate}
+Dev-Ops Engineer
+$ echo ${name% *}
+Associate Dev-Ops
+$ echo "${name#* }"
+Dev-Ops Engineer
+
+$ path=/home/username/temp.txt
+$ echo ${path#*/}
+home/username/temp.txt
+$ echo ${path##*/}
+temp.txt
+
+```
 
 # Some bash scripts
 ## counting 
@@ -128,15 +153,171 @@ echo -e "------------------------------------------------------------"
 
 for app_name in $(cat /tmp/assets/apps.txt)
 do
-        filename="/var/log/apps/${app_name}_app.log"
-        get_requests=$(cat ${filename} | grep "GET" | wc -l)
-        post_requests=$(cat ${filename} | grep "POST" | wc -l)
-        delete_requests=$(cat ${filename} | grep "DELETE" | wc -l)
-        echo -e " ${app_name}    \t ${get_requests}    \t    ${post_requests}   \t   ${delete_requests}"
+    filename="/var/log/apps/${app_name}_app.log"
+    get_requests=$(cat ${filename} | grep "GET" | wc -l)
+    post_requests=$(cat ${filename} | grep "POST" | wc -l)
+    delete_requests=$(cat ${filename} | grep "DELETE" | wc -l)
+    echo -e " ${app_name}    \t ${get_requests}    \t    ${post_requests}   \t   ${delete_requests}"
 done
 ```
-## List of some other scripts
- - [A test deployment script](test-deploy-ecommerce-application.sh)
- - [Count open connections](./count_connections.sh)
 
+## Learn `uniq -c`
+### kodekloud solution
+```
+#!/bin/bash
+set -o pipefail
+
+logfile="/etc/logs/error.log"
+
+echo "Number of times each error message appears:"
+cat "${logfile}" | grep "ERROR" | sort  | uniq  -c || { echo "Error encountered in pipe commands" >&2; exit 1; }
+
+exit 0
+```
+
+### My solution
+```
+#!/bin/bash
+set -o pipefail
+set -o noclobber
+
+logfile="/etc/logs/error.log"
+
+echo "Number of times each error message appears:"
+
+errorline="ERROR: DB_CONN_FAILURE: Connection to database failed"
+count=$(cat "$logfile" | grep -o "$errorline" | wc -l) || exit 1
+echo "<${count}> ${errorline}"
+```
+
+## Exmaples of Heredocs
+### Read a file remotely with Heredocs
+```
+$ ssh -T bob@node01 bash "<<EOF 
+cat /home/bob/docker_files/backup/sql_files/schema.sql
+EOF"
+CREATE DATABASE "employees";
+\c employees
+
+CREATE TABLE "employee" (
+"id_employee" int PRIMARY KEY,
+"first_name" varchar,
+"last_name" varchar,
+"area" varchar,
+"job_title" varchar,
+"email" varchar
+);
+
+\c employees
+INSERT INTO "employee"(id_employee, first_name, last_name, area, job_title, email) VALUES ('01', 'Kriti', 'Shreshtha', 'Finance', 'Financial Analyst', 'kriti shreshtha@company.com');
+INSERT INTO "employee"(id_employee, first_name, last_name, area, job_title, email) VALUES ('02', 'Rajasekar', 'Vasudevan', 'Finance', 'Senior Accountant', 'rajasekar.vasudevan@company.com');
+INSERT INTO "employee"(id_employee, first_name, last_name, area, job_title, email) VALUES ('03', 'Debbie', 'Miller', 'IT', 'Software Developer', 'debbie.miller@company.com');
+INSERT INTO "employee"(id_employee, first_name, last_name, area, job_title, email) VALUES ('04', 'Enrique', 'Rivera', 'Marketing', 'Marketing Specialist', 'enrique.rivera@company.com');
+INSERT INTO "employee"(id_employee, first_name, last_name, area, job_title, email) VALUES ('05', 'Feng', 'Lin', 'Sales', 'Sales Manager', 'feng.lin@company.com');
+SELECT * FROM "employee";
+```
+
+
+
+### Show tables in a docker container remotely with Heredocs
+```
+[bob@student-node ~]$ ssh -T bob@node01 << EOF
+sudo docker ps
+sudo docker exec -i my_postgres_container bash -c "psql -U postgres -d employees << EOF
+> select * from employee;
+> EOF"
+> EOF
+CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS          PORTS                    NAMES
+d97ad94704a9   my_postgres_image   "docker-entrypoint.s…"   11 minutes ago   Up 11 minutes   0.0.0.0:5432->5432/tcp   my_postgres_container
+id_employee | first_name | last_name |   area    |      job_title       |              email
+-------------+------------+-----------+-----------+----------------------+---------------------------------
+   1 | Kriti      | Shreshtha | Finance   | Financial Analyst    | kriti shreshtha@company.com
+   2 | Rajasekar  | Vasudevan | Finance   | Senior Accountant    | rajasekar.vasudevan@company.com
+   3 | Debbie     | Miller    | IT        | Software Developer   | debbie.miller@company.com
+   4 | Enrique    | Rivera    | Marketing | Marketing Specialist | enrique.rivera@company.com
+   5 | Feng       | Lin       | Sales     | Sales Manager        | feng.lin@company.com
+(5 rows)
+```
+
+### Finding a piece of data and writing to a file.
+```
+[bob@student-node ~]$ ssh -T bob@node01 << EOF
+sudo docker exec -i my_postgres_container bash -c "psql -U postgres -d employees << EOF
+\pset tuples_only on
+select email from employee where first_name='Kriti';
+EOF" >> /home/bob/kodekloud/employee1_email.txt
+EOF
+    email
+kriti shreshtha@company.com
+(1 row)
+```
+
+### Spinning Wheel
+```
+[bob@student-node ~]$ cat spinning.sh
+#!/usr/bin/env bash
+
+spin='-\|/'
+
+i=0
+while [[ true ]]; do
+printf "\r${spin:$((i%4)):1}"
+sleep 0.1
+((i++))
+done
+
+exit 0
+```
+
+### Changing data with file descriptor and Heredocs
+```
+[bob@student-node ~]$ ssh -T bob@node01 <<EOF
+exec 20<> /home/bob/kodekloud/employee1_email.txt
+read -n 5 <& 20
+echo -n "." >& 20
+echo 20>&-
+cat /home/bob/kodekloud/employee1_email.txt
+EOF
+
+kriti.shreshtha@company.com
+```
+
+## Removig and prefixes and suffixes.
+### Study the examples:
+```
+$ filepath="/home/vagrant/test_name.txt.bak"
+$ echo ${filepath%.*}
+/home/vagrant/test_name.txt
+$ echo ${filepath%%.*}
+/home/vagrant/test_name
+
+$ echo ${filepath#*/}
+home/vagrant/test_name.txt.bak
+$ echo ${filepath##*/}
+test_name.txt.bak
+```
+
+### Extreme example
+```
+#!/bin/bash
+url="https://github.com/jcroyoaun/kodekloud-lab-sample-nodejs/blob/master/app.js"
+raw_url_step1="${url/github.com/raw.githubusercontent.com}"
+#code for
+prefix="${raw_url_step1%%blob*}"
+suffix="${raw_url_step1#*blob/}"
+echo "${prefix}"
+echo "${suffix}"
+
+raw_url="${prefix}${suffix}"
+#echo "Raw URL: ${raw_url}"
+curl "${raw_url}"
+exit 0
+```
+
+
+## Some educational scripts
+- [A test deployment scrip](test-deploy-ecommerce-application.sh)
+- [Spinning wheel](spinning.sh)
+- [Package Download with Spinning wheel](package.sh)
+- [Count open connections](./count_connections.sh)
 
