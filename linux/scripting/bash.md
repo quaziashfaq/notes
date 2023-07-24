@@ -46,6 +46,77 @@ top: shows the processes currently using the most CPU time (press "q" to quit)
 ## Interesting commands
 cat /var/log/syslog | cut -d' ' -f5- | sort  | uniq -c | sort -nr | less
 
+## Shell built-in process and other process
+$ type echo
+$ type time
+$ type cat
+
+$ time echo
+$ time cat
+
+
+## Find Process
+$ pgrep -o bash
+
+$ ps -ef | grep bash
+
+$ sudo strace -Tfp $(pgrep -o bash) 2>&1 | grep -e 'execve' &
+$ sudo strace -Tfp $$ 2>&1 | grep -e 'execve' &
+$ echo 'Hello'
+$ cat file.txt
+
+## Guard Clause
+### Rewriting a bad code example
+Rather than writing bad nested if/else loops, we can rewrite them as gaurds before executing the actual code.
+
+```
+if [[ "$USER_NAME}" == "admin" ]]; then
+    if [[ -e "${FILE_PATH}" ]]; then
+        if [[ -s "${FILE_PATH}" ]]; then
+            run_process
+        else
+            echo "File exists but is empty"
+        fi
+    else
+        echo "file does not exist"
+    fi
+else
+    echo "User is not admin"
+fi
+
+exit 0
+
+```
+The above code example is bad and hard to comprehend and debug.
+The better way is as below.
+
+```
+if [[ ! "$USER_NAME}" == "admin" ]]; then
+    echo "User is not admin"
+    exit 1
+fi
+
+if [[ ! -e "${FILE_PATH}" ]]; then
+    echo "File does not exist"
+    exit 1
+fi
+
+if [[ ! -s "${FILE_PATH}" ]]; then
+    echo "File exists but is empty"
+    exit 1
+fi
+
+run_process
+exit 0
+```
+### Oneliner guard clause example
+```
+[[ -e ${filename} ]] || {echo "File does not exist"; exit 1;}
+[[ -z ${1} ]] && {echo "Argument is empty"; exit 1;}
+[[ -f "${filename}" ]] || {echo "File does not exist."; exit 1;}
+```
+
+
 
 # Some bash scripts
 ## counting 
@@ -64,6 +135,8 @@ do
         echo -e " ${app_name}    \t ${get_requests}    \t    ${post_requests}   \t   ${delete_requests}"
 done
 ```
-## Deploying a ecommerce application
-[A test deployment scrip](test-deploy-ecommerce-application.sh)
+## List of some other scripts
+ - [A test deployment script](test-deploy-ecommerce-application.sh)
+ - [Count open connections](./count_connections.sh)
+
 
