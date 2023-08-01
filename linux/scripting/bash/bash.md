@@ -174,7 +174,31 @@ ls -l file{
 `$@` -> List/separated values of all arguments being passed.
 `$$` -> current process ID.
 `$!` -> ID of the __last__ backgroupnd job.
+`$_` -> Performs an operaiton on the last argument.
+
 `$-` -> Contains flags in use by your script.
+|-------+--------------------------------------|
+| flags | Description                          |
+|-------+--------------------------------------|
+| h     | Remember the location of commands.   |
+| B     | Perform brace expansion.             |
+|-------+--------------------------------------|
+| e     | Exits immediately if a command       |
+|       | exits with a non-zero status.        |
+|-------+--------------------------------------|
+| H     | Enable history substitution.         |
+| i     | Interactive Shell                    |
+| m     | Job control is enabled.              |
+|-------+--------------------------------------|
+| u     | Treat unset variables as an error    |
+|       | when performing parameter expansion. |
+|-------+--------------------------------------|
+
+You can set the variables with `set` command
+`set -e` -> exits or error
+`set -u` -> exits when an unset variable is used
+`set -o pipefail` -> catches the error in piped commands
+
 
 ## IFS
 IFS=$' \t\n'
@@ -182,6 +206,14 @@ ANSI-C Quoting
 
 A  --  signals  the end of options and disables further option processing.  Any arguments after the -- are treated as filenames and argu‐
                  ments.  An argument of - is equivalent to --.
+
+## TypeSetting / Declaring the type of Variables
+`declare -U` -> Making the letters uppercase
+`declare -l` -> Making the letters lowercase
+`declare -a` -> Setting the type as arrary
+`declare -A` -> Setting the type as Associative Array.
+`declare -i` -> Setting the type as integer
+`declare -r` -> Setting the variable state as readonly.
 
 
 # Some bash scripts
