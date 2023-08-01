@@ -48,6 +48,13 @@ bg: causes a job that was stopped to go to the background
 jobs: lists the jobs currently running or stopped
 top: shows the processes currently using the most CPU time (press "q" to quit)
 
+
+When a user starts a terminall session (tty), the tty will have a shell process running with a one-to-one relationship to between them. This shell is called is parent shell. 
+
+Within the above parent shell, we run other commands and when they run in the prcoessor as processes, they get pid (process id).
+
+
+
 ## Interesting commands
 cat /var/log/syslog | cut -d' ' -f5- | sort  | uniq -c | sort -nr | less
 
@@ -134,7 +141,10 @@ $ echo ${name% *}
 Associate Dev-Ops
 $ echo "${name#* }"
 Dev-Ops Engineer
+```
 
+### Shortest and Longest match to remove.
+```
 $ path=/home/username/temp.txt
 $ echo ${path#*/}
 home/username/temp.txt
@@ -142,6 +152,37 @@ $ echo ${path##*/}
 temp.txt
 
 ```
+
+## Brace Expansion
+
+```
+$ touch {1..10}
+$ touch {1..10..2}
+$ ls
+file1  file3  file5  file7  file9
+
+ls -l file[1-9][1-9]
+ls -l file{
+```
+
+
+## Special Shell Varialbles:
+`$0` -> Name of the script being run
+`$?` -> Returns exit code value
+`$#` -> Number of arguments being passed to a script or function.
+`$*` -> String of all argumnets being passed.
+`$@` -> List/separated values of all arguments being passed.
+`$$` -> current process ID.
+`$!` -> ID of the __last__ backgroupnd job.
+`$-` -> Contains flags in use by your script.
+
+## IFS
+IFS=$' \t\n'
+ANSI-C Quoting
+
+A  --  signals  the end of options and disables further option processing.  Any arguments after the -- are treated as filenames and argu‐
+                 ments.  An argument of - is equivalent to --.
+
 
 # Some bash scripts
 ## counting 
