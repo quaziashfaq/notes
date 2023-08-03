@@ -114,7 +114,16 @@ Common S3 use cases:
 ### Amazon Elastic File System (EFS)
 File Storage for Amazon EC2 Instance
 
-## Databse Service
+## Database Services
+### Summary
+    Amazon RDS = Relational Database Service = MySQL, PostgreSQL, Oracle, Microsoft SQL
+    Amazon Aurora = MySQL or PostgreSQL compatible, redundant, highly available, auto patched and backed up, 3 times the throughput of MySQL.
+    DynamoDB = key-value database for simple lookup table.
+    Redshift = for dataware housing purpose where BI (business intelligence) processes will run on the past data for analysis.
+    DocumentDB = More than just key-value pair database. It's full-fledged database. NoSQL DB. Json Format. MongoDB compatible.
+    Neptune = Graph Datbaase. (like neo4j?). Recommendiation engines. Fraud database.
+    Amazon Quantum Ledger Database (QLDB) = for immutable data requried in banking sector.
+
 ### Features
 Purpose-built for specific application use cases
 Offlod time-consuming management tasks
@@ -126,6 +135,7 @@ Offlod time-consuming management tasks
 - Database point-in-time snapshots
 - Cost-efficient and resizable capacity
 - Automatic Host relpacement
+
 
 #### 6 other types of databases support.d
 1. Amazon Aurora
@@ -286,7 +296,7 @@ Windows Workloads
 - consider advanced security features and services
 amazon inspector
 amazon guard
-amazon shield
+aws shield
 
 ## leverage different storage options
 - move static assets to amazon s3
@@ -446,6 +456,10 @@ Responsible for desiging IT acrhitectures based on businesss requirements.
   Access control
 
 # Cloud Value Economics
+## Cloud Benifits
+   - Agility allows to avoid planning ahead of time for how much capacity I need.
+   - 
+
 ## Cloud Value Framework
 - Cost Savings (TCO)
   Tool: Cost Savings Analysis
@@ -567,6 +581,7 @@ Redshift OLAP - Amazon Data Warehouse Solution
 * Bootstrap script
 ** For RDS
 #!/bin/bash
+```
 yum update -y
 yum install httpd php php-mysql -y
 cd /var/www/html
@@ -579,6 +594,7 @@ chmod -R 755 wp-content
 chown -R apache:apache wp-content
 chkconfig httpd on
 service httpd start
+```
 
 
 * bits to check
@@ -701,7 +717,7 @@ CDK constructs: reusable cloud components. constructs.dev (similar to Terraform 
 EC2: virtual machines. "instance".
 AMI: predefined configuration for EC2 - amount of CPU, amount of memory, network bandwidth, OS, storage options such as EBS.
 EC2 is considered the backbone of AWS as many services use EC2 as underlying servers -- S3, RDS, DDB, Lambdas, etc
-=======
+
 ## AWS Security
 
 Security
@@ -802,15 +818,3 @@ Lex
    EBS - Elastic Block Store = Block Disk
    EFS - Elastic File Store = NFS Share
    S3  = Simple Storage Service = Object Storage
-## Databases
-   Amazon RDS = Relational Database Service = MySQL, PostgreSQL, Oracle, Microsoft SQL
-   Amazon Aurora = MySQL or PostgreSQL compatible, redundant, highly available, auto patched and backed up.
-   DynamoDB = key-value database for simple lookup table.
-   Redshift = for dataware housing purpose where BI (business intelligence) processes will run on the past data for analysis.
-   DocumentDB = More than just key-value pair database. It's full-fledged database. NoSQL DB. Json Format. MongoDB compatible.
-   Neptune = Graph Datbaase. (like neo4j?). Recommendiation engines. Fraud database.
-   Amazon Quantum Ledger Database (QLDB) = for immutable data requried in banking sector.
-
-   
-
-
