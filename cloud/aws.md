@@ -1,25 +1,31 @@
-# Features
+# AWS Cloud Basics
+## Features
 - On-demand software-based resources.
 - Available in seconds
 - Pay-as-you-go pricing
 
-# Regions
+## Regions
 - Regions are completely isolated from each other.
 - Certain resources are tied to regions.
 - Each region has datacenters which are called availability zone.
+- Each region has multiple, independent and physically isolated AZ.
 
-# Availability Zones
+## Availability Zones
 - AZs are isolated from other AZs withing the region.
-- AZs are connected with high-speed, low-latency connection within a region.
+- AZs are connected to each other with redundant, ultra-high-speed, low-latency connection within a region.
 
-# Misc
+## Misc
 - Web and mobile apps
 - Data processing and warehousing
 - Storage and Archiving
 
-# Core Techs
+# AWS Core Technologies
 ## Compute
+Compute means some form virtual machine which runs code.
+
 ### Amazon EC2 - resize compute capacity
+Elastic Cloud Compute => EC2 
+
 #### Features
 - elasticity
 - complete control
@@ -61,6 +67,10 @@ Run applications on a managed cluster (docker)
 
 ## Storage Service
 A reliable, scalable, and secure place for data
+EBS - Elastic Block Store = Block Disk
+EFS - Elastic File Store = NFS Share
+S3  = Simple Storage Service = Object Storage
+
 ### Amazon Elastic Block Store (EBS):
 Durable Persistent Block Level Storage
 Replicate every EBS volume.
@@ -137,7 +147,7 @@ Offlod time-consuming management tasks
 - Automatic Host relpacement
 
 
-#### 6 other types of databases support.d
+#### 6 other types of databases supported
 1. Amazon Aurora
 2. MariaDB
 3. PostgreSql
@@ -150,13 +160,49 @@ Offlod time-consuming management tasks
 - fast and predictable performance
 
 #### Amazon ElastiCache
-- in-memory caching system
+- in-memory caching systems / engines
+- ElasticCache is a web service that makes it easy to deploy, operate, and scale and in-memory cache in the cloud.
+- ElasticCache supports two opensouce in-memory caching engines
+    - memcached
+    - redis
+
 
 #### Amazon Redshift
 - Data warehousing and processing.
 - Collecting data from multiple sources and analyze them.
 - Generate report on past events
 - Predict future
+
+### Additional Notes
+** RDS (OLTP)
+SQL
+MySQL
+Oracle DB
+PostGreSQL
+Amazon Aurora
+MariaDB
+Amazon DynamoDB (No SQL)
+Redshift OLAP - Amazon Data Warehouse Solution
+
+* Bootstrap script
+** For RDS
+```
+#!/bin/bash
+yum update -y
+yum install httpd php php-mysql -y
+cd /var/www/html
+curl -O https://wordpress.org/latest.tar.gz
+tar -xfz latest.tar.gz
+cp -r wordpress/* /var/www/html
+rm -rf wordpress
+rm -rf latest.tar.gz
+chmod -R 755 wp-content
+chown -R apache:apache wp-content
+chkconfig httpd on
+service httpd start
+```
+
+
 
 ## Networking
 ### Amazon VPC
@@ -231,6 +277,106 @@ Route end users to internet applications
   - ICertiifcation and attestations
   - Laws, regulations, and privacy
   - alignments and frameworks
+### Others
+
+Security
+- Amazon Macie - Discover and protect your sensitive data
+- AWS Key Management Service - Store and manage encryption keys
+- AWS CloudHSM - Hardware based key storage
+- AWS Certificate Manager - provision, manage and deploy SSL and TLS security certificates
+- AWS secret Manager
+  - protects the secrets required to access the resources.
+  - rotates automatically, manage and retrive secrets.
+  - stores passwords, keys and tokens
+
+
+Infrastructure Protection
+- AWS shield - Denial of Service protection
+- AWS Web application Firewall (WAF) - filter malicious website traffics
+- aws firewall manager - Centrally manage firewall rules.
+
+threat detection
+- amazon guard duty - automatically detect threats
+- amazon inspector - analyze application security
+- aws config - record and evaluation configuratinos of your AWS resources.
+- aws cloudtrail - track user activity and API usage.
+
+Identity management
+- aws iam - securely manage access to AWS account services and resources.
+  - iam users
+    root user
+  - iam policy
+  - iam role: service or user cas assume a role.
+- aws single sign-on / IAM Identity Centre - Implement cloud  single sign-on
+- Amazon Cognito - Manage identity inside applications.
+- aws directory service
+  - Implement and manage Microsoft AD.
+  - Managed Microsoft AD
+  - Managed Simple AD
+  - AD connector - allow on pemise users to login to aws applications with AD
+  - distributed service with automatic failover
+  - compatible with other aws services
+  - aws organizationsk
+
+- AWS Orgaganizations
+Management and governance
+  - Account management services
+    - AWS control tower
+    - AWS org
+    - aws budgets
+  - Provisioning Services
+    - aws cloudformation
+      - Templates
+      - json or yaml settings.
+      - specify all the configuration to the cloudformation. It will generate the full infrastructure
+      - Full infrastructure with version control systems
+      - Nesting templates
+      - automation devops engineer can use it for automaiton
+      - scale
+    - aws service catalog
+    - aws ops works
+    - aws marketplace
+  - Operation services
+    - amazon cloudwatch
+      - monitoring
+      - collect metrics from services
+      - integrates with 70+ aws services
+      - lots of pre-defined metrics
+      - log storage
+      - ssh login logs -> cloudwatch logs -> cloudwatch filter -> cloudwatch alarm
+    - aws config
+    - aws cloudtrail
+    - aws systems manager
+    - amazon x-ray
+    - autoscaling
+      - minimum size
+      - desired size
+      - scale out to the maximum
+      - high availability
+      - better fault tolerance
+      - better cost management
+      - ec2, dynamodb, aurora
+
+Machine Learning
+  - Amazon Kendra
+  - Amazon Personalize
+
+  
+Machine learning tools
+  - Lookout for Metrics
+  - Forecast
+  - Fraud Detector
+
+
+  Rekognition - Analyze images, object and scene detection
+
+Polly
+Transcribe
+Lex
+
+
+   
+
 ## Management
 REST like API
 AWS management console (GUI)
@@ -247,39 +393,6 @@ Enterprise Applications
 Storage
 Windows Workloads
 
-
-
-# From Service to Solution
-## Migration
-### Six R's
-- rehost
-  - lift and shift
-  - recreating the on-premises network, only hosted on AWS.
-  - automating with tools such as aws VM import/export
-  - easier to optimize and re-architect applicaitons after migration.
-
-- replatform
-  - lift, tinker, and shift
-  - Retaining the core architecture
-  - making targeted aws cloud optimizations
-  - examples:
-    - migrating databases to amazon RDS
-    - Migrating applications to amazon elastict beanstalk
-
-- refactor
-  - modernize
-  - re-imagining how the application is architected and developed
-  - Using cloud-native features : Turn monolithic application into containerized mini applications.
-
-- retire
-  - shutting off non-useful applications
-  - reducing spend, manageemnt, and security
-
-- retain/revisit
-  - keeping certain application on-premises
-
-- repurchase
-  - moving workflows to software as a service (SaaS)
 
 # Cloud architecture best practices
 ## design for failure and nohting fails
@@ -322,11 +435,26 @@ aws shield
 
 ## don't fear constraints
 
-# Five Pillars
+# AWS Five Pillars - 
+It's found in AWS Well-Architeted Framework Whitepaper
+
 ## Operational excellence
+- Deploy smaller, reversible changes.
+- Plan for and anticipate failure.
+- Script operations with code.
+
 ## Security
+- Assign least privileges that is required.
+
 ## Reliability
+- Scale horizontally for resilience
+- Automatic recovery from failure
+
 ## Performance efficiency
+- Serverless architecture first
+- Use multi-regional deployment.
+- Effective user of resources to meet demand.
+
 ## Cost optimizations
 - Pay for what you *need*
 - Right-sizing instances
@@ -334,7 +462,8 @@ aws shield
 - Chooing the right pricing model
 - Optimizng storage
 
-# Discovery
+# From Service to Solution
+## Discovery
 - Discover custormer requirements
   - Research customer's business
   - Determine market segment
@@ -385,8 +514,39 @@ aws shield
   - focus on the short/mid-term
   - read the slides
 
-# Implementation
 ## Migration
+### Six R's
+- rehost
+  - lift and shift
+  - recreating the on-premises network, only hosted on AWS.
+  - automating with tools such as aws VM import/export
+  - easier to optimize and re-architect applicaitons after migration.
+
+- replatform
+  - lift, tinker, and shift
+  - Retaining the core architecture
+  - making targeted aws cloud optimizations
+  - examples:
+    - migrating databases to amazon RDS
+    - Migrating applications to amazon elastic beanstalk
+
+- refactor
+  - modernize
+  - re-imagining how the application is architected and developed
+  - Using cloud-native features : Turn monolithic application into containerized mini applications.
+
+- retire
+  - shutting off non-useful applications
+  - reducing spend, manageemnt, and security
+
+- retain/revisit
+  - keeping certain application on-premises
+
+- repurchase
+  - moving workflows to software as a service (SaaS)
+
+## Implementation
+### Migration
 - Four phases of iterative migration process
   + Assessment
     - Identify readiness
@@ -404,16 +564,17 @@ aws shield
     - manage
     - Optimize
     - Improve operating model.
-## Going to production
-## Minimum Viable Product (MVP)
+### Going to production
+### Minimum Viable Product (MVP)
 Avoid building a solution where you only discover if there is success at the end.
 Instead, start with something basic and gather feedback as you get more complex.
-## Well architected review
+### Well architected review
 
-# Modernization
-# Roles
-## Classic IT Roles
-### Architect
+## Modernization
+Modernizing the legacy application by re-architecting and hosting the application in the cloud.
+## Roles
+### Classic IT Roles
+#### Architect
 Responsible for desiging IT acrhitectures based on businesss requirements.
 - Enterprise or System Architect
   Create Holistic IT architecture designs
@@ -425,7 +586,7 @@ Responsible for desiging IT acrhitectures based on businesss requirements.
   Design Network Architecture
 - Security Architect
   Specify Security Requirements
-### System Adminsitrator
+#### System Adminsitrator
 - Hardawre / Software
   install
   repair
@@ -455,7 +616,7 @@ Responsible for desiging IT acrhitectures based on businesss requirements.
   Manage users
   Access control
 
-# Cloud Value Economics
+# Cloud Value Economics - Cost Optimization
 ## Cloud Benifits
    - Agility allows to avoid planning ahead of time for how much capacity I need.
    - 
@@ -548,75 +709,26 @@ Perspectives: https://perspectives.mvdirona.com/
 All Things Distributed: https://www.allthingsdistributed.com/
 
 # Snapshot
-** From snapshot -> Create volume
+## From snapshot -> Create volume
 Can be changed:
 volume type
 volume size
 availability zone
 encryption
 
-** From snapshot -> Create snapshot
+## From snapshot -> Create snapshot
 Can be changed:
 Region
 Encryption
 
 
-* In memeory caching engines
-ElasticCache is a web service that makes it easy to deploy, operate, and scale and in-memory cache in the cloud.
-ElasticCache supports two opensouce in-memory caching engines
-memcached
-redis
-
-# databases
-** RDS (OLTP)
-SQL
-MySQL
-Oracle DB
-PostGreSQL
-Amazon Aurora
-MariaDB
-Amazon DynamoDB (No SQL)
-Redshift OLAP - Amazon Data Warehouse Solution
-
-* Bootstrap script
-** For RDS
-#!/bin/bash
-```
-yum update -y
-yum install httpd php php-mysql -y
-cd /var/www/html
-curl -O https://wordpress.org/latest.tar.gz
-tar -xfz latest.tar.gz
-cp -r wordpress/* /var/www/html
-rm -rf wordpress
-rm -rf latest.tar.gz
-chmod -R 755 wp-content
-chown -R apache:apache wp-content
-chkconfig httpd on
-service httpd start
-```
 
 
-* bits to check
-Storage
-SAN
-ISM
-Vmax
-
-lsblk
-iscsi
-parted
-fdisk
-ext2
-ext3
-ext4
-init vs sytemd
 
 
-vol-0abca1990211ca66d, vol-0a235245407550301, vol-0f1f97963cff17a1a
-
-
+# Habijabi
 ## Elastic File System (EFS)
+```
 sudo mount -t efs fs-e08e4503:/ efs
 [root@ip-172-31-92-143 mnt]# mount
 sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime)
@@ -647,9 +759,11 @@ mqueue on /dev/mqueue type mqueue (rw,relatime)
 sunrpc on /var/lib/nfs/rpc_pipefs type rpc_pipefs (rw,relatime)
 tmpfs on /run/user/1000 type tmpfs (rw,nosuid,nodev,relatime,size=100728k,mode=700,uid=1000,gid=1000)
 fs-e08e4503.efs.us-east-1.amazonaws.com:/ on /mnt/efs type nfs4 (rw,relatime,vers=4.1,rsize=1048576,wsize=1048576,namlen=255,hard,noresvport,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=172.31.92.143,local_lock=none,addr=172.31.84.29)
-* aws cli
+```
+
+## aws cli
 To attach a gateway with VPC
-aws ec2 attach-internet-gateway --vpc-id "vpc-0814b4de9f8f93524" --internet-gateway-id "igw-09d552c517992113d" --region us-east-1
+`aws ec2 attach-internet-gateway --vpc-id "vpc-0814b4de9f8f93524" --internet-gateway-id "igw-09d552c517992113d" --region us-east-1`
 
 
 
@@ -659,7 +773,7 @@ Link: https://www.youtube.com/watch?v=SOTamWNgDKc&t=3366s
 
 
 
-Peijun Wu
+# Peijun Wu - Notes from Internet
 3 months ago (edited)
 Tracking my progress: 12:27:30
 Notes:
@@ -718,103 +832,3 @@ EC2: virtual machines. "instance".
 AMI: predefined configuration for EC2 - amount of CPU, amount of memory, network bandwidth, OS, storage options such as EBS.
 EC2 is considered the backbone of AWS as many services use EC2 as underlying servers -- S3, RDS, DDB, Lambdas, etc
 
-## AWS Security
-
-Security
-- Amazon Maice - Discover and protect your sensitive data
-- AWS Key Management Service - Store and manage encryption keys
-- AWS CloudHSM - Hardwarebased key storage
-- AWS Certificate Manager  provision 
-- AWS secret Manager
-  - protects the secrets required to access the resources.
-  - rotates automatically
-  - stores passwords, keys and tokens
-
-
-Infrastructure Protection
-- AWS shield
-- AWS Web application fw
-- aws firewall manager
-
-threat detection
-- amazon guard duty
-- amazon inspector
-- aws config
-- aws cloudtrail
-
-Identity management
-- aws iam
-  - iam users
-    root user
-  - iam policy
-  - iam role: service or user cas assume a role.
-- aws single sign-on
-- aws directory service
-  - Managed Microsoft AD
-  - Managed Simple AD
-  - AD connector - allow on pemise users to login to aws applications with AD
-  - distributed service with automatic failover
-  - compatible with other aws services
-  - aws organizationsk
-
-Management and governance
-  - Account management services
-    - AWS control tower
-    - AWS org
-    - aws budgets
-  - Provisioning Services
-    - aws cloudformation
-      - Templates
-      - json or yaml settings.
-      - specify all the configuration to the cloudformation. It will generate the full infrastructure
-      - Full infrastructure with version control systems
-      - Nesting templates
-      - automation devops engineer can use it for automaiton
-      - scale
-    - aws service catalog
-    - aws ops works
-    - aws marketplace
-  - Operation services
-    - amazon cloudwatch
-      - monitoring
-      - collect metrics from services
-      - integrates with 70+ aws services
-      - lots of pre-defined metrics
-      - log storage
-      - ssh login logs -> cloudwatch logs -> cloudwatch filter -> cloudwatch alarm
-    - aws config
-    - aws cloudtrail
-    - aws systems manager
-    - amazon x-ray
-    - autoscaling
-      - minimum size
-      - desired size
-      - scale out to the maximum
-      - high availability
-      - better fault tolerance
-      - better cost management
-      - ec2, dynamodb, aurora
-
-Machine Learning
-  - Amazon Kendra
-  - Amazon Personalize
-
-  
-Machine learning tools
-  - Lookout for Metrics
-  - Forecast
-  - Fraud Detector
-
-
-  Rekognition - Analyze images, object and scene detection
-
-Polly
-Transcribe
-Lex
-
-
-# Storage and Database
-## Storage
-   EBS - Elastic Block Store = Block Disk
-   EFS - Elastic File Store = NFS Share
-   S3  = Simple Storage Service = Object Storage
