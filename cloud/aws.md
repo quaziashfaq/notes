@@ -157,7 +157,7 @@ Common S3 use cases:
 - File Gateway - SMB and NFS interface to S3
 - Tape Gateway - VTL on your local network
 - Volume Gateway - iSCSI block storage volume to on-premises applications
-- 
+
 ## Database Services
 ### Relational
 ### 
