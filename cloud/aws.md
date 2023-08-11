@@ -62,8 +62,27 @@ Types:
 
 ### AWS Lambda: Run code in response to events
 
-### Amazon Elastic Containe Service
+### Containers
+#### Amazon Elastic Containe Service (ECS)
 Run applications on a managed cluster (docker)
+
+#### Amazon Elastic Container Registry (ECR)
+Store, manage, and deploy container images.
+
+#### Elastic Kubernetes Service (EKS)
+Fully managed Kubernetes service.
+
+### Amazon Lightsail
+An easy-to-use cloud platform to build applications or websites.
+
+### Edge
+- AWS Outposts - Run aws services on-premise
+- AWS Snow Family
+- AWS Wavelength - Access aws services 5g networks
+- VMWare Cloud on AWS - Migrate VMWare workloads
+- AWS Local Zones - Run latency sensitive applications closer to end users.
+
+
 
 ## Storage Service
 A reliable, scalable, and secure place for data
@@ -120,11 +139,28 @@ Common S3 use cases:
   Automatic cost saings by moing data between two access tiers, configured by the customer.
 
 #### Amazon S3 Glacier: Data archiving and backup
-### Amazon Storage Gateway: Seamless and secure integration
-### Amazon Elastic File System (EFS)
-File Storage for Amazon EC2 Instance
 
+### File Storage
+- Amazon Elastic File System (EFS) -  Network File Storage for Amazon EC2 Instance
+- Amazon FSx for Windows File Server
+
+### Data Transfer
+- Amazon Storage Gateway: provides on-premises access to unlimited cloud storage
+- AWS DataSync - easily transfer data to and from AWS upto 10 times faster than normal
+- AWS Transfer Family - Transfer files to S3 using SFTP, FTP and FTPS.
+
+
+### Backup
+
+
+### Storage Gateway
+- File Gateway - SMB and NFS interface to S3
+- Tape Gateway - VTL on your local network
+- Volume Gateway - iSCSI block storage volume to on-premises applications
+- 
 ## Database Services
+### Relational
+### 
 ### Summary
     Amazon RDS = Relational Database Service = MySQL, PostgreSQL, Oracle, Microsoft SQL
     Amazon Aurora = MySQL or PostgreSQL compatible, redundant, highly available, auto patched and backed up, 3 times the throughput of MySQL.
@@ -636,7 +672,7 @@ Responsible for desiging IT acrhitectures based on businesss requirements.
   - Test
     - on-demand
     - reserverd = reserved instances can reduce 75% cost than on-demand
-    - Spot instances
+    - Spot instances - 90% off the normal price. The workloads have to be fault tolerant.
     - Dedicated instances
     - Price reductions
     customer will automatically get the reduced price. No need to renew contract
@@ -832,3 +868,8 @@ EC2: virtual machines. "instance".
 AMI: predefined configuration for EC2 - amount of CPU, amount of memory, network bandwidth, OS, storage options such as EBS.
 EC2 is considered the backbone of AWS as many services use EC2 as underlying servers -- S3, RDS, DDB, Lambdas, etc
 
+# Links to read
+- AWS Directory Service Documnetation: https://docs.aws.amazon.com/directory-service/index.html
+- AWS IAM Service Documentation
+- S3 storage types : https://aws.amazon.com/s3/storage-classes/
+- 
