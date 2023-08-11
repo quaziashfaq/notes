@@ -278,8 +278,9 @@ Route end users to internet applications
   - Laws, regulations, and privacy
   - alignments and frameworks
 ### Others
+Later I will organize the below:
 
-Security
+#### Data Protection
 - Amazon Macie - Discover and protect your sensitive data
 - AWS Key Management Service - Store and manage encryption keys
 - AWS CloudHSM - Hardware based key storage
@@ -290,23 +291,23 @@ Security
   - stores passwords, keys and tokens
 
 
-Infrastructure Protection
+#### Infrastructure Protection
 - AWS shield - Denial of Service protection
 - AWS Web application Firewall (WAF) - filter malicious website traffics
 - aws firewall manager - Centrally manage firewall rules.
 
-threat detection
+#### Threat detection
 - amazon guard duty - automatically detect threats
 - amazon inspector - analyze application security
 - aws config - record and evaluation configuratinos of your AWS resources.
 - aws cloudtrail - track user activity and API usage.
 
-Identity management
+#### Identity management
 - aws iam - securely manage access to AWS account services and resources.
   - iam users
     root user
   - iam policy
-  - iam role: service or user cas assume a role.
+  - iam role: both service and user can assume a role to get particular privilege/permission to perform a task.
 - aws single sign-on / IAM Identity Centre - Implement cloud  single sign-on
 - Amazon Cognito - Manage identity inside applications.
 - aws directory service
@@ -316,10 +317,10 @@ Identity management
   - AD connector - allow on pemise users to login to aws applications with AD
   - distributed service with automatic failover
   - compatible with other aws services
-  - aws organizationsk
+  - aws organizations - centrally goern and manage multiple aws accounts in one place.
 
-- AWS Orgaganizations
-Management and governance
+- AWS Organizations
+#### Management and governance
   - Account management services
     - AWS control tower
     - AWS org
@@ -357,7 +358,7 @@ Management and governance
       - better cost management
       - ec2, dynamodb, aurora
 
-Machine Learning
+## Machine Learning
   - Amazon Kendra
   - Amazon Personalize
 
@@ -815,6 +816,7 @@ AWS Account ID: globally unique, 12 digits, assigned for every user
 (root and non-root IAM users), can be associated with alias,  can assume cross-account roles, or assume principals in policies, to access resources under other accounts (ownerID is another account).
 
 ARN: AWS Resource Names uniquely identify AWS resources. Unambiguously specify a resource across all of AWS.
+```
 arn:<partition>:<service>:<region>:<account-id>:<resource-id>
 arn:partition:service:region:account-id:resource-type/resource-id
 arn:partition:service:region:account-id:resource-type:resource-id
@@ -831,4 +833,10 @@ CDK constructs: reusable cloud components. constructs.dev (similar to Terraform 
 EC2: virtual machines. "instance".
 AMI: predefined configuration for EC2 - amount of CPU, amount of memory, network bandwidth, OS, storage options such as EBS.
 EC2 is considered the backbone of AWS as many services use EC2 as underlying servers -- S3, RDS, DDB, Lambdas, etc
+```
+
+
+# Links to Read
+- https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html
+- 
 
