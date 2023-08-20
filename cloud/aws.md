@@ -1,11 +1,35 @@
 # AWS Cloud Basics
-## Features
-- On-demand software-based resources.
-- Available in seconds
-- Pay-as-you-go pricing
+## Characteristics of cloud computing
+    1. pay-as-you-go pricing
+    2. services are delivered over the internet.
+    3. on-demand delivery and available in seconds
+
+## 6 advantages or  of using cloud computing
+    1. Go global in minutes
+    2. Stop spending money running and maintaining data centers
+    3. Benefit from massive economies of scale.
+    4. Increase speed and agility
+    5. Stop guessing capacity
+    6. Trade capital expenses for variable expenses
+
+## 4 benefits of cloud in technical terms
+    1. High Availability : Highly available systems are designed to operate continousoly without failure for a long time. These systems avoid loss of service by reducing or managing failures.
+    2. Elasticity : With elasticity you don't have to plan ahead of time how much capacity you need. You can provision only what you need and then grow andshrink based on demand.
+    3. Agility : The colud gives you incresaed agility. All the services you haveaccess to help you innovate faster, giving you speed to market.
+    4. Durability : Durability is all about long-term data protection. This means your data will remain intact without corruption.
+
+## 3 Common Cloud Computing Models
+    1. IaaS : Infrastucture as a service
+    2. PaaS : Platform as a Service
+    3. SaaS: Software as a Service
+
+## 3 Common Cloud Deployment Models
+    1. Private Cloud
+    2. Public Cloud
+    3. Hybrid Coud
 
 ## Regions
-- Regions are completely isolated from each other.
+- Regions are completely independent and isolated from each other.
 - Certain resources are tied to regions.
 - Each region has datacenters which are called availability zone.
 - Each region has multiple, independent and physically isolated AZ.
@@ -34,6 +58,7 @@ Elastic Cloud Compute => EC2
 - reliable - highly available
 - secure
 - inexpensive
+
 #### Machine Types
 - General Purpose: A, T, M
 - Compute Optimized
@@ -41,7 +66,49 @@ Elastic Cloud Compute => EC2
 - Accelerated computing
 - Storage Optimized
 
-Amazon Machine Images (AMI)
+#### Amazon Machine Images (AMI)
+#### Pricing
+- On-Demand
+    - What is it?
+        - fixed price
+        - billed down to second based on instance type
+        - no contract
+        - pay only for what you use.
+        - can reserve on-demand capacity.
+    - When to use?
+        - care about low cost.
+        - no upfront payment
+        - no long-term commitment
+        - applications have unpredictable workloads that can't be interrupted.
+        - applications are under development
+        - workloads will not run longer than a year.
+
+- Spot
+    - What is it?
+        - Use the unused EC2 capacity across AWS. 
+        - the request is fulfilled only if capacity is available.
+        - can save up to 90% off on-demand prices.
+        - cheapest option
+    - When is it to use?
+        - Not concerned about the start and stop time of application
+        - workloads can be interrupted.
+
+- Reserved Instances (RIs)
+    - What is it?
+        - commit to a specific instance type in a particular region for 1 or 3 yeras.
+        - can save up to 75% off on-demand prices
+        - sign a contract
+        - can reserver capacity in AZ for any duration.
+        - can pay all upfront, partial upfront or no upfront.
+        - all upfront for the max term earns the highest discount.
+        - provides converible types at 54% discount.
+
+- Dedicated hosts
+    
+    
+    - When to use it?
+        - applicaiton has steady state usage -> can commit to 1 or 3 years.
+        - application requires capacity reservation.
 
 ### Amazon EC2 Auto Scaling: increase or decrease number of instances
 automatically add or remove instances to adapt to demand
@@ -159,8 +226,24 @@ Common S3 use cases:
 - Volume Gateway - iSCSI block storage volume to on-premises applications
 
 ## Database Services
-### Relational
-### 
+- Relational
+    - aurora - mysql and postgresql comptaible
+    - rds
+    - redshift - cloud datawarehouse database.
+- key-value - nosql
+    - dynamodb - 
+- in-memory
+    - elasticache
+    - memcached
+- document
+    - documentDB - mongoDB compatible
+
+- graph
+- time series
+- wide column
+- ledger
+
+
 ### Summary
     Amazon RDS = Relational Database Service = MySQL, PostgreSQL, Oracle, Microsoft SQL
     Amazon Aurora = MySQL or PostgreSQL compatible, redundant, highly available, auto patched and backed up, 3 times the throughput of MySQL.
@@ -174,8 +257,7 @@ Common S3 use cases:
 Purpose-built for specific application use cases
 Offlod time-consuming management tasks
 ### Types
-#### Amazon RDS (Relational Database Service)
-- It's called Amazon Aurora
+#### Amazon Aurora
 - Managed Backup Service
 - Automated backups
 - Database point-in-time snapshots
@@ -183,7 +265,7 @@ Offlod time-consuming management tasks
 - Automatic Host relpacement
 
 
-#### 6 other types of databases supported
+#### 6 other types of RDS
 1. Amazon Aurora
 2. MariaDB
 3. PostgreSql
@@ -194,6 +276,15 @@ Offlod time-consuming management tasks
 #### Amazon DynamoDB
 - NoSQL DB
 - fast and predictable performance
+- key-value document database
+- single-digit ms performance
+- fully managed
+- works in multiple regions
+- built-in security, backup and restore
+- can handle more than 20,000,000 requsets  per second
+- works great with serverless.
+- works great for mobile application 
+
 
 #### Amazon ElastiCache
 - in-memory caching systems / engines
@@ -241,6 +332,20 @@ service httpd start
 
 
 ## Networking
+### Bird's eye-view
+- Cloud Networks
+    - Amazon VPC - define and provision an isolated network for your aws resources
+    - AWS transit gateway - connect VPCs and on-premises networks
+    - AWS privatelink - provide private connectivity between VPCs and on-premises applications
+    - Amazon Route 53 - host your own managed DNS.
+
+- Network Scaling
+    - Elastic load balancing - automatically distribute network traffice accross a pool of resources
+    - aws global accelerator - direct traffic through the aws global network to improve global application performnace.
+
+- Content Delivery
+    - Amazon CloudFront - securely deliver data, videos and applications to customers globally with low latency and high transfer speeds.
+
 ### Amazon VPC
 Build a virtual network in the cloud.
 Networking layer for Amazon EC2
@@ -251,14 +356,32 @@ Public and Private Subnets
 Flow Logs - Capture Network flow information
 Host-based firewalls - OS firewalls
 
+- Some components:
+    - NAT gateway
+    - internet gateway
+    - network access control list
+
 ### Security Groups
 Control Access to instances
 
 ### Network Access Control Lists (NACL)
 Control traffic/access at the subnet level
+### CloudFront
+Just like ElastiCache works between application and database to cache the data of database and to get faster response, CloudFront works in Edge location between user and website/application to cache the images, videos or other static data.
+
+[User] <--> CloudFront <--> [Application]
 
 ### Amazon Route 53
+DNS service
 Route end users to internet applications
+- Routing policy
+    - simple routing
+    - weighted routing policy
+    - geolocation policy
+    - latency policy
+    - failover policy
+    - multivalue answer policy
+
 
 ## Security
 ### AWS IAM (Identity and Access management)
@@ -358,11 +481,11 @@ Later I will organize the below:
 - AWS Organizations
 #### Management and governance
   - Account management services
-    - AWS control tower
-    - AWS org
-    - aws budgets
+    - AWS control tower - set up and govern a secure multi-account aws environment
+    - AWS organization - Centrally govern and manage your environments across multiple aws accounts.
+    - aws budgets - improve your planning and cost control.
   - Provisioning Services
-    - aws cloudformation
+    - aws cloudformation - model and provision all your resources via code.
       - Templates
       - json or yaml settings.
       - specify all the configuration to the cloudformation. It will generate the full infrastructure
@@ -370,21 +493,21 @@ Later I will organize the below:
       - Nesting templates
       - automation devops engineer can use it for automaiton
       - scale
-    - aws service catalog
-    - aws ops works
-    - aws marketplace
+    - aws service catalog - create, organize and govern your own curated catalog of AWS products
+    - aws ops works - automate operations with Chef and Puppet
+    - aws marketplace - find, test, buy and deploy software that runs on AWS.
   - Operation services
-    - amazon cloudwatch
+    - amazon cloudwatch - observe your services via metrics and logging
       - monitoring
       - collect metrics from services
       - integrates with 70+ aws services
       - lots of pre-defined metrics
       - log storage
       - ssh login logs -> cloudwatch logs -> cloudwatch filter -> cloudwatch alarm
-    - aws config
-    - aws cloudtrail
-    - aws systems manager
-    - amazon x-ray
+    - aws config - record and evaluate configurations of aws resources
+    - aws cloudtrail - trac all user activity across your aws accounts
+    - aws systems manager - optimize performance and security while managing a large amonut of systems
+    - amazon x-ray - analyze and debug production applications
     - autoscaling
       - minimum size
       - desired size
@@ -395,21 +518,20 @@ Later I will organize the below:
       - ec2, dynamodb, aurora
 
 ## Machine Learning
-  - Amazon Kendra
-  - Amazon Personalize
+  - Amazon Kendra - intelligent search
+  - Amazon Personalize - personalized recommendation
 
   
-Machine learning tools
-  - Lookout for Metrics
-  - Forecast
-  - Fraud Detector
+Machine learning tools for business metrics
+  - Lookout for Metrics - detect unexpected changes eg revenue performance or customer retentino, and identify root causes
+  - Forecast - build accurate forecasting models
+  - Fraud Detector - identify potentially fraudulent online activities.
 
+  Rekognition - Analyze images, object and scene detection and extract meaning
 
-  Rekognition - Analyze images, object and scene detection
-
-Polly
-Transcribe
-Lex
+Polly - turn text into life-like speech.
+Transcribe - turn high quality speech to text. add this capability to your applications.
+Lex - easily build conversational agents or chat bots.
 
 
    
@@ -496,7 +618,7 @@ It's found in AWS Well-Architeted Framework Whitepaper
 - Pay for what you *need*
 - Right-sizing instances
 - Increasing elasticity
-- Chooing the right pricing model
+- Choosing the right pricing model
 - Optimizng storage
 
 # From Service to Solution
