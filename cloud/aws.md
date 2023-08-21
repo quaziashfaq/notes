@@ -102,13 +102,31 @@ Elastic Cloud Compute => EC2
         - can pay all upfront, partial upfront or no upfront.
         - all upfront for the max term earns the highest discount.
         - provides converible types at 54% discount.
-
-- Dedicated hosts
-    
-    
     - When to use it?
         - applicaiton has steady state usage -> can commit to 1 or 3 years.
         - application requires capacity reservation.
+
+- Dedicated hosts
+    - What is it?
+        - physical server that is fully dedicated to your running instances.
+        - save up to 70% off on-demand prices
+        - bring your existing per-socket, per-core, per-vm software licenses.
+        - no multitenancy -> server is not share with other customers.
+    - When to use it?
+        - you can bring your own server-bound software license from vendor.
+        - There is regulatory or corporate compliance requirements around tenancy model.
+
+- Saving Plans
+    - What is it?
+        - commit to compute usage (measured per hour) for 1 or 3 years.
+        - save up to 72% off on-demand prices
+        - It's not making a commitmnet to a dedicated hsot.
+        - It's not a capacity reservation.
+        - Savings can be shared across various compute services.
+    - When to use it?
+        - Want to lower your bill across multiple compute services.
+        - Want to the flexibility to change computer services, instance types, operating systems or regions
+
 
 ### Amazon EC2 Auto Scaling: increase or decrease number of instances
 automatically add or remove instances to adapt to demand
@@ -118,18 +136,29 @@ balance capacity across availability zones
 dynamic and predictive scaling
 
 ### Elastic Load Balancing: Distribute incoming traffic
-Automatically distribute traffic across multiple EC2 instances
+Automatically distribute incoming application traffic across multiple EC2 instances
 Increase availability and fault tolerance
 Configure health checks
 Offload encryption and decrytion
 Types:
-    - Application load balancer
-    - Network load balancer
     - Classic laod balancer
+    - Application load balancer
+    - Gateway load balancers
+    - Network load balancer
+
+### EC2 Auto Scaling
+- Horizontal Scaling
+- Vertical Scaling
 
 ### AWS Lambda: Run code in response to events
+- Lambda is a serverless compute service that lets you run code without managing servers.
+- charged based on the duration and number of requests
+- 1 million free requests each month.
 
 ### Containers
+#### AWS Fargate 
+It is a serverless compute engine for containers like docker.
+
 #### Amazon Elastic Containe Service (ECS)
 Run applications on a managed cluster (docker)
 
@@ -140,14 +169,15 @@ Store, manage, and deploy container images.
 Fully managed Kubernetes service.
 
 ### Amazon Lightsail
-An easy-to-use cloud platform to build applications or websites.
+An easy-to-use cloud platform to quickly launch pre-configured applications for small projects.
 
 ### Edge
-- AWS Outposts - Run aws services on-premise
+- AWS Outposts - Run aws services on-premise - installs servers on-premises
 - AWS Snow Family
 - AWS Wavelength - Access aws services 5g networks
 - VMWare Cloud on AWS - Migrate VMWare workloads
 - AWS Local Zones - Run latency sensitive applications closer to end users.
+AWS Batch - batch allows you to proces large workloads in smaller chunks
 
 
 
@@ -182,6 +212,10 @@ Infinite scalability, greater analysis, and faster data retrieval.
 - There is no limitation of how many files you can keep.
 - 11 9s durability
 - 4 9's availability
+- Set security at bucket level or individual access level.
+- S3 has versioning feature to keep multiple versions.
+- S3 access logs can be used to track issues or abnormal activities.
+- S3 is a regional service. But the bucket names are global.
 
 Common S3 use cases:
 - backup and storage
@@ -196,12 +230,19 @@ Common S3 use cases:
 - Standard Infrequent Access
   Lower per gb price than standard. But it has per gb retrieval fee.
   Stores data in 3 AZs.
-- One Zone
+- One Zone Infrequent Access
   Infrequent Access. Stores data in a single AZ.
   20% lower prices than Standard IA.
-- Amazon S3 Glacier and Amazon Glacier Deep Archive (S3 Glacier Deep Archive)
+- S3 Glacier
   Secure, low-cost and durable storage classes for data archiving.
-  Archive Data
+    - S3 Glacier Instant Retrieval
+    - S3 Glacier Flexible Retrieval 
+    - S3 Glacier Deep Archive
+- S3 Outposts
+    - provides object storage on-premises
+    - a single storage class
+    - stores data across multiple devices or servers
+
 - Amazon S3 Intelligent Tiering
   Automatic cost saings by moing data between two access tiers, configured by the customer.
 
