@@ -5,18 +5,21 @@
     3. on-demand delivery and available in seconds
 
 ## 6 advantages or  of using cloud computing
-    1. Go global in minutes
+    1. Go global in minutes: 
+    Going global in minutes means you can deploy applications in multiple Regions around the world.
     2. Stop spending money running and maintaining data centers
     3. Benefit from massive economies of scale.
-    4. Increase speed and agility
+    4. Increase speed and agility: 
+    The cloud gives you increased speed and agility. All the services you have access to help you innovate faster, giving you speed to market.
     5. Stop guessing capacity
     6. Trade capital expenses for variable expenses
 
 ## 4 benefits of cloud in technical terms
     1. High Availability : Highly available systems are designed to operate continousoly without failure for a long time. These systems avoid loss of service by reducing or managing failures.
-    2. Elasticity : With elasticity you don't have to plan ahead of time how much capacity you need. You can provision only what you need and then grow andshrink based on demand.
-    3. Agility : The colud gives you incresaed agility. All the services you haveaccess to help you innovate faster, giving you speed to market.
+    2. Elasticity : With elasticity you don't have to plan ahead of time how much capacity you need. You can provision only what you need and then grow andshrink based on demand. With elasticity, the company doesn't have to plan ahead of time how much capacity they'll need - elasticity allows them to match the supply of resources with changing workload demands.
+    3. Agility : The colud gives you incresaed agility. All the services you have access to help you innovate faster, giving you speed to market i.e. innovate more quickly and deliver your applications faster.
     4. Durability : Durability is all about long-term data protection. This means your data will remain intact without corruption.
+    5. Scalability: It means the systems can adapt to meet new levels of demand. It means a system has the ability to grow to accomodate an increase in demand. There are both horizontal and vertical scaling in regards to compute resources. Horizontal scaling involves the adding of instances of the same size. Vertical scaling is typically a manual process where the size of the instance is changed.
 
 ## 3 Common Cloud Computing Models
     1. IaaS : Infrastucture as a service
@@ -29,6 +32,7 @@
     3. Hybrid Coud
 
 ## Regions
+- A Region is a geographical area of the world that is a collection of data centers logically grouped into Availability Zones.
 - Regions are completely independent and isolated from each other.
 - Certain resources are tied to regions.
 - Each region has datacenters which are called availability zone.
@@ -68,6 +72,7 @@ Elastic Cloud Compute => EC2
 
 #### Amazon Machine Images (AMI)
 #### Pricing
+##### Definition
 - On-Demand
     - What is it?
         - fixed price
@@ -116,7 +121,7 @@ Elastic Cloud Compute => EC2
         - you can bring your own server-bound software license from vendor.
         - There is regulatory or corporate compliance requirements around tenancy model.
 
-- Saving Plans
+- Savings Plan
     - What is it?
         - commit to compute usage (measured per hour) for 1 or 3 years.
         - save up to 72% off on-demand prices
@@ -128,12 +133,21 @@ Elastic Cloud Compute => EC2
         - Want to the flexibility to change computer services, instance types, operating systems or regions
 
 
+##### Question Answers
+- A company with a business-critical application needs to ensure business continuity and that they will not be impacted by capacity restraints in a given Region. How can the company ensure this?
+    - On-demand capacity reservation: On-Demand Capacity Reservations enable you to reserve compute capacity for your Amazon EC2 instances for any duration.
+    - Standard Reserved Instance (RI) with a capacity reservation: A Reserved Instance is a reservation of resources and capacity for either 1 or 3 years. A capacity reservation offers assurance that the customer will be given preference if there is ever a capacity constraint in a Region.
+    - Convertible Reserved Instance (RI) with a capacity reservation: A Reserved Instance is a reservation of resources and capacity for either 1 or 3 years. A capacity reservation offers assurance that the customer will be given preference if there is ever a capacity constraint in a Region.
+
+
+
 ### Amazon EC2 Auto Scaling: increase or decrease number of instances
-automatically add or remove instances to adapt to demand
-monitor the health of running instances
-replace impaired instances automatically
-balance capacity across availability zones
-dynamic and predictive scaling
+- automatically add or remove instances to adapt to demand
+- monitor the health of running instances
+- replace impaired instances automatically
+- balance capacity across availability zones
+- dynamic and predictive scaling
+- When you require scalable capacity to maintain service levels in your environment.  Auto Scaling monitors your applications and automatically adjusts capacity to maintain steady, predictable performance at the lowest possible cost.
 
 ### Elastic Load Balancing: Distribute incoming traffic
 Automatically distribute incoming application traffic across multiple EC2 instances
@@ -146,6 +160,8 @@ Types:
     - Gateway load balancers
     - Network load balancer
 
+#### Aplication Load Balancer
+AWS recommends enabling multiple Availability Zones for all load balancers. With an Application Load Balancer however, it is a requirement that you enable at least two or more Availability Zones. This configuration helps ensure that the load balancer can continue to route traffic. If one Availability Zone becomes unavailable or has no healthy targets, the load balancer can route traffic to the healthy targets in another Availability Zone.
 ### EC2 Auto Scaling
 - Horizontal Scaling
 - Vertical Scaling
@@ -154,6 +170,7 @@ Types:
 - Lambda is a serverless compute service that lets you run code without managing servers.
 - charged based on the duration and number of requests
 - 1 million free requests each month.
+- Lambda allows you to run a variable and intermittent code without paying for compute time when your code isn't running.
 
 ### Containers
 #### AWS Fargate 
@@ -192,11 +209,12 @@ Durable Persistent Block Level Storage
 Replicate every EBS volume.
 - Network-attached block storage for use with Amazon EC2 instance
   - Persist independently from instance
+  - Tied to ove AZ.
   - Used like a physical hard drive
   - Automatically replicated
   - Attached to any instance in the same az
-  - One EBS voluem to one EC2 instance
-  - One EC2 instance to many EBS volumes
+  - One EBS volume can belong to one EC2 instance
+  - One EC2 instance can have many EBS volumes
   - EBS volumes can retain data after EC2 instance termination
   - Allow point-in-time snapshots to S3
   - 1 GiB increments
@@ -216,6 +234,10 @@ Infinite scalability, greater analysis, and faster data retrieval.
 - S3 has versioning feature to keep multiple versions.
 - S3 access logs can be used to track issues or abnormal activities.
 - S3 is a regional service. But the bucket names are global.
+- provides automatic replication across Availability Zones.
+- Bucket policies OR Bucket access policies
+    - Bucket policies allow you to control access to entire buckets, whereas access control lists let you control access to individual objects within an S3 bucket.
+    - By default, buckets and their contents are private. By default, all data stored in S3 is not viewable by the public. If you want a bucket or object to be accessible by the public, you must explicitly make it so. NAT gateways and internet gateways are needed to allow communications between VPCs and the internet, but they are not required when it comes to S3. 
 
 Common S3 use cases:
 - backup and storage
@@ -250,6 +272,8 @@ Common S3 use cases:
 
 ### File Storage
 - Amazon Elastic File System (EFS) -  Network File Storage for Amazon EC2 Instance
+    - Only supports Linux FS.
+    - Accessible from multiple AZ in the same region.
 - Amazon FSx for Windows File Server
 
 ### Data Transfer
@@ -325,6 +349,7 @@ Offlod time-consuming management tasks
 - can handle more than 20,000,000 requsets  per second
 - works great with serverless.
 - works great for mobile application 
+- provides automatic replication across Availability Zones.
 
 
 #### Amazon ElastiCache
@@ -340,6 +365,7 @@ Offlod time-consuming management tasks
 - Collecting data from multiple sources and analyze them.
 - Generate report on past events
 - Predict future
+- Redshift allows you to run complex analytic queries against petabytes of structured data, use sophisticated query optimization, has columnar storage on high-performance local disks, and has massively parallel query execution?
 
 ### Additional Notes
 ** RDS (OLTP)
@@ -402,6 +428,8 @@ Host-based firewalls - OS firewalls
     - internet gateway
     - network access control list
 
+- By default, all subnets within a VPC can communicate with each other.
+
 ### Security Groups
 Control Access to instances
 
@@ -423,6 +451,8 @@ Route end users to internet applications
     - failover policy
     - multivalue answer policy
 
+### Direct Connect
+Direct Connect is a private (bypasses the public internet), dedicated physical network connection from your on-premises data center to AWS. Since the connection is private, it is extremely fast.
 
 ## Security
 ### AWS IAM (Identity and Access management)
@@ -442,7 +472,7 @@ Route end users to internet applications
   - inherit all the best practicies of aws
 
 
-
+- the best way to give S3 access to all applications running on the EC2 instance -> Use an instance profile to pass an IAM role with Amazon S3 permissions to the EC2 instance
 
 
 
@@ -481,25 +511,27 @@ Route end users to internet applications
 Later I will organize the below:
 
 #### Data Protection
-- Amazon Macie - Discover and protect your sensitive data
+- Amazon Macie - Macie uses machine learning to discover sensitive data stored on Amazon S3. Macie automatically detects a large and growing list of sensitive data types, including personally identifiable information (PII) such as names, addresses, and credit card numbers.
 - AWS Key Management Service - Store and manage encryption keys
 - AWS CloudHSM - Hardware based key storage
 - AWS Certificate Manager - provision, manage and deploy SSL and TLS security certificates
-- AWS secret Manager
+- AWS Secrets Manager
   - protects the secrets required to access the resources.
   - rotates automatically, manage and retrive secrets.
   - stores passwords, keys and tokens
 
 
 #### Infrastructure Protection
-- AWS shield - Denial of Service protection
-- AWS Web application Firewall (WAF) - filter malicious website traffics
+- AWS shield - It's a managed Denial of Service protection service.
+    - Shield Standard protects against layer 3 and 4 attacks.
+    - Shield Advanced protects against layer 3, 4 and 7 attacks.
+- AWS Web application Firewall (WAF) - filter malicious website traffics. It protects web applications against common web attacks like SQL injection attacks and cross-site scripting.
 - aws firewall manager - Centrally manage firewall rules.
 
 #### Threat detection
 - amazon guard duty - automatically detect threats
-- amazon inspector - analyze application security
-- aws config - record and evaluation configuratinos of your AWS resources.
+- amazon inspector - analyze application security, Inspector works with EC2 instances to uncover and report vulnerabilities.
+- aws config - record and evaluation configuratinos of your AWS resources. Config allows you to assess, audit, and evaluate the configurations of your resources over time. Config works with EC2 instances, servers running on-premises, and servers and VMs in environments provided by other cloud providers.
 - aws cloudtrail - track user activity and API usage.
 
 #### Identity management
@@ -507,7 +539,7 @@ Later I will organize the below:
   - iam users
     root user
   - iam policy
-  - iam role: both service and user can assume a role to get particular privilege/permission to perform a task.
+  - iam role: both service and user can assume a role to get particular privilege/permission to perform a task. For example, The company will need to create a role that grants access to S3 and associate it with the EC2 instance.
 - aws single sign-on / IAM Identity Centre - Implement cloud  single sign-on
 - Amazon Cognito - Manage identity inside applications.
 - aws directory service
@@ -517,12 +549,18 @@ Later I will organize the below:
   - AD connector - allow on pemise users to login to aws applications with AD
   - distributed service with automatic failover
   - compatible with other aws services
-  - aws organizations - centrally goern and manage multiple aws accounts in one place.
+  - aws organizations - centrally govern and manage multiple aws accounts in one place.
+
+- Service control policies (SCPs)
+     - AWS Organizations provides central governance and management for multiple accounts. 
+     - Organization SCPs allow you to create permissions guardrails that apply to all accounts within a given organization. 
+     
 
 - AWS Organizations
 #### Management and governance
   - Account management services
-    - AWS control tower - set up and govern a secure multi-account aws environment
+    - AWS control tower - set up and govern a secure multi-account aws environment. It helps to ensure all AWS accounts to conform to company-wide policies.
+    - Service control policies (SCPs) - AWS Organizations provides central governance and management for multiple accounts. Organization SCPs allow you to create permissions guardrails that apply to all accounts within a given organization
     - AWS organization - Centrally govern and manage your environments across multiple aws accounts.
     - aws budgets - improve your planning and cost control.
   - Provisioning Services
@@ -539,6 +577,8 @@ Later I will organize the below:
     - aws marketplace - find, test, buy and deploy software that runs on AWS.
   - Operation services
     - amazon cloudwatch - observe your services via metrics and logging
+      - A CloudWatch alarm can be set up to monitor CPU utilization and trigger further action. Further action could be an Auto Scaling group adding another EC2 instance and/or using SNS to notify team members of the occurrence.
+      - CloudWatch Alarms can be used to determine the percentage of utilization versus the limit.
       - monitoring
       - collect metrics from services
       - integrates with 70+ aws services
@@ -546,7 +586,7 @@ Later I will organize the below:
       - log storage
       - ssh login logs -> cloudwatch logs -> cloudwatch filter -> cloudwatch alarm
     - aws config - record and evaluate configurations of aws resources
-    - aws cloudtrail - trac all user activity across your aws accounts
+    - aws cloudtrail - track all user and API activity across your aws accounts
     - aws systems manager - optimize performance and security while managing a large amonut of systems
     - amazon x-ray - analyze and debug production applications
     - autoscaling
@@ -557,6 +597,20 @@ Later I will organize the below:
       - better fault tolerance
       - better cost management
       - ec2, dynamodb, aurora
+
+####  AWS Trust & Safety team
+The customer should contact the AWS Trust & Safety team using the form or email if they found that there is mining happening in their EC2 machines.
+
+#### DDoS attack protection
+Use the following services:
+- AWS Shield
+- CloudFront
+- Web Application Firewall (WAF)
+- Route 53
+
+#### Questions
+- Customer Service Policy for Penetration Testing: 
+AWS customers are welcome to carry out security assessments or penetration tests against their AWS infrastructure without prior approval for Amazon EC2 instances, NAT gateways, elastic load balancers, and 7 other services.
 
 ## Machine Learning
   - Amazon Kendra - intelligent search
@@ -583,6 +637,19 @@ AWS management console (GUI)
 AWS cli
 Software Development Kit (SDKs)
 
+### AWS Trusted Advisor
+Q: Which AWS service can help you optimize your AWS environment by giving recommendations to reduce cost, increase performance, and improve security?
+A: Trusted Advisor provides real-time guidance to help you provision your resources following AWS best practices.
+- Exposed access keys
+- Open-access permissions for S3 buckets
+- low utilization on EC2 instances.
+- Trusted Advisor has a service limit dashboard that helps you monitor service limits.
+
+
+
+### AWS Personal Health Dashboard
+The AWS Personal Health Dashboard publishes alerts and remediation guidance when issues with AWS services arise. Notifications are also provided for scheduled events that may impact AWS customers.
+
 ## Other solutions
 Machine Learning
 Analytics and Data Lakes
@@ -593,6 +660,40 @@ Enterprise Applications
 Storage
 Windows Workloads
 
+
+# Billing and Pricing
+
+## Support Matrix
+Here is a brief description what each support level provides
+
+### Developer Support
+- Open a technical support case via email. Customers on the Developer Support plan can submit support cases for account and billing questions, service limit increases, and technical support cases via email only.
+
+### Business Support
+- Business Support is the minimum plan that provides access to the full set of Trusted Advisor checks.
+- The Business level support plan provides 1 hour or less response time support for production-level failures.
+- Infrastructure Event Management is also available to Business Support customers, but they need to pay an additional fee to use this service and cannot use it normally as part of their plan.
+- 24x7 support via phone or chat.
+
+### Enterprise Support 
+- All of Business support.
+- It provides access to a Technical Account Manager (TAM) who helps coordinate access to subject matter experts among other things. TAMs typically provide proactive best-practice guidance and assistance with architecting, developing, and running AWS solutions.
+- Customers on the Enterprise Support plan have access to the AWS Support API to create, manage, and close support cases.
+- The Concierge agent is the primary point of contact for billing or account inquiries
+- The response time for a business-critical system down case is less than 15 minutes.
+- AWS Infrastructure Event Management is a structured program available to Enterprise Support customers that helps you plan for large-scale events, such as product or application launches, infrastructure migrations, and marketing events. It is also available to Business Support customers, but they need to pay an additional fee to use this service and cannot use it normally as part of their plan. 
+
+
+
+## All about cost
+### AWS Pricing Calculator
+The Pricing Calculator provides an estimate of AWS fees and charges. Since the company knows the workload details, the AWS Pricing Calculator can also help with calculating the total cost of ownership.
+
+### AWS Cost Explorer
+Cost Explorer allows you to visualize and forecast your costs and usage over time
+
+### AWS Cost and Usage Report
+AWS Cost and Usage Report to track your EC2 Reserved Instance costs.
 
 # Cloud architecture best practices
 ## design for failure and nohting fails
@@ -635,8 +736,8 @@ aws shield
 
 ## don't fear constraints
 
-# AWS Five Pillars - 
-It's found in AWS Well-Architeted Framework Whitepaper
+# AWS SIX Pillars - 
+It's found in AWS Well-Architected Framework Whitepaper
 
 ## Operational excellence
 - Deploy smaller, reversible changes.
@@ -653,7 +754,8 @@ It's found in AWS Well-Architeted Framework Whitepaper
 ## Performance efficiency
 - Serverless architecture first
 - Use multi-regional deployment.
-- Effective user of resources to meet demand.
+- Effective use of resources to meet demand.
+- In this pillar, you would use the information gathered through the evaluation process to actively drive adoption of new services or resources. You would also define a process to improve workload performance, and you would need to stay up-to-date on new resources and services.
 
 ## Cost optimizations
 - Pay for what you *need*
@@ -661,6 +763,8 @@ It's found in AWS Well-Architeted Framework Whitepaper
 - Increasing elasticity
 - Choosing the right pricing model
 - Optimizng storage
+
+## Sustainability
 
 # From Service to Solution
 ## Discovery
@@ -768,7 +872,10 @@ It's found in AWS Well-Architeted Framework Whitepaper
 ### Minimum Viable Product (MVP)
 Avoid building a solution where you only discover if there is success at the end.
 Instead, start with something basic and gather feedback as you get more complex.
-### Well architected review
+### AWS Application Discovery Service
+AWS Application Discovery Service helps you gather information about your on-premises environment and is considered a migration tool.
+
+
 
 ## Modernization
 Modernizing the legacy application by re-architecting and hosting the application in the cloud.
@@ -908,7 +1015,6 @@ Blogs to read
 Perspectives: https://perspectives.mvdirona.com/
 All Things Distributed: https://www.allthingsdistributed.com/
 
-# Snapshot
 ## From snapshot -> Create volume
 Can be changed:
 volume type
@@ -1001,7 +1107,7 @@ Compliance & Policy (& Permissions):
 1. Data Residency: The physical location where the servers and data reside for an organization.
 2. Compliance Boundaries: Regulatory compliance / legal rules by a government that describes where data and services are allowed to reside.
 3. Data Sovereignity: legal authority / juristic control asserted on data within juristic boundaries.
-4. AWS Config: Policy as Code service. You can create rules that continuous check AWS resource configuration. If they deviate (someone accidentally deploy to a wrong region), you can get alerted / the service can auto-fix the deviation.
+4. AWS Config: Policy as Code service. You can create rules that continuously check AWS resource configuration. If they deviate (someone accidentally deploy to a wrong region), you can get alerted / the service can auto-fix the deviation.
 5. IAM policies: role/group - level permissions that directly deny access to certain things. Service Control Policy (SCP) on the other hand manages permissions organization/account-wide.
 6. Gov Cloud: special regions for public sectors
 
@@ -1019,12 +1125,13 @@ ARN: AWS Resource Names uniquely identify AWS resources. Unambiguously specify a
 arn:<partition>:<service>:<region>:<account-id>:<resource-id>
 arn:partition:service:region:account-id:resource-type/resource-id
 arn:partition:service:region:account-id:resource-type:resource-id
+```
 
 where partition can be aws, aws-cn, aws-us-gov.
 
 Since ARN address is hierarchical, you can use * to specify a group of resources in policies, etc: arn:partition:service:region:account-id:*
 
-IAC:
+IaC (Infrastructure as Code) helps in Automation.
 CloudFormation (CFN): JSON/YAML, declarative, can be huge and not as dynamic (hard to create repeated infra). The infra CFN creates is called stack.
 CDK: Imperative, web programming language e.g., Python, can be more dynamic, generates CFN. Easier to create CICD pipelines than CFN. AWS CDK vs. AWS SDK? AWS CDK ensures idempotence of your infrastructure.
 CDK constructs: reusable cloud components. constructs.dev (similar to Terraform modules).
@@ -1044,3 +1151,12 @@ EC2 is considered the backbone of AWS as many services use EC2 as underlying ser
 - AWS IAM Service Documentation
 - S3 storage types : https://aws.amazon.com/s3/storage-classes/
 - 
+
+
+# AWS Cost Optimization
+## Five Best Practices
+- Practice Cloud Financial Management
+- Expenditure and Usage Awareness
+- Cost Effective Resources
+- Manage Demand and Supply Resources
+- Optimizing over Time.
