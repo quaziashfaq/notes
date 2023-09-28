@@ -180,10 +180,60 @@ workload, usage & cost
 ##### Improve predictability
 
 ## Expenditure and Usage Awareness
+- Using Organizations, IAM, and Control Tower
+  - AWS organization
+    - define and manage mulitple accounts
+    - control access permissions andaudit
+    - activate single singn on
+    - activate SCP 
+    - Use audit log
+    - manage billing and share resources across accounts
+    - consoladed billing 
+    - scp can control access resources, services and regions
+    - manage mulitple accounts
+
+  - iam
+    - control access access aws
+    - users, grou.s, roles and policies
+    - principle of least privilege
+    - iam roles to dolegate access to users or aws services -> short-term credentials for users/workloads/services
+    - iam policies specify which permissions are included in policies that can be attached to roles.
+    - iam access analyzer to check and verify permissions as I set them.
+
+  - Control Tower
+    - Landing zone with guardrails.
+      - preventive
+      - detective
+      - mandatory
+      - optional
+
+- Using Tags to Monitor and Maintain costs
+  - Best practice is to activate tagging in billing and management console and configure in such a way that you must assign pre-configured tags when you want to create a resource. Otherwise, the resoruce creation will fail.
+  - using organizations tag policies - enable all features in organizations to utilize this feature.
+  - cost allocation tags (tags that are used to organize your resources and create detailed cost and billing reports.)
+  - Some useful tags you should configure
+    - date configured (user defined; need to be activated)
+    - created by (aws generated; must be enabled)
+
+
+
+
+- QuickSight, S3 Storage Lens, Analytics, and Cost Categories
+  - QuickSight
+    - create and share dashboards that scale
+    - everyone can view dashboards
+    - self-service BI with QuickSight Q
+    - embedded analytics for applications
+    - ML insights
+    - 10s of thousands can use simultaneously
+    - SPICE -> Super-fast Parallel In-memory Calculation Engine
+  - S3 Storage Lens
+  - Analytics
+  - Cost Categories
+- Auto Scaling and instance scheduler
 
 ### Governance
-
-#### Use them to bring structure
+    - Use them to bring structure
 
 ##### Policies
 
@@ -200,10 +250,8 @@ workload, usage & cost
 #### Cost
 
 ### Decomission Regularly
-
-#### Stay aware of resource lifecycle
-
-#### Decommission less user or deprecated resources.
+    - Stay aware of resource lifecycle
+    - Decommission less user or deprecated resources.
 
 ## Cost-Effective Resources
 
