@@ -1,0 +1,174 @@
+Okay. Hello, Cloud Gurus
+and welcome to this lecture.
+In this lecture we're going to look at EC2 metadata
+as well as user data.
+Now we covered off what user data was in the last lecture.
+In this lecture, we're going to explore what metadata is
+and then how we can combine metadata with user data
+to make dynamic scripts.
+So let's start with what EC2 metadata is.
+We'll look at how we can retrieve it.
+We'll look at how we can use user data to save our metadata.
+We'll go through and I'll show that to you
+in the AWS console.
+And then we'll go onto my exam tips.
+So what is EC2 metadata?
+What is metadata?
+We covered it off in S3
+but metadata is just data about data.
+So EC2 metadata is simply data about your EC2 instance.
+And this can include things such
+as your private IP addresses, public IP addresses,
+the hostname of your EC2 instance,
+what security groups it's in, et cetera, et cetera.
+So it's just data about your EC2 instance.
+So to retrieve our metadata,
+all we need to do is type in a command,
+and we type in the curl command.
+And then what we're doing is we're going to
+http://
+and then it's 169.254.169.254,
+/latest, and then /meta-data.
+And then we can basically get a whole bunch
+of different options so we can get things like
+our hostname, our local IPv4 address.
+We can get our public IPv4 address, et cetera, et cetera.
+So that's all we do.
+We use the curl command query about metadata
+about our EC2 instance
+and I'll show you how to do that in just one second.
+What we could also do is use user data to save our metadata.
+So in here we've got a bootstrap script
+and we're running the curl command.
+And so we're running curl http://169.254.169.254
+/latest/meta-data
+and then /local-ipv4.
+And that's then going to save our IPv4 address
+into a text file.
+So let's call it myIP.txt.
+So in this lecture,
+what we're going to do is run this bootstrap script.
+It's in the resources section of the course.
+And essentially what we're doing
+is we're just creating a web server.
+We're starting the Apache servers,
+and then we're making a website.
+And it's basically running this echo command.
+So it's saying my IP is
+and then it's adding it to our index.html
+and then we're running the curl command
+and we're getting our public IPv4
+and we're appending that to the index.html.
+And then we're just closing out our HTML.
+So it's a really, really simple bootstrap script
+but running this bootstrap script will allow us
+to get our public IP address by querying our metadata.
+And this is a way that we can go in
+and pass using user data to query our metadata
+and then basically output it somewhere.
+So let's go over to the AWS console.
+Okay, so here I am in the AWS console
+I'm going to go over to EC2 and I'm just going to go in
+and terminate the instance that we set up
+in the last lecture.
+So we'd go to instance state, terminate instance
+and terminate it.
+And then what I'm going to do is I'm going to go over
+and create a new instance, so hit Launch Instances up here.
+We're going to use the Amazon Linux 2 AMI
+and we're just going to use the t2.micro.
+And then what I'm going to do
+is I'm going to go down to my user data
+and I'm going to paste it in here.
+So you can see my bootstrap script is in here.
+And then I'm going to go ahead and add my storage,
+and I'm going to leave everything else as default.
+I'm going to use my security group that we created
+in the last lecture.
+So we're using our web-DMZ security group,
+and then I'm going to go ahead and hit Launch.
+And I'm going to use my existing key pair.
+So that has now launched.
+Now, the first thing that we want to do
+is check whether or not our bootstrap script has worked
+has it gone through, queried our metadata
+to give us our public IP address?
+So what we're going to do is just going to wait
+for this instance to come up online,
+and then we're going to go ahead
+and grab the public IPv4 address.
+And then I'm just going to type that into my browser
+and hit Enter.
+So I'm just going to wait for this to come up online.
+Okay, so my EC2 instance is now up online
+I've got a public IP address.
+I'm going to copy that into my clipboard
+and we can see that that script works.
+So our bootstrap script or our user data
+has gone through and queried our metadata.
+It's got our public IPv4 address
+and has then written it to a HTML file.
+So the next thing we're going to do is just have a look
+at how we can query our metadata manually.
+So I'm just going to log into the SSH terminal window.
+So here I am in my terminal window.
+I'm just going to type in ssh ec2-user
+and then @ and then the public IP address,
+and then -I and then my key name.
+And then I'm going to go ahead and connect.
+You might just want to do this using EC2 connect.
+It's a lot easier.
+I'm going to elevate my privileges to root,
+and I'm going to go ahead and clear the screen.
+So the first thing we're going to do
+is we can just go over to our var/www/html directory.
+So this is where our website is.
+We type in ls we can see our index in there.
+We can even display the contents of our file by doing that.
+And so you can see that the file has been written.
+Next thing we're going to do is run the curl commands.
+So we type in curl
+http://
+and then it's just 169.254.169.254
+and then /latest
+and then /meta-data.
+Then I'm going to go ahead and hit Enter.
+And now you can see the different options that I get.
+So we've got AMI-ID, we've got AMI-launch-index,
+AMI-manifest-path, et cetera, et cetera.
+So if I hit the up button and hit /
+and let's say, I want to go and get my public IPv4 address.
+So I type in public-
+and then IPv4, IPv4 and hit Enter.
+And there you go.
+You can see it's displayed it down here.
+So it's got my public IPv4 address.
+So that's all you need to know
+is how to use the curl command to query your metadata
+for the exam.
+Another thing you can also query
+is your instance's user data.
+So you just change the term here from metadata to user
+and then data.
+And that will actually show you
+the bootstrap script that was run
+when this instance was provisioned.
+So you can query both your user data
+and your metadata as well.
+So onto my exam tips, just remember
+that user data is simply bootstrap scripts
+and metadata is simply data about your EC2 instance.
+You will get scenario questions
+where they're trying to confuse you
+between user data and metadata.
+Just remember metadata is data about data.
+That's the way I always remember it.
+So that's always to do with EC2,
+whereas user data is your bootstrap scripts.
+And also remember that you can use bootstrap scripts
+or user data to access metadata.
+And that is exactly what we did in this demo.
+So that is it for this lecture, everyone.
+If you have any questions, please let me know.
+If not, feel free to move on to the next lecture.
+Thank you.
