@@ -1,0 +1,202 @@
+Okay. Hello, Cloud Gurus.
+And welcome to this lecture.
+In this lecture, we're going to look at
+how we can back up our data using S3 Replication.
+Now, S3 Replication used to be called
+Cross Region Replication.
+That was because you do it from one region to another.
+But now you can do it just from one bucket to another bucket
+in the same region as well.
+So, they've renamed it and it's just called
+S3 Replication rather than Cross Region Replication.
+So, in this lecture
+we're going to learn what S3 replication is.
+We can then going to go and have a look
+at how we can do this in the AWS console,
+and then we'll go onto my exam tips.
+So, S3 replication is exactly what it sounds like.
+It's a way of replicating objects
+from one bucket to another.
+Now, versioning must be enabled on both the source
+and destination buckets in order for this to work.
+And objects in an existing bucket
+are not replicated automatically.
+Once replication is turned on,
+then all subsequent updated objects
+will be replicated automatically.
+So, if you're going to do this,
+it's best to create 2 new buckets:
+a source bucket and then a destination bucket,
+turn replication on, and then upload your objects.
+And also remember going into your exam
+that delete markers are not replicated by default.
+However, you can turn that on if you want.
+So, deleting individual versions
+or delete markers will not be replicated by default.
+So, let's go into the AWS console
+and have a look at this in action.
+Okay, so here I am in the AWS console.
+Let's go over to S3
+and we're going to go ahead and create 2 buckets.
+So, let's create our first bucket.
+I'm going to call it mysourcebucketacloudguru
+and then just some numbers.
+And then I'm going to do this
+in the US East, Northern Virginia region.
+And then I'm going to leave everything as default.
+And like I said, you do need versioning turned on
+but I'm going to leave that disabled for now.
+And we'll see why in a second.
+So, I'm going to go ahead and create that bucket
+and then I'm going to go and create my destination bucket.
+So, we're going to replicate from our source bucket
+to a destination bucket.
+So, let's go ahead and call it mydestinationbucketacloudguru
+and then again, some random numbers.
+And then, I'm going to replicate this
+all the way over to Japan.
+So, let's replicate this all the way over to Tokyo.
+It's going across the Pacific.
+So, let's go ahead and create this bucket.
+And that has now created our 2 buckets.
+So, we've got our source bucket and our destination bucket,
+and you can see them in here.
+So, the first thing we're going to do
+is we're going to go over to our source bucket and what
+I'm going to do is I'm just going to upload an object
+just to prove to you that by turning replication on
+it's not going to do it automatically. So again,
+I'm going to choose that picture of the Netherlands.
+So, let's go ahead and hit Upload.
+That has now uploaded my object to Northern Virginia.
+And then the next thing I'm going to do
+is go in and turn on replication.
+Now, if we go to properties,
+we can see that versioning has been disabled for now.
+So, it hasn't been enabled. What we're
+going to do is we're going to go over to management
+and its replication rules are under our lifecycle's rule.
+So, let's go ahead and create a replication rule.
+And straight away, it's saying,
+"Hey, you need versioning enabled on the source bucket
+in order to do replication."
+So, let's go ahead and hit enable
+and that has now turned versioning on.
+In here, my replication rule,
+I'll just call it replication to Japan.
+And in here we've got choose whether this rule
+will be enabled or disabled when created.
+Well, we want it obviously to be enabled.
+Our source bucket,
+we want this to apply to all objects in our bucket.
+You can do it to sub-folders if you wanted
+but I'm going to do it to all objects in our bucket.
+And in here we pick our destination bucket.
+So, you can click browse S3
+and you can go ahead and select the bucket that you want.
+And you can see the different regions in here.
+So, I'm going to select my one in Japan.
+And I'm going to go ahead and choose that bucket.
+Now, straightaway it'll also give me
+another warning saying,
+"Hey you need versioning turned on
+on your destination bucket as well."
+So, let's go ahead and do that.
+So, we now have versioning enabled.
+In here, we will need to create a IAM role for replication.
+So, let's go ahead and just hit, Create New Role
+and that will create the role automatically for us.
+And then we've got optional encryption
+and we can change our storage classes.
+I'm going to leave everything as default.
+This is quite important
+so you could basically have your source bucket
+as normal S3 and then your destination bucket
+as infrequently accessed and save some money.
+So, you can change the storage class
+at your destination if you want.
+I'm just going to leave everything as default.
+And then, like I mentioned before,
+delete markers are not replicated automatically.
+You can enable it, but you have to click in there.
+I'm not going to do that.
+I'm just going to leave everything as default
+and go ahead and hit Save.
+That has now created cross-region replication.
+So, we'll be able to see our replication rules in here.
+And so if I actually come in and click on my source bucket,
+go over to management,
+I can see my replication rules are in there
+and you can actually go in
+and view the configuration if you want.
+So, let's go over to to S3 and let's go in
+and have a look at our destination bucket.
+As you can see right now, there are no objects in it.
+So, that a picture of the Netherlands that we uploaded,
+that hasn't been replicated automatically
+because that was already in the bucket
+at the time that we turn replication on.
+If we then go over to our source bucket
+and we were to upload that file again.
+Let's go ahead and hit Upload, add our files,
+and we're going to go in and add that picture again.
+And then I'm going to go ahead and hit Upload.
+That is now uploading.
+You see it's in progress and it's succeeded.
+So, we have now uploaded that over to our source bucket.
+If we hit Exit we'll be able to see it in here and then
+what we want to do is we want to go over to Amazon S3
+and we'll go over to our destination bucket.
+Now, sometimes it can take a couple of minutes
+and if you think about it, it's going across the Pacific.
+So. it can take a little bit of time.
+What I'm going to do is I'm just going to sit here
+and pause the video.
+In fact, I don't need to pause it.
+There you go.
+It has now replicated
+across from Northern Virginia to Japan.
+So, you can see our object is in there
+and it's happened automatically.
+If I went back over to my source bucket
+and I went in to delete this object.
+Because I didn't check that box about delete markers,
+the delete marker will not be replicated automatically.
+That's what we would assume would happen.
+So, let's type in here delete
+and go ahead and hit Delete Object.
+That object has now been deleted.
+If we go back over to exit,
+we can see that there are no objects in our bucket. However,
+we know that because we've got versioning turned on,
+if we just click on this little button
+we'll be able to see the object and then we'll be able
+to see the next version that we uploaded
+and then the delete marker here.
+We go back over to S3 and go to our destination bucket.
+You'll be able to see that the object is still in here
+and the delete marker has not been replicated.
+And you can go ahead
+and turn delete marker replication on if you want,
+but just going into your exam, remember that by default
+delete markers are not replicated
+from one bucket to another.
+So, let's go onto my exam tips.
+So onto my exam tips, just remember what S3 Replication is.
+It used to be called Cross Region Replication.
+So, if they haven't updated the questions
+and you see the mention of cross region replication,
+then the language has changed.
+Just think of cross region replication
+equals S3 replication.
+So, you can replicate objects from one bucket to another.
+They can either be in the same region
+or in different regions.
+Objects in an existing bucket
+are not replicated automatically and delete markers
+are not replicated automatically by default.
+However, you can enable that if you so want.
+So, that is it for this lecture.
+If you have any questions, please just let me know.
+If not, feel free to move on to the next lecture.
+Thank you.

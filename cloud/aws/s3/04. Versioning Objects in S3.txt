@@ -1,0 +1,201 @@
+Okay, hello, Cloud Gurus,
+and welcome to this lecture.
+In this lecture, we're going to look
+at versioning objects in S3.
+So the first thing we're going to explore
+is what is versioning?
+Then we'll look at the advantages of versioning,
+then I'll show you how to do it in the console,
+and then we will go onto my exam tips.
+So what is versioning?
+Well, you can enable versioning in S3.
+So you can have multiple versions
+of an object within your S3 bucket.
+It's a way of doing version control
+with your objects or files.
+So it's very, very easy to set up,
+and we'll look at how we can do it.
+There is quite a few nuances with versioning,
+so I'll show you some tips and tricks as well.
+So the advantages of versioning is it allows you
+to have all versions of your objects stored in S3.
+So this includes all rights,
+and even if you delete an object, it's a great backup tool.
+And once versioning is enabled,
+versioning cannot be disabled,
+it can only be suspended.
+So you can't get rid of versioning on your bucket.
+All you can do is suspend versioning.
+It integrates to these things called lifecycle rules,
+which we will cover off in a later lecture.
+And it supports multifactor authentication,
+and this can come up in your exam an awful lot.
+So what the scenario question will basically be around
+is you need to protect your objects in S3
+from being accidentally deleted.
+And that includes all versions of your objects.
+And how can you prevent that?
+Well, you can enable multi-factor authentication
+to delete objects.
+You need two forms of authentication
+in order to delete your objects.
+So let's go over to the AWS console,
+and have a look at how we can turn on versioning.
+Okay, so here I am in the AWS console.
+What we're gonna do is we're gonna go over
+to our website bucket,
+and we're going to go over to Properties,
+and you'll see we've got bucket versioning in here.
+And all we wanna do is go in, and hit the Edit button.
+I'm gonna go ahead and enable bucket versioning.
+And as soon as we do that,
+versioning will be turned on.
+And then what we wanna do is let's go over to our bucket.
+So we go back over to our objects in our bucket,
+and you can see our objects are in here.
+I'm just gonna go back and come back into this bucket
+because the UI's a bit funny.
+And so now you can see our two objects in here,
+and we've actually got this little tab over here,
+which says List Versions.
+You can see it in there.
+So let's click on that, and now we'll be able
+to see the different versions of our objects.
+So right now, there is no versions of our objects.
+We've just got our index.html,
+and we've got our error.html.
+These are all basically the first versions of our objects.
+Let's go ahead and upload,
+or let's make a change to index.html,
+and then upload it to the bucket.
+So here's our index.html.
+I'm just gonna add a line of code in here.
+I'm going to change it from Hello Cloud Gurus
+to Hello Cloud Gurus!
+This is version 2.
+And I'm gonna go ahead and save that.
+And now what I wanna do
+is I want to go over and hit Upload,
+and then I'm gonna go in and add my files.
+I can see my index.html in here,
+so I'm gonna go ahead and hit Open.
+And I'm gonna go ahead and hit Upload.
+So that has now uploaded it.
+And if I hit Exit, if I click on this List Versions again,
+I'll be able to see that we've got two different versions.
+So we've got a new version ID,
+so this is version one, and this is version two.
+And then what I can actually do
+is click on the object itself.
+I can then click on this object URL,
+and I'll be able to see Hello Cloud Gurus!
+This is version 2.
+So if I go back,
+and if I come back to my object,
+so click in here and again, turn versioning on.
+If we click on this one,
+we'll be able to get a unique URL in here.
+So I wonder what will happen if we click on it.
+Well, because this is a previous version,
+it is now we've got access denied.
+So we don't actually have permissions
+to access this version.
+So even when you have a policy that enables all objects
+within your bucket to be public,
+it doesn't apply to previous versions of those objects.
+So that is also an important thing to remember
+for your exam.
+So in order to be able to view this,
+we can go to our object actions
+and we can go ahead and hit Make Public.
+That will then make this version of the object public.
+And then we can click back in here
+and we should be able to click this
+and we'll be able to see the original version.
+So here we go.
+Hello Cloud Gurus!
+And we don't have this is version 2.
+Now, what we're gonna do
+is we're gonna go back to our bucket
+and what we're going to do is we're going
+to upload a third version.
+So let's go over and make a change.
+So we've got Hello Cloud Gures. This is version 2.
+What I'm gonna do is gonna change this to version 3.
+I'm gonna go ahead and save it.
+I'm back in my bucket.
+I'm gonna go in and hit upload.
+I'm gonna add my file and I'm going to do it index.html.
+And I'm gonna go ahead and hit Open.
+And then I'm gonna go ahead and upload this.
+So we've now uploaded version three.
+If we come back to our bucket and hit list versions,
+you'll be able to see the three different versions here.
+So we've got version one, version two, and version three.
+Now, if we were to click on version two,
+and we click on this,
+we won't be able to see it because it isn't public.
+So we need to first just go in and hit Make Public
+and we just click in here, Make Public.
+And so that has now made the version public.
+And if we click exit, we should now be able to click this
+and we'll be able to see version two.
+And if we go back and we click on our just main index.html,
+so we click in here and click in here.
+We'll be able to see version three.
+So this is version three.
+Okay, so the next thing we're going to do is look
+at how delete markers work.
+So let's go back over to our bucket and what happens
+if we go ahead and click in here and hit delete?
+So we're gonna go in and hit delete.
+So just type delete in here.
+That's going to delete this object.
+And then we hit exit.
+Now you can't see that index.html,
+but because we've got versionings turned on,
+it is still there.
+You just need to click on the list object versions,
+and you can now see we've got three different versions
+of our object and then a delete marker sitting over the top.
+So we still have all three versions
+of our objects and we can see all the changes there.
+And we've got our delete marker in here.
+And the way to restore an object
+is to delete the delete marker.
+So if we click in here and go ahead and hit delete,
+that will delete our delete marker.
+So we have to type permanently delete
+and hit delete objects.
+Now, if we go back to our bucket, we'll be able to see
+in here that that delete marker has now been removed
+and if we turn versioning off in the UI,
+we'll be able to see, we can now see the index.html.
+So that is versioning in a nutshell.
+So onto my exam tips.
+Just remember that all versions
+of an object are stored in S3, and this includes all writes
+and even if you delete an object like we just saw.
+Versioning is a great backup tool.
+And once you have set versioning up on a bucket,
+it can't be disabled, it can only be suspended.
+So versioning will always stay on, but you can suspend it.
+You can't go and delete versioning from a bucket.
+Versioning can be integrated with lifecycle rules
+and we're gonna cover off lifecycle rules
+in another lecture.
+And it also supports multifactor authentication.
+This is where it'll come up the most.
+Essentially, like I said,
+if you get a scenario-based question, they're talking
+about you need to protect your objects in a bucket
+from accidental deletion.
+You wanna turn versioning on.
+That's one great way of doing it.
+But you can also enable multi-factor authentication
+so that you need two forms of, you know,
+authorization in order to delete an object.
+So that is it for this lecture, everyone.
+If you have any questions, please let me know.
+If not, feel free to move on to the next lecture.
+Thank you.

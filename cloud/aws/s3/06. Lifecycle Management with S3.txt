@@ -1,0 +1,131 @@
+Okay, hello, Cloud Gurus,
+and welcome to this lecture.
+In this lecture, we're going to look at
+Lifecycle Management with S3.
+So we're going to explore what Lifecycle Management is,
+then we'll look at Lifecycle Management
+and how we can use it with versioning.
+Then we'll go in and do a demo
+and then we'll move on to my exam tips.
+So what is Lifecycle Management?
+Well this basically automates moving your objects
+between the different storage tiers,
+thereby maximizing your cost effectiveness.
+So it's a way of automating,
+moving your objects to save you money.
+So if you're not using an object
+or it hasn't been accessed recently,
+you can move it from S3 Standard
+to S3 Infrequently Accessed.
+So say if it hasn't been accessed in the last 30 days,
+it would automatically move to S3-IA.
+And then if you haven't used that object
+in let's say 90 days after it's been moved to S3-IA,
+it would then be moved onto Glacier and archived off.
+And of course, Glacier is a lot cheaper than S3 Standard.
+So that's all Lifecycle Management is.
+It's a way of automating the removal of your objects
+from one storage tier to another to save you some money.
+You can also use Lifecycle Management with Versioning.
+So you can actually use Lifecycle Management
+to move different versions of your objects
+to different storage tiers as well,
+thereby saving you even more money.
+So let's go into the AWS console
+and have a look at how we can do this.
+Okay, so here I am in the AWS console.
+We're going to go over to S3, which is always under Storage.
+And then what I'm going to do is I'm going to go into
+one of the buckets I created earlier,
+the ryan3141kroonenberg,
+and this was the one that had our 2 image files on it.
+And in this, I'm going to go ahead
+and turn on Lifecycle Management and Versioning.
+So if I go into Properties, I can turn bucket versioning on.
+So let's go ahead and enable.
+Also, once you enable versioning on a bucket,
+like I said in a previous lecture, you can only suspend it,
+you can't remove it.
+So just bear that in mind.
+So Versioning is now turned on.
+So what we're going to do is
+we're going to go over to Management, and under Management,
+we can see lifecycle rules.
+And what we want to do is go ahead
+and create a lifecycle rule.
+So first thing we need to do
+is give the lifecycle rule a name.
+So I'll just call it MyLifeCycle and then Rule.
+And then I'm going to, we can either limit the scope
+of this rule to using 1 or more filters.
+You could do it per directory or per folder within a bucket
+or per objects within a bucket.
+I'm going to apply it to all objects in the bucket,
+going to acknowledge that this rule will apply
+to all objects in the bucket and clicking there.
+And then what we're going to do is we can see
+we've got a list of different actions,
+so we can use lifecycle rules to move current versions
+of objects between storage classes,
+move non-current versions of objects
+between storage classes,
+expire current versions of objects,
+permanently delete non-current versions of objects,
+and then delete expired object delete markers,
+or incomplete multipart uploads.
+So to keep it simple,
+we're just going to move it between storage classes.
+So we'll click in here.
+And then basically what we want to do
+is create a set of rules for our transitions.
+So right now, our objects are sitting in S3,
+and let's say that
+after 30 days, we want to move it
+to Standard-Infrequently Access storage.
+We can do that.
+Then we can go in here and add another transition,
+and we might just want to move it over to Glacier,
+Glacier Instant Retrieval,
+or perhaps Glacier Flexible Retrieval,
+which is formally known as Glacier, or Glacier Deep Archive.
+And you can see in here the number of days
+minimum storage requirements,
+if you're moving from S3 over to Glacier,
+so we've got 90, 90, and 180.
+So what I'm going to do
+is just do it over to Glacier Deep Archive.
+I'm going to type in here 180.
+I'm going to get this warning message here
+about transitioning smaller objects
+to Glacier Deep Archive will incur per object costs.
+That's fine.
+I'm going to go ahead and hit I Acknowledge.
+And then in here, we can actually see how it all works.
+So we've got day 0,
+we upload our object to S3. Day 30,
+that object is then moved to Standard-Infrequently Accessed.
+And then day 180,
+the objects are then moved to Glacier Deep Archive.
+So that's all it is.
+We go ahead and hit Create Rule.
+And there we go.
+We can see our Lifecycle rules have now been created.
+What we can do is sometimes it says it may take some time
+for the configuration to be updated.
+So if we just click in here and hit Refresh,
+we can now see our MyLifeCycleRule in there.
+So let's go onto my exam tips.
+So just remember going into your exam,
+that lifecycle management rules automate moving of objects
+between our different storage tiers.
+It can be used in conjunction with versioning.
+So you can just do this
+for previous versions of objects,
+or you can do it for every object within a bucket.
+And like I said,
+it can be applied to current versions
+as well as previous versions.
+So that is it for this lecture, everyone.
+If you have any questions, please let me know.
+If not, feel free to move on to next lecture.
+Thank you.
