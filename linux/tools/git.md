@@ -119,6 +119,7 @@ git show <commit-ID>
 
 
 Command	Explanation & Link
+
 | Command             | Description                                     |
 |---------------------+-------------------------------------------------|
 | `git commit -a`     | Stages files automatically                      |
