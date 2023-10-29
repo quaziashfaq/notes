@@ -1,23 +1,21 @@
-#+STARTUP: indent
-#+STARTUP: hidestars
-
-* Merging an upstream repository into your fork
+## Merge
+### Merging an upstream repository into your fork
 
 quaziashfaq/emacs.d is a fork of purcell/emacs.d
 
 Clone my fork in my machine
-$ git clone git@github.com:quaziashfaq/emacs.d.git
+`$ git clone git@github.com:quaziashfaq/emacs.d.git`
 
 Checkout master branch of my fork.
+`$ git checkout master`
 
-$ git checkout master
-
-This is what 'origin' pointns to ->
+This is what `origin` pointns to ->
+```bash
 $ git remote
 origin
 
 $ git remote show origin
-\* remote origin
+  * remote origin
   Fetch URL: git@github.com:quaziashfaq/emacs.d.git
   Push  URL: git@github.com:quaziashfaq/emacs.d.git
   HEAD branch: master
@@ -30,10 +28,10 @@ $ git remote show origin
     master merges with remote master
   Local ref configured for 'git push':
     master pushes to master (up to date)
-
+```
 
 Now get the upstream data. Give it a name: 'upstream'
-
+```bash
 $ git remote add upstream git@github.com:purcell/emacs.d.git
 
 $ git remote
@@ -41,7 +39,7 @@ origin
 upstream
 
 $ git remote show upstream
-\* remote upstream
+* remote upstream
   Fetch URL: git@github.com:purcell/emacs.d.git
   Push  URL: git@github.com:purcell/emacs.d.git
   HEAD branch: master
@@ -52,48 +50,55 @@ $ git remote show upstream
     smartparens-take-2 new (next fetch will store in remotes/upstream)
   Local ref configured for 'git push':
     master pushes to master (fast-forwardable)
-
+```
 
 Now pull the data from purcell/emacs.d master branch
+```
 $ git pull upstream master
 From github.com:purcell/emacs.d
  * branch            master     -> FETCH_HEAD
  * [new branch]      master     -> upstream/master
 Already up to date.
+```
 
-
-We are in 'master' branch of local. Now merge my local master branch with purcell's master branch
-
+We are in `master` branch of local. Now merge my local master branch with purcell's master branch
+```
 $ git merge upstream/master 
 Already up to date.
-
+```
 [There is no update now that's it's very clean.. :-)]
 
 Now push your local updated repo to your fork in github.
+`$ git pull origin master`
 
-$ git pull origin master
-
-* Merging repo from another machine with github repository
-** Clone the repo from another machine
+### Merging repo from another machine with github repository
+Clone the repo from another machine
+```
 $ git clone ssh://ash@192.168.56.21/home/ash/docker/docker-config
 $ git remote -v
 origin	ssh://ash@192.168.56.21/home/ash/docker/docker-config (fetch)
 origin	ssh://ash@192.168.56.21/home/ash/docker/docker-config (push)
+```
 
-** Now add the github repo
+Now add the github repo
 Change directory.
+```
 $ cd docker-config/
 $ git remote -v
+```
 
 Now add the github url
+```
 $ git remote add githubrepo git@github.com:quaziashfaq/docker-config.git
 $ git remote -v
 githubrepo	git@github.com:quaziashfaq/docker-config.git (fetch)
 githubrepo	git@github.com:quaziashfaq/docker-config.git (push)
 origin	ssh://ash@192.168.56.21/home/ash/docker/docker-config (fetch)
 origin	ssh://ash@192.168.56.21/home/ash/docker/docker-config (push)
+```
 
-* Some commands to explore
+## Some commands to explore
+```
 git diff
 git diff <filename>
 git diff --staged
@@ -110,25 +115,37 @@ git add -p <filename>
 git commit
 
 git show <commit-ID>
+```
+
 
 Command	Explanation & Link
-git commit -a	Stages files automatically
-git log -p	Produces patch text
-git show	Shows various objects
-git diff	Is similar to the Linux `diff` command, and can show the differences in various commits
-git diff --staged	An alias to --cached, this will show all staged files compared to the named commit
+| Command             | Description                                     |
+|---------------------+-------------------------------------------------|
+| `git commit -a`     | Stages files automatically                      |
+| `git log -p`        | Produces patch text                             |
+| `git show`          | Shows various objects                           |
+|---------------------+-------------------------------------------------|
+| `git diff`          | Is similar to the Linux `diff` command,         |
+|                     | and can show the differences in various commits |
+|---------------------+-------------------------------------------------|
+| `git diff --staged` | An alias to --cached, this will show            |
+|                     | all staged files compared to the named commit   |
+|---------------------+-------------------------------------------------|
+
+
 git add -p	Allows a user to interactively review patches to add to the current commit
 git mv	Similar to the Linux `mv` command, this moves a file
 git rm	Similar to the Linux `rm` command, this deletes, or removes a file
 There are many useful git cheatsheets online as well. Please take some time to research and study a few, such as this one.
 
-* .gitignore files
+
+## .gitignore files
 .gitignore files are used to tell the git tool to intentionally ignore some files in a given Git repository. For example, this can be useful for configuration files or metadata files that a user may not want to check into the master branch. Check out more at: https://git-scm.com/docs/gitignore.
 
 A few common examples of file patterns to exclude can be found here.
 
 
-* Going back to history
+## Going back to history
 
 File not staged and want to restore to previous version:
 git checkout <filename>
@@ -165,14 +182,14 @@ to check after we rollback
 git log -p -2
 
 
-* Amending git commit
+## Amending git commit
 git commit --amend
 Awesome! git commit --amend allows us to modify and add changes to the most recent commit.
 It overwrite the previous commit.
 Don't use it in public repository.
 Use git commit --amend in your local repository. Then you can publish the changes. But avoid amending commits that have already been made public.
 
-* git revert cheat sheet
+## git revert cheat sheet
 git checkout is effectively used to switch branches.
 
 git reset basically resets the repo, throwing away some changes. It’s somewhat difficult to understand, so reading the examples in the documentation may be a bit more useful.
@@ -192,8 +209,7 @@ Feel free to read more here:
 https://en.wikipedia.org/wiki/SHA-1
 https://github.blog/2017-03-20-sha-1-collision-detection-on-github-com/
 
-
-* git branching
+## git branching
 Command	Explanation & Link
 git branch	Used to manage branches
 git branch <name>	Creates the branch
@@ -205,7 +221,7 @@ git merge <branch>	Merge joins branches together.
 git merge --abort	If there are merge conflicts (meaning files are incompatible), --abort can be used to abort the merge action.
 git log --graph --oneline	This shows a summarized view of the commit history for a repo.
 
-* Git working with remote branch
+## Git working with remote branch
 ** Workflow
 Check the remote branch status
 #+BEGIN_SRC bash
@@ -278,7 +294,7 @@ Date:   Sun May 17 18:07:55 2020 +0800
  
 
     
-** Cheat Sheet
+## Cheat Sheet
 
 Command	Explanation & Links
 | Command                | What it does?                                                                                |
@@ -290,65 +306,67 @@ Command	Explanation & Links
 | git fetch              | Downloads specific objects                                                                   |
 | git branch -r          | Lists remote branches; can be combined with other branch arguments to manage remote branches |
 
-
-* Git Rebasing
-** Fast forward merging
+## Git Rebasing
+### Fast forward merging
 If a branch is created and some commit is done. But there is no commit in master branch. So when we are merging the branch with master, it's called fast-forward merging.
-** 3-way merge
+
+### 3-way merge
 If a branch is created and some commit is done. And there is commit in master branch. So when we are merging the branch with master, it's called 3-way merging. If same files are changed or same lines are changed in the same files then there could be conflict which need to be remedied.
-** git rebasing
+
+### git rebasing
 New branches are created to bring new changes for improvement or to solve the bugs. Then merging happens in 3-way and the git commit history becomes complex. So to make it linear and easy to understand, we rebase it. Rebasing replays the change on the other branch.
 
-# Create a new branch
-$ git checkout -b refactor
+Create a new branch
+`$ git checkout -b refactor`
 
-# Changes are committed.
-$ git commit
+Changes are committed.
+`$ git commit`
 
-# Push the new branch
-$ git push origin refactor
+Push the new branch
+`$ git push origin refactor`
 
-# Now rebase on the master: move the current branch (refactor) on top of master
-# This makes debugging easier and prevents three-way merges by transferring the completed work from one branch to another.
-git rebase --verbose master
+Now rebase on the master: move the current branch (refactor) on top of master
+This makes debugging easier and prevents three-way merges by transferring the completed work from one branch to another.
+`$ git rebase --verbose master`
 
-# Check the git commit history log and find it in linear format.
-$ git log --graph --oneline -all
+Check the git commit history log and find it in linear format.
+`$ git log --graph --oneline -all`
 
-# check out the master
-$ git checkout master
+Check out the master
+`$ git checkout master`
 
-# git merge 
-$ git merge refactor
+git merge 
+`$ git merge refactor`
 
-# Check the git commit history log and find it in linear format.
-$ git log --graph --oneline -all
+Check the git commit history log and find it in linear format.
+`$ git log --graph --oneline -all`
 
-# Now get rid of the refactor branch both remotely and locally.
+Now get rid of the refactor branch both remotely and locally.
+```
 $ git push --delete origin refactor
 $ git branch -d refactor
+```
+Now push the master branch
+`$ git push --verbose`
 
-# Now push the master branch
-$ git push --verbose
+## How to work with github
+Fork a repo from another account to your account and then clone it to local pc
+`$ git clone github-repo-url`
 
-
-* How to work with github
-# Fork a repo from another account to your account.
-# clone it to local pc
-$ git clone github-repo-url
-
-# Create a new branch add a feature 
+Create a new branch add a feature 
+```
 $ git checkout -b add-readme
 $ vim README.md
 $ git add README.md
 $ git commit
-
-# Push local repo to remote repo
-git push --set-upstream origin local-branch
+```
+ 
+ Push local repo to remote repo
+`$ git push --set-upstream origin local-branch`
 
 Create a pull request in Github.com
 
-* Git Help Links
+## Git Help Links
 Check out the following links for more information:
 
 https://arp242.net/diy.html 
