@@ -49,5 +49,4 @@ It's designed for:
 |Ruby
 |Programming Language
 |A programmer's best friend.
-
 |===
