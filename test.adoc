@@ -50,5 +50,4 @@ It's designed for:
 |Programming Language
 |A programmer's best friend.
 
-...
 |===
