@@ -12,8 +12,11 @@ This document contains two paragraphs.
 
 IMPORTANT: You should be aware of learning asciiDoc
 
-[cols=2*]
+[cols=2*,options=header]
 |===
+|Name
+|Purpose
+
 |Firefox
 |Web Browser
 
