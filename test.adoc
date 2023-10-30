@@ -1,0 +1,15 @@
+= Document Title
+:reproducible:
+:author: Ashfaq
+
+This is basic AsciiDoc document by {author}.
+
+== Section Title
+
+This document contains two paragraphs.
+
+This document contains two paragraphs.
+
+IMPORTANT: learning asciiDoc
+
+
