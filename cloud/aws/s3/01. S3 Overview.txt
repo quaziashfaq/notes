@@ -1,5 +1,3 @@
-Okay.
-Hello, Cloud Gurus.
 And welcome to this section of the course.
 In this lecture, we're going to do an overview of S3.
 S3 is 1 of the oldest services with AWS.
