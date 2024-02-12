@@ -1,37 +1,37 @@
 # AWS Cloud Basics
 ## Characteristics of cloud computing
-    1. pay-as-you-go pricing
-    2. services are delivered over the internet.
-    3. on-demand delivery and available in seconds
+1. pay-as-you-go pricing
+2. services are delivered over the internet.
+3. on-demand delivery and available in seconds
 
 ## 6 advantages or  of using cloud computing
-    1. Go global in minutes: 
-    Going global in minutes means you can deploy applications in multiple Regions around the world.
-    2. Stop spending money running and maintaining data centers
-    3. Benefit from massive economies of scale.
-    4. Increase speed and agility: 
-    The cloud gives you increased speed and agility. All the services you have access to help you innovate faster, giving you speed to market.
-    5. Stop guessing capacity
-    6. Trade capital expenses for variable expenses
+1. Go global in minutes: Going global in minutes means you can deploy applications in multiple Regions around the world.
+2. Stop spending money running and maintaining data centers
+3. Benefit from massive economies of scale.
+4. Increase speed and agility: 
+The cloud gives you increased speed and agility. All the services you have access to help you innovate faster, giving you speed to market.
+5. Stop guessing capacity
+6. Trade capital expenses for variable expenses
 
 ## 4 benefits of cloud in technical terms
-    1. High Availability : Highly available systems are designed to operate continousoly without failure for a long time. These systems avoid loss of service by reducing or managing failures.
-    2. Elasticity : With elasticity you don't have to plan ahead of time how much capacity you need. You can provision only what you need and then grow andshrink based on demand. With elasticity, the company doesn't have to plan ahead of time how much capacity they'll need - elasticity allows them to match the supply of resources with changing workload demands.
-    3. Agility : The colud gives you incresaed agility. All the services you have access to help you innovate faster, giving you speed to market i.e. innovate more quickly and deliver your applications faster.
-    4. Durability : Durability is all about long-term data protection. This means your data will remain intact without corruption.
-    5. Scalability: It means the systems can adapt to meet new levels of demand. It means a system has the ability to grow to accomodate an increase in demand. There are both horizontal and vertical scaling in regards to compute resources. Horizontal scaling involves the adding of instances of the same size. Vertical scaling is typically a manual process where the size of the instance is changed.
+1. High Availability : Highly available systems are designed to operate continousoly without failure for a long time. These systems avoid loss of service by reducing or managing failures.
+2. Elasticity : With elasticity you don't have to plan ahead of time how much capacity you need. You can provision only what you need and then grow andshrink based on demand. With elasticity, the company doesn't have to plan ahead of time how much capacity they'll need - elasticity allows them to match the supply of resources with changing workload demands.
+3. Agility : The colud gives you incresaed agility. All the services you have access to help you innovate faster, giving you speed to market i.e. innovate more quickly and deliver your applications faster.
+4. Durability : Durability is all about long-term data protection. This means your data will remain intact without corruption.
+5. Scalability: It means the systems can adapt to meet new levels of demand. It means a system has the ability to grow to accomodate an increase in demand. There are both horizontal and vertical scaling in regards to compute resources. Horizontal scaling involves the adding of instances of the same size. Vertical scaling is typically a manual process where the size of the instance is changed.
 
 ## 3 Common Cloud Computing Models
-    1. IaaS : Infrastucture as a service
-    2. PaaS : Platform as a Service
-    3. SaaS: Software as a Service
+1. IaaS : Infrastucture as a service
+2. PaaS : Platform as a Service
+3. SaaS: Software as a Service
 
 ## 3 Common Cloud Deployment Models
-    1. Private Cloud
-    2. Public Cloud
-    3. Hybrid Coud
+1. Private Cloud
+2. Public Cloud
+3. Hybrid Coud
 
 ## Regions
+What's a region?
 - A Region is a geographical area of the world that is a collection of data centers logically grouped into Availability Zones.
 - Regions are completely independent and isolated from each other.
 - Certain resources are tied to regions.
@@ -39,6 +39,7 @@
 - Each region has multiple, independent and physically isolated AZ.
 
 ## Availability Zones
+What's a availability zone
 - AZs are isolated from other AZs withing the region.
 - AZs are connected to each other with redundant, ultra-high-speed, low-latency connection within a region.
 
@@ -310,13 +311,13 @@ Common S3 use cases:
 
 
 ### Summary
-    Amazon RDS = Relational Database Service = MySQL, PostgreSQL, Oracle, Microsoft SQL
-    Amazon Aurora = MySQL or PostgreSQL compatible, redundant, highly available, auto patched and backed up, 3 times the throughput of MySQL.
-    DynamoDB = key-value database for simple lookup table.
-    Redshift = for dataware housing purpose where BI (business intelligence) processes will run on the past data for analysis.
-    DocumentDB = More than just key-value pair database. It's full-fledged database. NoSQL DB. Json Format. MongoDB compatible.
-    Neptune = Graph Datbaase. (like neo4j?). Recommendiation engines. Fraud database.
-    Amazon Quantum Ledger Database (QLDB) = for immutable data requried in banking sector.
+ Amazon RDS = Relational Database Service = MySQL, PostgreSQL, Oracle, Microsoft SQL
+ Amazon Aurora = MySQL or PostgreSQL compatible, redundant, highly available, auto patched and backed up, 3 times the throughput of MySQL.
+ DynamoDB = key-value database for simple lookup table.
+ Redshift = for dataware housing purpose where BI (business intelligence) processes will run on the past data for analysis.
+ DocumentDB = More than just key-value pair database. It's full-fledged database. NoSQL DB. Json Format. MongoDB compatible.
+ Neptune = Graph Datbaase. (like neo4j?). Recommendiation engines. Fraud database.
+ Amazon Quantum Ledger Database (QLDB) = for immutable data requried in banking sector.
 
 ### Features
 Purpose-built for specific application use cases
@@ -368,7 +369,7 @@ Offlod time-consuming management tasks
 - Redshift allows you to run complex analytic queries against petabytes of structured data, use sophisticated query optimization, has columnar storage on high-performance local disks, and has massively parallel query execution?
 
 ### Additional Notes
-** RDS (OLTP)
+RDS (OLTP)
 SQL
 MySQL
 Oracle DB
@@ -378,8 +379,8 @@ MariaDB
 Amazon DynamoDB (No SQL)
 Redshift OLAP - Amazon Data Warehouse Solution
 
-* Bootstrap script
-** For RDS
+Bootstrap script
+For RDS
 ```
 #!/bin/bash
 yum update -y
@@ -554,7 +555,7 @@ Later I will organize the below:
 - Service control policies (SCPs)
      - AWS Organizations provides central governance and management for multiple accounts. 
      - Organization SCPs allow you to create permissions guardrails that apply to all accounts within a given organization. 
-     
+
 
 - AWS Organizations
 #### Management and governance
@@ -616,7 +617,7 @@ AWS customers are welcome to carry out security assessments or penetration tests
   - Amazon Kendra - intelligent search
   - Amazon Personalize - personalized recommendation
 
-  
+
 Machine learning tools for business metrics
   - Lookout for Metrics - detect unexpected changes eg revenue performance or customer retentino, and identify root causes
   - Forecast - build accurate forecasting models
@@ -629,7 +630,7 @@ Transcribe - turn high quality speech to text. add this capability to your appli
 Lex - easily build conversational agents or chat bots.
 
 
-   
+
 
 ## Management
 REST like API
@@ -1004,7 +1005,7 @@ Delivering cost savings
 1. Kickoff
    - cost savings, overview
    - Timeline, scope, and roles
-2.
+
 
 # Documents to Read
 AWS Documentation
@@ -1087,7 +1088,7 @@ Notes:
 2. 50 scored questions and 15 unscored (too hard / too easy / unseen)
 3. Always create IAM user instead of using root account. IAM user common policies are Admin, PowerUsers, etc
 4. General computing : EC2. GPU Computing : Infer1. (compete against tpu in gcp). Quantum: AWS Bracket.
-5. Data centers within a region are isolate from each other (different buildings), but close enough to provide low latency (< 10ms), therefore they usually have the same impact, and HA is defined as being available in 2/3 different AZs. Subnets are associated with AZs. You pick subnets instead of picking AZs for EC2, for instance. Default subnets are created one subnet per AZ. Managed HA services will replicate in multiple AZs behind the scene in each region so you don't need to pick (e.g., S3.). CloudFront distribution uses "area" which covers many regions. Global services like IAM doesn't even have concept of region.
+5. Data centers within a region are isolate from each other (different buildings), but close enough to provide low latency (less than 10ms), therefore they usually have the same impact, and HA is defined as being available in 2/3 different AZs. Subnets are associated with AZs. You pick subnets instead of picking AZs for EC2, for instance. Default subnets are created one subnet per AZ. Managed HA services will replicate in multiple AZs behind the scene in each region so you don't need to pick (e.g., S3.). CloudFront distribution uses "area" which covers many regions. Global services like IAM doesn't even have concept of region.
 6. Fault Domain: isolated physical construct where failure / fault will not impact other fault domains. Fault level: A collection of fault domains. Fault Domains can be nested.
 
 Network:
@@ -1139,7 +1140,6 @@ CDK constructs: reusable cloud components. constructs.dev (similar to Terraform 
 EC2: virtual machines. "instance".
 AMI: predefined configuration for EC2 - amount of CPU, amount of memory, network bandwidth, OS, storage options such as EBS.
 EC2 is considered the backbone of AWS as many services use EC2 as underlying servers -- S3, RDS, DDB, Lambdas, etc
-```
 
 
 # Links to Read
