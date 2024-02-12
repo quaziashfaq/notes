@@ -33,4 +33,3 @@ Differences in academy  :
 2. More Muslims should study in the Academy (whilst also recognising and being aware of the inherent biases, dangers, constraints and pressures from within the Academy system)
 3. Madrassahs need to revamp and update their curricula
 
-
