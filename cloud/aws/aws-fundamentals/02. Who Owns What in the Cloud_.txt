@@ -1,7 +1,5 @@
-In this lecture we're going to look at who owns
-what in the cloud, and by owns,
-we're talking about who is responsible
-for what in the cloud.
+In this lecture we're going to look at who owns what in the cloud, and by owns, we're talking about who is responsible for what in the cloud.
+
 So the first thing I'm going to do is give you an analogy
 of renting a car,
 then we're going to look at renting resources in the cloud,
