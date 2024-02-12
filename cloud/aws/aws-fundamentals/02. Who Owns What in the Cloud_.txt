@@ -1,5 +1,3 @@
-Okay. Hello, Cloud Gurus,
-and welcome to this lecture.
 In this lecture we're going to look at who owns
 what in the cloud, and by owns,
 we're talking about who is responsible

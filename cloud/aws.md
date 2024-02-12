@@ -33,15 +33,22 @@ The cloud gives you increased speed and agility. All the services you have acces
 ## Regions
 What's a region?
 - A Region is a geographical area of the world that is a collection of data centers logically grouped into Availability Zones.
+- Each region consists of two or more AZs.
 - Regions are completely independent and isolated from each other.
 - Certain resources are tied to regions.
-- Each region has datacenters which are called availability zone.
+- Each region has a group of datacenters which is called availability zone.
 - Each region has multiple, independent and physically isolated AZ.
 
-## Availability Zones
-What's a availability zone
+## Availability Zones (AZs)
+What's a availability zone?
+- A group of multiple data centres close enough together to be grouped into one AZ.
 - AZs are isolated from other AZs withing the region.
+- Each data centre has redundant power, networking and connectivity.
 - AZs are connected to each other with redundant, ultra-high-speed, low-latency connection within a region.
+- AZs in a region are within 100kms or 60 miles.
+
+### Edge Location
+They are just endpoints for AWS thare used for caching content. This consists of AWS's content delivery network: CloudFront.
 
 ## Misc
 - Web and mobile apps
