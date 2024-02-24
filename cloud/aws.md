@@ -79,6 +79,8 @@ Elastic Cloud Compute => EC2
 - Storage Optimized
 
 #### Amazon Machine Images (AMI)
+Amazon machine imgase are like template virtual machines already created. Just need to select the CPU, memory, network, disk size. Then machine images will be deployed and the OS will be ready.
+
 #### Pricing
 ##### Definition
 - On-Demand
