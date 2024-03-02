@@ -59,8 +59,9 @@ They are just endpoints for AWS thare used for caching content. This consists of
 ## Compute
 Compute means some form virtual machine which runs code.
 
-### Amazon EC2 - resize compute capacity
+### Amazon EC2 
 Elastic Cloud Compute => EC2 
+Capability to resize compute capacity
 
 #### Features
 - elasticity
@@ -150,6 +151,8 @@ Amazon machine imgase are like template virtual machines already created. Just n
     - Convertible Reserved Instance (RI) with a capacity reservation: A Reserved Instance is a reservation of resources and capacity for either 1 or 3 years. A capacity reservation offers assurance that the customer will be given preference if there is ever a capacity constraint in a Region.
 
 
+### Elastic Beanstalk
+Elastic Beanstalk, which is a provisioning engine => a way of basically automating the deployment of your applications within AWS.
 
 ### Amazon EC2 Auto Scaling: increase or decrease number of instances
 - automatically add or remove instances to adapt to demand
@@ -213,6 +216,7 @@ A reliable, scalable, and secure place for data
 EBS - Elastic Block Store = Block Disk
 EFS - Elastic File Store = NFS Share
 S3  = Simple Storage Service = Object Storage
+FSx = ? #TODO
 
 ### Amazon Elastic Block Store (EBS):
 Durable Persistent Block Level Storage
@@ -296,14 +300,15 @@ Common S3 use cases:
 
 
 ### Storage Gateway
+Provides on-premises access to unlimited cloud storage
 - File Gateway - SMB and NFS interface to S3
 - Tape Gateway - VTL on your local network
 - Volume Gateway - iSCSI block storage volume to on-premises applications
 
 ## Database Services
-- Relational
+### Types of Databases
+- RDS = Relational Database Service
     - aurora - mysql and postgresql comptaible
-    - rds
     - redshift - cloud datawarehouse database.
 - key-value - nosql
     - dynamodb - 
@@ -464,6 +469,9 @@ Route end users to internet applications
 ### Direct Connect
 Direct Connect is a private (bypasses the public internet), dedicated physical network connection from your on-premises data center to AWS. Since the connection is private, it is extremely fast.
 
+### API gatewoy 
+It's a serverless way of replacing web servers
+
 ## Security
 ### AWS IAM (Identity and Access management)
 - Securely control access to AWS services and resources
@@ -497,6 +505,9 @@ Direct Connect is a private (bypasses the public internet), dedicated physical n
   - sotrage
   - database
   - networking
+  - Overall software of virtualization
+
+
 - Customer
   Customers and apn partners are responsible for the security *in* the cloud
   - Client side data encryption and data integrity authentication
@@ -505,6 +516,10 @@ Direct Connect is a private (bypasses the public internet), dedicated physical n
   - Operating system, network, and firewall configuration
   - platform, applications, identity and access management
   - Customer Data
+
+
+Encryption is a shared responsibility between AWS and customers.
+
 
 ### Cloud Compliance
 
@@ -1169,3 +1184,9 @@ EC2 is considered the backbone of AWS as many services use EC2 as underlying ser
 - Cost Effective Resources
 - Manage Demand and Supply Resources
 - Optimizing over Time.
+
+# AWS Exam Guide
+Design Secure Architectures,
+Design Resilient Architectures,
+Design High-Performing Architectures, and
+Design Cost-Optimized Architectures.
