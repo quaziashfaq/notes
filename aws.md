@@ -1190,3 +1190,25 @@ Design Secure Architectures,
 Design Resilient Architectures,
 Design High-Performing Architectures, and
 Design Cost-Optimized Architectures.
+
+# Links to Courses
+Now there are 11 training courses with badge assessments. How to enroll ⬇
+ 
+The best investment you can make, is an investment in yourself. I prepared a list of free cloud courses that that come with free assessments and digital badges.
+ 
+There is not a single page that summarizes how to enroll to different AWS badges, so here you go (all up-to-date) including the latest addition cloud essentials:
+ 
+Cloud Essentials: https://bit.ly/awscloudess
+  7 🔸 Media & Entertainment: https://bit.ly/awsmebadge
+  8 🔸 Architecting: https://bit.ly/architect23
+  9 🔸 AWS for Games: https://go.aws/3l6fYf7
+ 10 🔸 Serverless: https://go.aws/3UZpFs0
+ 11 🔸 Object Storage: https://go.aws/3JVneTS
+ 12 🔸 Block Storage: https://go.aws/3JVneTS
+ 13 🔸 File Storage: https://go.aws/3JVneTS
+ 14 🔸 Storage Data Migration: https://go.aws/3JVneTS
+ 15 🔸 Data Protection & Disaster Recovery: https://go.aws/3JVneTS
+ 16 
+ 17 ⚡️ Feel free to share it with friends and help others to upskill!
+ 18 
+
