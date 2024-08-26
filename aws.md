@@ -1,5 +1,6 @@
 # AWS Cloud Basics
 ## Characteristics of cloud computing
+
 1. pay-as-you-go pricing
 2. services are delivered over the internet.
 3. on-demand delivery and available in seconds
@@ -482,11 +483,8 @@ It's a serverless way of replacing web servers
 
 - Cloud security at aws is teh highes priority
   - Inherit benefits from AWS data center and network architecture
-
   - similar to on premises data cetners, without maintaining facilities and hardware.
-
   - can be easily automated
-
   - inherit all the best practicies of aws
 
 
@@ -560,13 +558,16 @@ Later I will organize the below:
 - aws cloudtrail - track user activity and API usage.
 
 #### Identity management
-- aws iam - securely manage access to AWS account services and resources.
+- aws iam
+  - securely manage access to AWS account services and resources.
   - iam users
     root user
   - iam policy
   - iam role: both service and user can assume a role to get particular privilege/permission to perform a task. For example, The company will need to create a role that grants access to S3 and associate it with the EC2 instance.
-- aws single sign-on / IAM Identity Centre - Implement cloud  single sign-on
-- Amazon Cognito - Manage identity inside applications.
+- aws single sign-on / IAM Identity Centre 
+  - Implement cloud  single sign-on
+- Amazon Cognito 
+  - Manage identity inside applications.
 - aws directory service
   - Implement and manage Microsoft AD.
   - Managed Microsoft AD
@@ -574,14 +575,15 @@ Later I will organize the below:
   - AD connector - allow on pemise users to login to aws applications with AD
   - distributed service with automatic failover
   - compatible with other aws services
-  - aws organizations - centrally govern and manage multiple aws accounts in one place.
+- aws organizations 
+  - centrally govern and manage multiple aws accounts in one place.
 
 - Service control policies (SCPs)
      - AWS Organizations provides central governance and management for multiple accounts. 
      - Organization SCPs allow you to create permissions guardrails that apply to all accounts within a given organization. 
-
-
 - AWS Organizations
+
+
 #### Management and governance
   - Account management services
     - AWS control tower - set up and govern a secure multi-account aws environment. It helps to ensure all AWS accounts to conform to company-wide policies.
