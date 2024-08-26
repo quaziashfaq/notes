@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+    <title>Title of the page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+
+  a:link, a:visited {
+    background-color: #f44336;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  a:hover, a:active {
+    background-color: blue;
+  }
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #7fffd4;
+  }
+
+  tr:hover {
+    background-color: aqua;
+  }
+
+  .important-message {
+    background-color: black;
+    display: flex;
+    color: white;
+  }
+
+  .important-message > div {
+    width: 50%;
+  }
+  
+  </style>
+</head>
+<body>
+  <h1 style="font-size:10vw;">Responsive Text</h1>
+
+<h1 style="font-size:300%; text-align:center;"> Heading1 </h1>
+<p title="Let's html" style="font-size:200%">Learn HTML</p>
+<a href="https://w3schools.com">W3Schools for Learning HTML</a>
+<img src="w3schools.jpg" alt="W3Schools.com" width="104" height="142">
+
+<div class="important-message">
+  <div>
+    TEST
+  </div>
+  <div>
+    Google what you don't know!
+  </div>
+</div>
+
+
+<p style="color:red;">
+Tags to learn: <br>
+header, footer, nav, video, article, section
+</p>
+
+
+<h2> Items to Learn</h2>
+<table>
+  <tr>
+    <th>Items</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td>HTML</td>
+    <td>Ongoing</td>
+  </tr>
+  <tr>
+    <td>CSS</td>
+    <td>Yet to start</td>
+  </tr>
+  <tr>
+    <td>Basic Javascript</td>
+    <td>I know a little bit</td>
+  </tr>
+</table>
+
+
+&lt;b&gt; - Bold text<br>
+&lt;strong&gt; - Important text<br>
+&lt;i&gt; - Italic text<br>
+&lt;em&gt; - Emphasized text<br>
+&lt;mark&gt; - Marked text<br>
+&lt;small&gt; - Smaller text<br>
+&lt;del&gt; - Deleted text<br>
+&lt;ins&gt; - Inserted text<br>
+&lt;sub&gt; - Subscript text<br>
+&lt;sup&gt; - Superscript text<br>
+<br>
+&lt;abbr&gt;	Defines an abbreviation or acronym<br>
+&lt;address&gt;	Defines contact information for the author/owner of a document<br>
+&lt;bdo&gt;	Defines the text direction<br>
+&lt;blockquote&gt;	Defines a section that is quoted from another source<br>
+&lt;cite&gt;	Defines the title of a work<br>
+&lt;q&gt;	Defines a short inline quotation<br>
+<br>
+
+Use the HTML <b>style</b> attribute for inline styling<br>
+Use the HTML &lt;style&gt; element to define internal CSS<br>
+Use the HTML &lt;link&gt; element to refer to an external CSS file<br>
+Use the HTML &lt;head&gt; element to store &lt;style&gt; and &lt;link&gt; elements<br>
+Use the CSS <b>color</b> property for text colors<br>
+Use the CSS <b>font-family</b>property for text fonts<br>
+Use the CSS <b>font-size</b> property for text sizes<br>
+Use the CSS <b>border</b> property for borders<br>
+Use the CSS <b>padding</b> property for space inside the border<br>
+Use the CSS <b>margin</b> property for space outside the border<br>
+<br>
+
+The target attribute specifies where to open the linked document.<br>
+The target attribute can have one of the following values:<br>
+<br>
+_self - Default. Opens the document in the same window/tab as it was clicked<br>
+_blank - Opens the document in a new window or tab<br>
+_parent - Opens the document in the parent frame<br>
+_top - Opens the document in the full body of the window<br>
+<br>
+Example<br>
+Use target="_blank" to open the linked document in a new browser window or tab:<br>
+<br>
+<a href="https://www.w3schools.com/" target="_blank">Visit W3Schools!</a>
+
+Use the id attribute (id="value") to define bookmarks in a page
+Use the href attribute (href="#value") to link to the bookmark
+
+
+
+
+<p style="font-family:verdana">
+You can use anchor elements to link to content outside of your web page.
+</p>
+
+  <a href="http://freecatphotoapp.com" target="_blank">cat photos</a>
+
+  <form action="/submit-cat-photo">
+    <input type="text" placeholder="cat photo URL" required>
+    <button type="submit">Submit</button>
+  </form>
+
+
+
+<a href="#my-id">Paragraph page</a>
+<a href="#">link to dead page</a>
+
+
+
+<form action="/submit-cat-photo">
+  <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" checked>Indoor</label>
+  <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor">Outdoor</label>
+  <input type="text" placeholder="cat photo URL" required>
+  <button type="submit">Submit</button>
+
+    <label for="good"><input id="good" type="checkbox" name="personality">Good</label>
+    <label for="bad"><input id="bad" type="checkbox" name="personality">Bad</label>
+    <label for="ugly"><input id="ugly" type="checkbox" name="personality">Ugly</label>
+
+    <button type="submit">Submit</button>
+
+ <button type="submit">Submit</button>
+
+</form>
+
+
+#+END_SRC
+
+
+You can add another level of organization in your HTML document within the html tags with the head and body elements. Any markup with information about your page would go into the head tag. Then any markup with the content of the page (what displays for a user) would go into the body tag.
+
+Metadata elements, such as link, meta, title, and style, typically go inside the head element.
+
+* CSS Style
+** inline
+images<h2 style="color: red">CatPhotoApp</h2>
+
+
+** Separate but in the same html file
+*** Changing the element style
+<style>
+  h2 {
+    color: blue;
+  }
+</style>
+*** Changing the style using class
+<style>
+  h2 {
+    color: blue;
+  }
+  .red-text {
+    color: red;
+  }
+</style>
+
+<h2 class="red-text">CatPhotoApp</h2>
+
+*** Importing google font library
+
+To import a Google Font, you can copy the font(s) URL from the Google Fonts library and then paste it in your HTML. For this challenge, we'll import the Lobster font. To do this, copy the following code snippet and paste it into the top of your code editor(before the opening style element):
+
+```
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+
+*** Border and Applying 2 style classes on an element
+<style>
+  .red-text {
+    color: red;
+  }
+
+  h2 {
+    font-family: Lobster, monospace;
+  }
+
+  p {
+    font-size: 16px;
+    font-family: monospace;
+  }
+
+  .smaller-image {
+    width: 100px;
+  }
+
+  .thick-green-border {
+    border-color: green;
+    border-width: 10px;
+    border-style: solid;
+  }
+</style>
+
+<h2 class="red-text">CatPhotoApp</h2>
+<main>
+  <p class="red-text">Click here to view more <a href="#">cat photos</a>.</p>
+
+  <a href="#"><img class="smaller-image thick-green-border" src="https://bit.ly/fcc-relaxing-cat" alt="A cute orange cat lying on its back."></a>
+
+</body>
+</html>
