@@ -1,4 +1,8 @@
 # AWS Cloud Basics
+## Definitions
+### Latency
+The time that passes between a user request and the resulting response.
+
 ## Characteristics of cloud computing
 1. pay-as-you-go pricing
 2. services are delivered over the internet.
@@ -8,14 +12,13 @@
 1. Go global in minutes: Going global in minutes means you can deploy applications in multiple Regions around the world.
 2. Stop spending money running and maintaining data centers
 3. Benefit from massive economies of scale.
-4. Increase speed and agility: 
-The cloud gives you increased speed and agility. All the services you have access to help you innovate faster, giving you speed to market.
+4. Increase speed and agility: The cloud gives you increased speed and agility. All the services you have access to help you innovate faster, giving you speed to market.
 5. Stop guessing capacity
 6. Trade capital expenses for variable expenses
 
 ## 4 benefits of cloud in technical terms
 1. High Availability : Highly available systems are designed to operate continousoly without failure for a long time. These systems avoid loss of service by reducing or managing failures.
-2. Elasticity : With elasticity you don't have to plan ahead of time how much capacity you need. You can provision only what you need and then grow andshrink based on demand. With elasticity, the company doesn't have to plan ahead of time how much capacity they'll need - elasticity allows them to match the supply of resources with changing workload demands.
+2. Elasticity : With elasticity, you don't have to plan ahead of time how much capacity you need. You can provision only what you need and then grow andshrink based on demand. With elasticity, the company doesn't have to plan ahead of time how much capacity they'll need - elasticity allows them to match the supply of resources with changing workload demands.
 3. Agility : The colud gives you incresaed agility. All the services you have access to help you innovate faster, giving you speed to market i.e. innovate more quickly and deliver your applications faster.
 4. Durability : Durability is all about long-term data protection. This means your data will remain intact without corruption.
 5. Scalability: It means the systems can adapt to meet new levels of demand. It means a system has the ability to grow to accomodate an increase in demand. There are both horizontal and vertical scaling in regards to compute resources. Horizontal scaling involves the adding of instances of the same size. Vertical scaling is typically a manual process where the size of the instance is changed.
@@ -38,22 +41,21 @@ What's a region?
 - Certain resources are tied to regions.
 - Each region has a group of datacenters which is called availability zone.
 - Each region has multiple, independent and physically isolated AZ.
+- AZs are fault tolerant. Meaning if one AZ is down, the other AZs should not be impacted.
+- A region is global and made up of two or more AZs.
 
 ## Availability Zones (AZs)
 What's a availability zone?
-- A group of multiple data centres close enough together to be grouped into one AZ.
-- AZs are isolated from other AZs withing the region.
+- A group of one or more physically separated data centres close enough together to be grouped into one AZ.
+- AZs are isolated from other AZs within the region.
 - Each data centre has redundant power, networking and connectivity.
 - AZs are connected to each other with redundant, ultra-high-speed, low-latency connection within a region.
 - AZs in a region are within 100kms or 60 miles.
+- One or more discrete data centers with redundant power, networking, and connectivity in an AWS region.
+- Multi-AZ deployment provides high availability.
 
 ### Edge Location
 They are just endpoints for AWS thare used for caching content. This consists of AWS's content delivery network: CloudFront.
-
-## Misc
-- Web and mobile apps
-- Data processing and warehousing
-- Storage and Archiving
 
 # AWS Core Technologies
 ## Compute
@@ -61,7 +63,7 @@ Compute means some form virtual machine which runs code.
 
 ### Amazon EC2 
 Elastic Cloud Compute => EC2 
-Capability to resize compute capacity
+Capability to resize compute capacity in minutes.
 
 #### Features
 - elasticity
@@ -78,13 +80,14 @@ Capability to resize compute capacity
 - Memory Optimized
 - Accelerated computing
 - Storage Optimized
+- High Performance Computing (HPC) Optimized
 
 #### Amazon Machine Images (AMI)
-Amazon machine imgase are like template virtual machines already created. Just need to select the CPU, memory, network, disk size. Then machine images will be deployed and the OS will be ready.
+Amazon machine imgase are like templated virtual machines which are already created. Just need to select the CPU, memory, network, disk size. Then machine images will be deployed and the OS will be ready.
 
 #### Pricing
 ##### Definition
-- On-Demand
+###### On-Demand
     - What is it?
         - fixed price
         - billed down to second based on instance type
@@ -97,9 +100,9 @@ Amazon machine imgase are like template virtual machines already created. Just n
         - no long-term commitment
         - applications have unpredictable workloads that can't be interrupted.
         - applications are under development
-        - workloads will not run longer than a year.
+        - workloads will _not_ run longer than a year.
 
-- Spot
+###### Spot Instances
     - What is it?
         - Use the unused EC2 capacity across AWS. 
         - the request is fulfilled only if capacity is available.
@@ -109,12 +112,22 @@ Amazon machine imgase are like template virtual machines already created. Just n
         - Not concerned about the start and stop time of application
         - workloads can be interrupted.
 
-- Reserved Instances (RIs)
+###### Dedicated hosts
+    - What is it?
+        - physical server that is fully dedicated to your running instances.
+        - save up to 70% off on-demand prices.
+        - bring your existing per-socket, per-core, per-vm software licenses.
+        - no multitenancy -> server is not shared with other customers.
+    - When to use it?
+        - you can bring your own server-bound software license from vendor.
+        - There is regulatory or corporate compliance requirements around tenancy model.
+
+###### Reserved Instances (RIs)
     - What is it?
         - commit to a specific instance type in a particular region for 1 or 3 yeras.
-        - can save up to 75% off on-demand prices
-        - sign a contract
-        - can reserver capacity in AZ for any duration.
+        - can save up to 75% off on-demand prices.
+        - sign a contract.
+        - can reserve capacity in AZ for any duration.
         - can pay all upfront, partial upfront or no upfront.
         - all upfront for the max term earns the highest discount.
         - provides converible types at 54% discount.
@@ -122,17 +135,7 @@ Amazon machine imgase are like template virtual machines already created. Just n
         - applicaiton has steady state usage -> can commit to 1 or 3 years.
         - application requires capacity reservation.
 
-- Dedicated hosts
-    - What is it?
-        - physical server that is fully dedicated to your running instances.
-        - save up to 70% off on-demand prices
-        - bring your existing per-socket, per-core, per-vm software licenses.
-        - no multitenancy -> server is not share with other customers.
-    - When to use it?
-        - you can bring your own server-bound software license from vendor.
-        - There is regulatory or corporate compliance requirements around tenancy model.
-
-- Savings Plan
+###### Savings Plan
     - What is it?
         - commit to compute usage (measured per hour) for 1 or 3 years.
         - save up to 72% off on-demand prices
@@ -144,7 +147,7 @@ Amazon machine imgase are like template virtual machines already created. Just n
         - Want to the flexibility to change computer services, instance types, operating systems or regions
 
 
-##### Question Answers
+##### Additional Notes
 - A company with a business-critical application needs to ensure business continuity and that they will not be impacted by capacity restraints in a given Region. How can the company ensure this?
     - On-demand capacity reservation: On-Demand Capacity Reservations enable you to reserve compute capacity for your Amazon EC2 instances for any duration.
     - Standard Reserved Instance (RI) with a capacity reservation: A Reserved Instance is a reservation of resources and capacity for either 1 or 3 years. A capacity reservation offers assurance that the customer will be given preference if there is ever a capacity constraint in a Region.
@@ -161,27 +164,42 @@ Elastic Beanstalk, which is a provisioning engine => a way of basically automati
 - balance capacity across availability zones
 - dynamic and predictive scaling
 - When you require scalable capacity to maintain service levels in your environment.  Auto Scaling monitors your applications and automatically adjusts capacity to maintain steady, predictable performance at the lowest possible cost.
-
-### Elastic Load Balancing: Distribute incoming traffic
-Automatically distribute incoming application traffic across multiple EC2 instances
-Increase availability and fault tolerance
-Configure health checks
-Offload encryption and decrytion
 Types:
-    - Classic laod balancer
-    - Application load balancer
-    - Gateway load balancers
-    - Network load balancer
-
-#### Aplication Load Balancer
-AWS recommends enabling multiple Availability Zones for all load balancers. With an Application Load Balancer however, it is a requirement that you enable at least two or more Availability Zones. This configuration helps ensure that the load balancer can continue to route traffic. If one Availability Zone becomes unavailable or has no healthy targets, the load balancer can route traffic to the healthy targets in another Availability Zone.
-### EC2 Auto Scaling
 - Horizontal Scaling
 - Vertical Scaling
 
+
+### Elastic Load Balancing: Distribute incoming traffic
+#### Notes:
+- Automatically distribute incoming application traffic across multiple EC2 instances.
+- Increase availability and fault tolerance.
+- Configure health checks.
+- Offload encryption and decrytion.
+Types:
+    - Classic load balancer
+      For EC2-classic network and layer 4/7
+      It uses TCP, SSL/TLS, HTTP, HTTPS protocol listeners.
+
+    - Application load balancer
+      application management -> layer 7
+      HTTP, HTTPS, and GRPC
+
+    - Gateway load balancers
+      network logging, monitoring with third-party virtual appliances. -> Layer 3/4
+      layer 3 as a gateway
+      layer 4 as a load balancer.
+
+    - Network load balancer
+      static IP addresses
+      layer 4
+      TCP, UDP, and TLS
+
+#### Aplication Load Balancer (ALB)
+AWS recommends enabling multiple Availability Zones for all load balancers (LB). In an ALB, it is a requirement that you enable at least two or more AZs. This configuration helps ensure that the LB can continue to route traffic. If one AZ becomes unavailable or has no healthy targets, the LB can route traffic to the healthy targets in another AZ.
+
 ### AWS Lambda: Run code in response to events
 - Lambda is a serverless compute service that lets you run code without managing servers.
-- charged based on the duration and number of requests
+- charge is based on the duration and number of requests.
 - 1 million free requests each month.
 - Lambda allows you to run a variable and intermittent code without paying for compute time when your code isn't running.
 
@@ -198,17 +216,76 @@ Store, manage, and deploy container images.
 #### Elastic Kubernetes Service (EKS)
 Fully managed Kubernetes service.
 
+#### Comparison between ECS and EKS
+| Elastic Compute Service      | Elastic Kubernetes Service    |
+|------------------------------|-------------------------------|
+| Fully managed and serverless | Fully managed and open-source |
+|------------------------------|-------------------------------|
+| Supports                     | Supports:                     |
+| EC2, Fargate, Outposts,      | EC2, Fargate, EKS on outposts |
+| ECS anywhere                 | Local zones, Wavelength       |
+|                              | EKS anywhere                  |
+|------------------------------|-------------------------------|
+| Docker, Docker compose CLI   | Kubernetes                    |
+|------------------------------|-------------------------------|
+
+
+
+
 ### Amazon Lightsail
 An easy-to-use cloud platform to quickly launch pre-configured applications for small projects.
 
-### Edge
+### Edge Computing
 - AWS Outposts - Run aws services on-premise - installs servers on-premises
-- AWS Snow Family
+- AWS Snow Family - Offline Data Transfer
 - AWS Wavelength - Access aws services 5g networks
 - VMWare Cloud on AWS - Migrate VMWare workloads
-- AWS Local Zones - Run latency sensitive applications closer to end users.
-AWS Batch - batch allows you to proces large workloads in smaller chunks
+- AWS Local Zones - Run latency sensitive applications closer to end users. They are extension to AWS regions providing millisecond latency to the demanding applications like gaming.
+- AWS Batch - batch allows you to proces large workloads in smaller chunks
+- AWS Edge locatinos - An edge location ensures low latency by placing website contents closer to users.
 
+### Notes - to be organized
+Remember, 
+
+EC2 pricing options: 
+- on-demand, 
+- spot instances (cheapest)
+- dedicated hosts, 
+- reserved instances, and 
+- savings plans.
+
+
+Spot instances are the cheapest option if start and stop times don't matter.
+Savings plans and reserved instances are time commitments from 1 to 3 years.
+Remember, dedicated hosts are not the same as dedicated instances.
+
+EC2 scaling and their benefits:
+- horizontal or scaling out, which has the added benefit of adding high availability as it is done across multiple AZs.
+- vertical or scaling up.
+
+Four types of load balancers:
+They are classic, gateway, application and network.
+Application load balancers use HTTP and HTTPS protocols for your applications.
+And network load balancers offer extreme performance and static IPs with TCP, UDP and TLS protocols.
+
+Let's move on to our serverless topics.
+
+Serverless Services:
+We'll start with knowing your responsibility when using serverless services like Lambda.
+You are responsible for your code only. AWS manages servers, the environment and language support.
+
+Understand that Fargate is considered serverless and is used to manage containers.
+Know that Lambda has an always free tier that includes 1 million requests free a month.
+It has a 15 minute timeout and can be triggered by events.
+
+Know that Fargate has no upfront costs and that you pay only for what you use in VCPUs, memory and storage.
+
+Remember, outposts support hybrid deployment models while maintaining local data residency requirements.
+Lightsail is a compute services that quickly launches small projects like test environments or pre-configured WordPress websites.
+
+Batch processes larger, longer workloads into smaller batches.
+
+And finally, wavelength allows users and devices to reach applications without leaving the 5G mobile network.
 
 
 ## Storage Service
@@ -223,27 +300,27 @@ Durable Persistent Block Level Storage
 Replicate every EBS volume.
 - Network-attached block storage for use with Amazon EC2 instance
   - Persist independently from instance
-  - Tied to ove AZ.
-  - Used like a physical hard drive
-  - Automatically replicated
-  - Attached to any instance in the same az
-  - One EBS volume can belong to one EC2 instance
-  - One EC2 instance can have many EBS volumes
-  - EBS volumes can retain data after EC2 instance termination
-  - Allow point-in-time snapshots to S3
-  - 1 GiB increments
-  - Size can be from 1 GiB to 16TiB
-  - EBS snapshots can be copied between regions
+  - Tied to one AZ.
+  - Used like a physical hard drive.
+  - Automatically replicated.
+  - Attached to any instance in the same az.
+  - One EBS volume can belong to one EC2 instance.
+  - One EC2 instance can have many EBS volumes.
+  - EBS volumes can retain data after EC2 instance termination.
+  - Allow point-in-time snapshots to S3.
+  - 1 GiB increments.
+  - Size can be from 1 GiB to 16TiB.
+  - EBS snapshots can be copied between regions.
 
 ### Amazon Simple Storage Service (S3)
 Durable, scalable object storage
 #### Features
 Infinite scalability, greater analysis, and faster data retrieval.
-- Highly scalable object storage with
-- Object size: can be upto 5 TiB
+- Highly scalable object storage.
+- Object size: can be upto 5 TiB.
 - There is no limitation of how many files you can keep.
-- 11 9s durability
-- 4 9's availability
+- 11 x 9s durability.
+- 4 x 9's availability.
 - Set security at bucket level or individual access level.
 - S3 has versioning feature to keep multiple versions.
 - S3 access logs can be used to track issues or abnormal activities.
@@ -260,20 +337,30 @@ Common S3 use cases:
 - software delivery
 
 #### S3 Classes / Varities:
-- Standard
+- S3 Standard
   Active Data
-  Stores data in 3 AZ???
-- Standard Infrequent Access
+  Stores data in 3 AZ??? #TODO: Find if it's true or not?
+
+- S3 Standard Infrequent Access
   Lower per gb price than standard. But it has per gb retrieval fee.
   Stores data in 3 AZs.
-- One Zone Infrequent Access
+
+- S3 One Zone Infrequent Access
   Infrequent Access. Stores data in a single AZ.
   20% lower prices than Standard IA.
+
 - S3 Glacier
   Secure, low-cost and durable storage classes for data archiving.
+  #TODO: Check the retrieval options?
+
     - S3 Glacier Instant Retrieval
     - S3 Glacier Flexible Retrieval 
     - S3 Glacier Deep Archive
+    - 3 Retrieval options:
+      - Standard - low cost
+      - Bulk - cost effective for large amounts of data
+      - expedited - urgent need.
+
 - S3 Outposts
     - provides object storage on-premises
     - a single storage class
@@ -282,61 +369,74 @@ Common S3 use cases:
 - Amazon S3 Intelligent Tiering
   Automatic cost saings by moing data between two access tiers, configured by the customer.
 
+
+
 #### Amazon S3 Glacier: Data archiving and backup
 
 ### File Storage
-- Amazon Elastic File System (EFS) -  Network File Storage for Amazon EC2 Instance
-    - Only supports Linux FS.
-    - Accessible from multiple AZ in the same region.
+- Amazon Elastic File System (EFS)  - Network File Storage for Amazon EC2 Instance
+  - Only supports Linux FS.
+  - Accessible from multiple AZ in the same region.
+  - protected from AZ outages.
+  - Thousands of linux ec2 machines can access the same EFS volume
+  - scalable, elastic and cloud native
+  - encryption is enabled.
+  - automatically grows and shrinks.
+  - 2 types:
+    - Stanard
+    - Infrequent Access (IA) - by intelligent tiering infrequently accessed data can be moved to EFS-IA storage
 - Amazon FSx for Windows File Server
 
 ### Data Transfer
 - Amazon Storage Gateway: provides on-premises access to unlimited cloud storage
-- AWS DataSync - easily transfer data to and from AWS upto 10 times faster than normal
+- AWS DataSync - easily transfer data to and from AWS upto 10 times faster than normal way of transfer.
 - AWS Transfer Family - Transfer files to S3 using SFTP, FTP and FTPS.
+[STG GW](#storage-gateway)
 
 
 ### Backup
 
 
 ### Storage Gateway
-Provides on-premises access to unlimited cloud storage
+Provides on-premise access to unlimited cloud storage.
+Use cases: data backup, disaster recovery, and data processing.
 - File Gateway - SMB and NFS interface to S3
-- Tape Gateway - VTL on your local network
-- Volume Gateway - iSCSI block storage volume to on-premises applications
-
+- Tape Gateway 
+  - VTL on your local network
+  - For archiving data
+- Volume Gateway 
+  - iSCSI block storage volume to on-premises applications
+  - Store or Cached volumes
+- FSx File Gateway 
+  - Extends Windows FileSystem gateway.
 ## Database Services
 ### Types of Databases
 - RDS = Relational Database Service
     - aurora - mysql and postgresql comptaible
     - redshift - cloud datawarehouse database.
 - key-value - nosql
-    - dynamodb - 
+    - dynamodb
 - in-memory
     - elasticache
-    - memcached
+      - memcached
+      - redis
 - document
     - documentDB - mongoDB compatible
-
 - graph
 - time series
 - wide column
 - ledger
 
 
-### Summary
- Amazon RDS = Relational Database Service = MySQL, PostgreSQL, Oracle, Microsoft SQL
- Amazon Aurora = MySQL or PostgreSQL compatible, redundant, highly available, auto patched and backed up, 3 times the throughput of MySQL.
- DynamoDB = key-value database for simple lookup table.
- Redshift = for dataware housing purpose where BI (business intelligence) processes will run on the past data for analysis.
- DocumentDB = More than just key-value pair database. It's full-fledged database. NoSQL DB. Json Format. MongoDB compatible.
- Neptune = Graph Datbaase. (like neo4j?). Recommendiation engines. Fraud database.
- Amazon Quantum Ledger Database (QLDB) = for immutable data requried in banking sector.
+### Relational Databases
+#### 6 types of RDS
+1. Amazon Aurora
+2. MariaDB
+3. PostgreSQL
+4. Oracle Database
+5. MSSQL Server
+6. MySQL
 
-### Features
-Purpose-built for specific application use cases
-Offlod time-consuming management tasks
-### Types
 #### Amazon Aurora
 - Managed Backup Service
 - Automated backups
@@ -345,15 +445,20 @@ Offlod time-consuming management tasks
 - Automatic Host relpacement
 
 
-#### 6 other types of RDS
-1. Amazon Aurora
-2. MariaDB
-3. PostgreSql
-4. Oracle Database
-5. MSSQL Server
-6. MySQL
+#### Summary
+ Amazon RDS = Relational Database Service = MySQL, PostgreSQL, Oracle, Microsoft SQL
+ Amazon Aurora = MySQL or PostgreSQL compatible, redundant, highly available, auto patched and backed up, 3 times the throughput of MySQL.
+ DynamoDB = key-value database for simple lookup table.
+ Redshift = for dataware housing purpose where BI (business intelligence) processes will run on the past data for analysis.
+ DocumentDB = More than just key-value pair database. It's full-fledged database. NoSQL DB. Json Format. MongoDB compatible.
+ Neptune = Graph Datbaase. (like neo4j?). Recommendiation engines. Fraud database.
+ Amazon Quantum Ledger Database (QLDB) = for immutable data requried in banking sector.
 
-#### Amazon DynamoDB
+#### Features
+Purpose-built for specific application use cases
+Offload time-consuming management tasks
+
+### Amazon DynamoDB
 - NoSQL DB
 - fast and predictable performance
 - key-value document database
@@ -367,7 +472,7 @@ Offlod time-consuming management tasks
 - provides automatic replication across Availability Zones.
 
 
-#### Amazon ElastiCache
+### Amazon ElastiCache
 - in-memory caching systems / engines
 - ElasticCache is a web service that makes it easy to deploy, operate, and scale and in-memory cache in the cloud.
 - ElasticCache supports two opensouce in-memory caching engines
@@ -375,23 +480,15 @@ Offlod time-consuming management tasks
     - redis
 
 
-#### Amazon Redshift
+### Amazon Redshift
 - Data warehousing and processing.
 - Collecting data from multiple sources and analyze them.
 - Generate report on past events
 - Predict future
 - Redshift allows you to run complex analytic queries against petabytes of structured data, use sophisticated query optimization, has columnar storage on high-performance local disks, and has massively parallel query execution?
+Redshift OLAP - Amazon Data Warehouse Solution
 
 ### Additional Notes
-RDS (OLTP)
-SQL
-MySQL
-Oracle DB
-PostGreSQL
-Amazon Aurora
-MariaDB
-Amazon DynamoDB (No SQL)
-Redshift OLAP - Amazon Data Warehouse Solution
 
 Bootstrap script
 For RDS
@@ -416,27 +513,27 @@ service httpd start
 ## Networking
 ### Bird's eye-view
 - Cloud Networks
-    - Amazon VPC - define and provision an isolated network for your aws resources
-    - AWS transit gateway - connect VPCs and on-premises networks
+    - Amazon VPC - define and provision an isolated network for your aws resources.
+    - AWS transit gateway - connect VPCs and on-premise networks.
     - AWS privatelink - provide private connectivity between VPCs and on-premises applications
     - Amazon Route 53 - host your own managed DNS.
 
 - Network Scaling
-    - Elastic load balancing - automatically distribute network traffice accross a pool of resources
-    - aws global accelerator - direct traffic through the aws global network to improve global application performnace.
+    - Elastic load balancing - automatically distribute network traffic across a pool of resources.
+    - AWS Global accelerator - direct traffic through the aws global network to improve global application performance.
 
 - Content Delivery
     - Amazon CloudFront - securely deliver data, videos and applications to customers globally with low latency and high transfer speeds.
 
 ### Amazon VPC
 Build a virtual network in the cloud.
-Networking layer for Amazon EC2
+Networking layer for Amazon EC2.
 A virtual network dedicated to a customer's AWS account.
 Subnet: A range of IP address in a VPC.
-Public and Private Subnets
+Public and Private Subnets.
 
-Flow Logs - Capture Network flow information
-Host-based firewalls - OS firewalls
+Flow Logs - Capture Network flow information.
+Host-based firewalls - OS firewalls.
 
 - Some components:
     - NAT gateway
@@ -445,32 +542,63 @@ Host-based firewalls - OS firewalls
 
 - By default, all subnets within a VPC can communicate with each other.
 
+#### Internet Gateway
+- Internet Gateway (IGW) is a horizontally scaled, redundant, and highly available VPC component that allows communication between your VPC and the internet.
+- IGW enables resources (like EC2 instances) in public subnets to connect to the internet. Similarly, resources on the internet can initiate a connection to resources in your subnet using the public.
+- If a VPC does not have an IGW, then the resources in the VPC cannot be accessed from the Internet (unless the traffic flows via a Corporate Network and VPN/Direct Connect).
+- IGW supports IPv4 and IPv6 traffic.
+- IGW does not cause availability risks or bandwidth constraints on your network traffic. In order to make subnet public, add a route to your subnet’s route table that directs internet-bound traffic to the IGW.
+- You can associate exactly one IGW with a VPC.
+- Internet Gateway is not Availability Zone specific.
+- There’s no additional charge for having an internet gateway in your account.
+
+#### NAT Gawetay
+NAT Gateway (NGW) is a managed Network Address Translation (NAT) service.
+NAT Gateway does something similar to Internet Gateway (IGW), but it only works one way: Instances in a private subnet can connect to services outside your VPC but external services cannot initiate a connection with those instances.
+NAT gateways are supported for IPv4 or IPv6 traffic.
+NAT gateway supports the following protocols: TCP, UDP, and ICMP.
+Each NAT gateway is created in a specific Availability Zone and implemented with redundancy in that zone.
+If you have resources in multiple Availability Zones and they share one NAT gateway, and if the NAT gateway’s Availability Zone is down, resources in the other Availability Zones lose internet access.
+To create an Availability Zone-independent architecture, create a NAT gateway in each Availability Zone.
+You can associate exactly one Elastic IP address with a public NAT gateway.
+You are charged for each hour that your NAT gateway is available and each Gigabyte of data that it processes.
+
 ### Security Groups
 Control Access to instances
 
 ### Network Access Control Lists (NACL)
 Control traffic/access at the subnet level
 ### CloudFront
-Just like ElastiCache works between application and database to cache the data of database and to get faster response, CloudFront works in Edge location between user and website/application to cache the images, videos or other static data.
+Just like ElastiCache works between application and database to cache the data of database and to get faster response, CloudFront works at Edge location between user and website/application to cache the images, videos or other static data.
 
 [User] <--> CloudFront <--> [Application]
 
 ### Amazon Route 53
 DNS service
-Route end users to internet applications
+A record = mapping between an IP address and a domain name.
+Route end users to internet applications.
 - Routing policy
     - simple routing
-    - weighted routing policy
-    - geolocation policy
-    - latency policy
-    - failover policy
+    - weighted routing policy = multiple IP addresses will get weights which maps to frequencies of returning the IP address.
+    - geolocation policy = Certain IP address depending on the source of the IP address.
+    - latency policy = the IP address nearer to the location of requesting IP address. Fastest response or lowest latency.
+    - failover policy = If one IP is not accessible, then the 2nd IP will be returned.
     - multivalue answer policy
 
 ### Direct Connect
-Direct Connect is a private (bypasses the public internet), dedicated physical network connection from your on-premises data center to AWS. Since the connection is private, it is extremely fast.
+Direct Connect is a private (bypassing the public internet), dedicated physical network connection from your on-premises data center to AWS. Since the connection is private, it is extremely fast.
 
 ### API gatewoy 
-It's a serverless way of replacing web servers
+It's a serverless way of replacing web servers.
+
+### AWS Transit gateway
+It is used to connect the on-premis network to AWS VPC.
+
+### AWS Private Link
+To connect the on-premis apps to AWS VPC.
+
+### AWS Global Accelerator
+It can be leveraged to route the traffic through AWS for faster speed.
 
 ## Security
 ### AWS IAM (Identity and Access management)
@@ -484,10 +612,10 @@ It's a serverless way of replacing web servers
   - Inherit benefits from AWS data center and network architecture
   - similar to on premises data cetners, without maintaining facilities and hardware.
   - can be easily automated
-  - inherit all the best practicies of aws
+  - inherit all the best practices of aws
 
 #### How to give S3 access?
-- the best way to give S3 access to all applications running on the EC2 instance -> Use an instance profile to pass an IAM role with Amazon S3 permissions to the EC2 instance
+- the best way to give S3 access to all applications running on the EC2 instance -> Use an instance profile to pass an IAM role with Amazon S3 permissions to the EC2 instance.
 
 #### Users and Roles
   - iam users: 
@@ -500,7 +628,7 @@ It's a serverless way of replacing web servers
 
 ### Shared Responsibility Model
 - AWS
-  AWS is responsible for the security *of* the Cloud
+  AWS is responsible for the security of the Cloud
   - AWS global infrastructure
   - regions
   - availability zones
@@ -513,10 +641,10 @@ It's a serverless way of replacing web servers
 
 
 - Customer
-  Customers and apn partners are responsible for the security *in* the cloud
+  Customers and apn partners are responsible for the security *in* the cloud.
   - Client side data encryption and data integrity authentication
   - Server-side encryption (file system and data)
-  - Network traffice protection (encryption / integrity / identity)
+  - Network traffic protection (encryption / integrity / identity)
   - Operating system, network, and firewall configuration
   - platform, applications, identity and access management
   - Customer Data
@@ -528,14 +656,15 @@ Encryption is a shared responsibility between AWS and customers.
 ### Cloud Compliance
 
 - Sharing Information
-  - Inustry certifications
-  - SEcurity and control practices
+  - Industry certifications
+  - Security and control practices
   - Compliance reports directly under NDA
 
 - Assurance Programs
-  - ICertiifcation and attestations
+  - Certiifcation and attestation
   - Laws, regulations, and privacy
   - alignments and frameworks
+
 ### Others
 Later I will organize the below:
 
@@ -573,33 +702,36 @@ Later I will organize the below:
   - Implement and manage Microsoft AD.
   - Managed Microsoft AD
   - Managed Simple AD
-  - AD connector - allow on pemise users to login to aws applications with AD
+  - AD connector - allow on-pemise users to login to aws applications with AD.
   - distributed service with automatic failover
   - compatible with other aws services
 - aws organizations 
   - centrally govern and manage multiple aws accounts in one place.
-- Service control policies (SCPs)
-     - AWS Organizations provides central governance and management for multiple accounts. 
-     - Organization SCPs allow you to create permissions guardrails that apply to all accounts within a given organization. 
 
 
 #### Management and governance
   - Account management services
-    - AWS control tower - set up and govern a secure multi-account aws environment. It helps to ensure all AWS accounts to conform to company-wide policies.
-    - Service control policies (SCPs) - AWS Organizations provides central governance and management for multiple accounts. Organization SCPs allow you to create permissions guardrails that apply to all accounts within a given organization
-    - AWS organization - Centrally govern and manage your environments across multiple aws accounts.
-    - aws budgets - improve your planning and cost control.
+    - AWS control tower 
+      - set up and govern a secure multi-account aws environment. 
+      - It helps to ensure all AWS accounts to conform to company-wide policies.
+    - AWS organization 
+      - Centrally govern and manage your environments across multiple aws accounts.
+    - Service control policies (SCPs)
+      - AWS Organizations provides central governance and management for multiple accounts. 
+      - Organization SCPs allow you to create permissions guardrails that apply to all accounts within a given organization. 
+    - aws budgets 
+      - improve your planning and cost control.
   - Provisioning Services
     - aws cloudformation - model and provision all your resources via code.
       - Templates
       - json or yaml settings.
-      - specify all the configuration to the cloudformation. It will generate the full infrastructure
-      - Full infrastructure with version control systems
+      - specify all the configuration to the cloudformation. It will generate the full infrastructure.
+      - Full infrastructure with version control systems.
       - Nesting templates
-      - automation devops engineer can use it for automaiton
+      - automation devops engineer can use it for automaiton.
       - scale
-    - aws service catalog - create, organize and govern your own curated catalog of AWS products
-    - aws ops works - automate operations with Chef and Puppet
+    - aws service catalog - create, organize and govern your own curated catalog of AWS products.
+    - aws ops works - automate operations with Chef and Puppet.
     - aws marketplace - find, test, buy and deploy software that runs on AWS.
   - Operation services
     - amazon cloudwatch - observe your services via metrics and logging
@@ -613,7 +745,7 @@ Later I will organize the below:
       - ssh login logs -> cloudwatch logs -> cloudwatch filter -> cloudwatch alarm
     - aws config - record and evaluate configurations of aws resources
     - aws cloudtrail - track all user and API activity across your aws accounts
-    - aws systems manager - optimize performance and security while managing a large amonut of systems
+    - aws systems manager - optimize performance and security while managing a large amonut of systems.
     - amazon x-ray - analyze and debug production applications
     - autoscaling
       - minimum size
@@ -624,7 +756,7 @@ Later I will organize the below:
       - better cost management
       - ec2, dynamodb, aurora
 
-####  AWS Trust & Safety team
+#### AWS Trust & Safety team
 The customer should contact the AWS Trust & Safety team using the form or email if they found that there is mining happening in their EC2 machines.
 
 #### DDoS attack protection
@@ -644,7 +776,7 @@ AWS customers are welcome to carry out security assessments or penetration tests
 
 
 Machine learning tools for business metrics
-  - Lookout for Metrics - detect unexpected changes eg revenue performance or customer retentino, and identify root causes
+  - Lookout for Metrics - detect unexpected changes eg revenue performance or customer retention, and identify root causes
   - Forecast - build accurate forecasting models
   - Fraud Detector - identify potentially fraudulent online activities.
 
@@ -680,8 +812,6 @@ The AWS Personal Health Dashboard publishes alerts and remediation guidance when
 Machine Learning
 Analytics and Data Lakes
 Internet of Things
-Serverless Computing
-Containers
 Enterprise Applications
 Storage
 Windows Workloads
@@ -722,7 +852,7 @@ Cost Explorer allows you to visualize and forecast your costs and usage over tim
 AWS Cost and Usage Report to track your EC2 Reserved Instance costs.
 
 # Cloud architecture best practices
-## design for failure and nohting fails
+## design for failure and nothing fails
 - avoid single points of failure
 - multiple instances
 - multiple AZs
@@ -732,7 +862,7 @@ AWS Cost and Usage Report to track your EC2 Reserved Instance costs.
 ## build security in every layer
 - encrypt data at rest and in transit
 - enforce principle of least privilege in IAM
-- implement both Security groups and netowkr access control lists (NACL)
+- implement both Security groups and netowrk access control lists (NACL)
 - consider advanced security features and services
 amazon inspector
 amazon guard
@@ -740,30 +870,44 @@ aws shield
 
 ## leverage different storage options
 - move static assets to amazon s3
-- use amazon cloudfront to server globally
+- use amazon cloudfront to serve globally
 - store session state in dynamodb
-- use elasticache between hosts and databases to store the database query results.
+- use elasticache between EC2 servers and databases to store the database query results.
 
 ## implement elasticity
 - implement auto scaling policies
-- architect resiliency to reboot and relaunch
-- leverage managed services like amazon s3 and amazon dynamodb
+- architect resiliency to reboot and relaunch.
+- leverage managed services like amazon s3 and amazon dynamodb.
 
 ## think parallel
 - scale horizontally, not vertically
-- decouple compute from session / state
+- decouple compute from session / state.
 - use elastic load balancing
 - right-size your infrastructure
 
 ## loose coupling sets you free
-- looser the systems are coulped, the larger it can scale.
+- the more loose the systems are couple, the larger it can scale.
 - instead of a single, ordered workflow, use multiple queues
-- use amazon simple ueue service and simple notification service (SQS & SNS)som
+- use amazon simple queue service and simple notification service (SQS & SNS)som
 
 ## don't fear constraints
 
 # AWS SIX Pillars - 
 It's found in AWS Well-Architected Framework Whitepaper
+## Summary of General Design Principles
+- Stop guessing your capacity needs.
+- Test systems at production scale.
+- Consider evolutionary architectures
+- Automate with architectural experimentation in mind.
+- Drive architectures using data
+- Improve through game days.
+## Summary of six pillars
+Security = Focuses on protection of data, systems, and any assets used by your workload.
+Cost Optimization = Focuses on the ongoing process of maintaining costs in the cloud.
+Performance Efficiency = Focuses on the ability to use computing resources efficiently to meet requirements.
+Operational Excellence = Focuses on creating applications that successfully support your workload.
+Reliability = Focuses on architecting a workload to be consistent and able to recover quickly.
+Sustainability = Focuses on environmental impacts like energy efficiency and consumption.
 
 ## Operational excellence
 - Deploy smaller, reversible changes.
@@ -1106,8 +1250,6 @@ Link: https://www.youtube.com/watch?v=SOTamWNgDKc&t=3366s
 
 
 # Peijun Wu - Notes from Internet
-3 months ago (edited)
-Tracking my progress: 12:27:30
 Notes:
 1. Allocate 120 minutes. Actual exam is 90 minutes.
 2. 50 scored questions and 15 unscored (too hard / too easy / unseen)
@@ -1212,4 +1354,9 @@ Cloud Essentials: https://bit.ly/awscloudess
  16 
  17 ⚡️ Feel free to share it with friends and help others to upskill!
  18 
+
+## Misc Notes
+- Web and mobile apps
+- Data processing and warehousing
+- Storage and Archiving
 
