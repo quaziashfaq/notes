@@ -1360,3 +1360,5 @@ Cloud Essentials: https://bit.ly/awscloudess
 - Data processing and warehousing
 - Storage and Archiving
 
+# Testing links
+[Testing Links](./test.md)
