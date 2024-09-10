@@ -522,9 +522,6 @@ service httpd start
     - Elastic load balancing - automatically distribute network traffic across a pool of resources.
     - AWS Global accelerator - direct traffic through the aws global network to improve global application performance.
 
-- Content Delivery
-    - Amazon CloudFront - securely deliver data, videos and applications to customers globally with low latency and high transfer speeds.
-
 ### Amazon VPC
 Build a virtual network in the cloud.
 Networking layer for Amazon EC2.
@@ -569,6 +566,20 @@ Control Access to instances
 ### Network Access Control Lists (NACL)
 Control traffic/access at the subnet level
 ### CloudFront
+This is the AWS version of CDN (Content Delivery Network)
+
+- Content Delivery
+    - Amazon CloudFront - securely deliver data, videos and applications to customers globally with low latency and high transfer speeds.
+
+Benefits:
+Speed
+reliability
+global reach
+Security : CloudFront is integrated with AWS shield and AWS Web App Firewall.
+Optimizes with EC2, S3 and Route 53
+
+Edge location is a data center which is nearest to customer.
+
 Just like ElastiCache works between application and database to cache the data of database and to get faster response, CloudFront works at Edge location between user and website/application to cache the images, videos or other static data.
 
 [User] <--> CloudFront <--> [Application]
@@ -599,6 +610,9 @@ To connect the on-premis apps to AWS VPC.
 
 ### AWS Global Accelerator
 It can be leveraged to route the traffic through AWS for faster speed.
+Capabilities:
+- Built-in DDoS protection
+- Automatic failover 
 
 ## Security
 ### AWS IAM (Identity and Access management)
@@ -1360,5 +1374,34 @@ Cloud Essentials: https://bit.ly/awscloudess
 - Data processing and warehousing
 - Storage and Archiving
 
-# Testing links
-[Testing Links](./test.md)
+# Job Roles
+## Cloud Architect
+What he/she must know? Service integration, CloudWatch and Logging, IAM & Security
+
+Certifications:
+1. AWS Cloud Practitioner Foundational
+2. AWS Solutions Architect Associate
+3. AWS Solutions Architect Professional
+
+## Systems Administrator
+What to know: Configuration management, requirement gathering and make it to deployments
+
+Certifications:
+1. AWS Cloud Practitioner Foundational
+2. AWS Solutions Architect Associate
+* AWS SysOps Administrator Associate
+* AWS Advanced Networkin Specialty
+
+## Security Administrator
+What to know?
+1. Defines and understands cloud and IT security rules and requirements based on business security and regulator needs.
+2. Can communicate well to engineers and managemnet/leaders.
+3. Resourceful: knows where to find the answers.
+
+1. AWS Solutions Architect Associate
+2. AWS Security Administration
+
+## DevOps Administrator
+What to know: programming, automation and orchestration of many tools and stages in the pipeline
+
+
