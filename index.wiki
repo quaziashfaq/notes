@@ -1,0 +1,15 @@
+= my documents = 
+    * [[Testing]]
+    * [[Testing 2]]
+    * [[file:linux/readme.md|Linux]]
+
+== Subheader ==
+    * Ready 1
+    * ready 2
+    * Ready 3
+
+== fine ==
+    * i think its' working
+    * only if the folding works
+    * does it really work?
+
