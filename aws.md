@@ -546,6 +546,7 @@ service httpd start
 - Content Delivery Network (CDN)
     - Amazon CloudFront - securely deliver data, videos and applications to customers globally with low latency and high transfer speeds.
 
+=======
 ### Amazon VPC
 Build a virtual network in the cloud.
 Networking layer for Amazon EC2.
@@ -557,9 +558,9 @@ Flow Logs - Capture Network flow information.
 Host-based firewalls - OS firewalls.
 
 - Some components:
-    - NAT gateway
-    - internet gateway
-    - network access control list
+  - NAT gateway
+  - internet gateway
+  - network access control list
 
 - By default, all subnets within a VPC can communicate with each other.
 
@@ -590,6 +591,20 @@ Control Access to instances
 ### Network Access Control Lists (NACL)
 Control traffic/access at the subnet level
 ### CloudFront
+This is the AWS version of CDN (Content Delivery Network)
+
+- Content Delivery
+  - Amazon CloudFront - securely deliver data, videos and applications to customers globally with low latency and high transfer speeds.
+
+Benefits:
+Speed
+reliability
+global reach
+Security : CloudFront is integrated with AWS shield and AWS Web App Firewall.
+Optimizes with EC2, S3 and Route 53
+
+Edge location is a data center which is nearest to customer.
+
 Just like ElastiCache works between application and database to cache the data of database and to get faster response, CloudFront works at Edge location between user and website/application to cache the images, videos or other static data.
 
 [User] <--> CloudFront <--> [Application]
@@ -599,12 +614,12 @@ DNS service
 A record = mapping between an IP address and a domain name.
 Route end users to internet applications.
 - Routing policy
-    - simple routing
-    - weighted routing policy = multiple IP addresses will get weights which maps to frequencies of returning the IP address.
-    - geolocation policy = Certain IP address depending on the source of the IP address.
-    - latency policy = the IP address nearer to the location of requesting IP address. Fastest response or lowest latency.
-    - failover policy = If one IP is not accessible, then the 2nd IP will be returned.
-    - multivalue answer policy
+  - simple routing
+  - weighted routing policy = multiple IP addresses will get weights which maps to frequencies of returning the IP address.
+  - geolocation policy = Certain IP address depending on the source of the IP address.
+  - latency policy = the IP address nearer to the location of requesting IP address. Fastest response or lowest latency.
+  - failover policy = If one IP is not accessible, then the 2nd IP will be returned.
+  - multivalue answer policy
 
 ### Direct Connect
 Direct Connect is a private (bypassing the public internet), dedicated physical network connection from your on-premises data center to AWS. Since the connection is private, it is extremely fast.
@@ -620,55 +635,58 @@ To connect the on-premis apps to AWS VPC.
 
 ### AWS Global Accelerator
 It can be leveraged to route the traffic through AWS for faster speed.
+Capabilities:
+- Built-in DDoS protection
+- Automatic failover 
 
 ## Security
 ### AWS IAM (Identity and Access management)
 #### Securely control access to AWS services and resources
-  - Fine-grained access control to aws resources
-  - multi-factor authentication
-  - ability to analyze accesss
-  - Integration with corporate directories
+- Fine-grained access control to aws resources
+- multi-factor authentication
+- ability to analyze accesss
+- Integration with corporate directories
 
 #### Cloud security at aws is the highest priority
-  - Inherit benefits from AWS data center and network architecture
-  - similar to on premises data cetners, without maintaining facilities and hardware.
-  - can be easily automated
-  - inherit all the best practices of aws
+- Inherit benefits from AWS data center and network architecture
+- similar to on premises data cetners, without maintaining facilities and hardware.
+- can be easily automated
+- inherit all the best practices of aws
 
 #### How to give S3 access?
 - the best way to give S3 access to all applications running on the EC2 instance -> Use an instance profile to pass an IAM role with Amazon S3 permissions to the EC2 instance.
 
 #### Users and Roles
-  - iam users: 
-    - root user is the user that has full control and access to all services.
+- iam users: 
+  - root user is the user that has full control and access to all services.
 
-  - Access or Deny access by IAM policies
-  - iam role: 
-    both service and user can assume a role to get particular privilege/permission to perform a task. For example, The company will need to create a role that grants access to S3 and associate it with the EC2 instance.
+- Access or Deny access by IAM policies
+- iam role: 
+  both service and user can assume a role to get particular privilege/permission to perform a task. For example, The company will need to create a role that grants access to S3 and associate it with the EC2 instance.
 
 
 ### Shared Responsibility Model
 - AWS
-  AWS is responsible for the security of the Cloud
-  - AWS global infrastructure
-  - regions
-  - availability zones
-  - edge locations
-  - compute
-  - sotrage
-  - database
-  - networking
-  - Overall software of virtualization
+AWS is responsible for the security of the Cloud
+- AWS global infrastructure
+- regions
+- availability zones
+- edge locations
+- compute
+- sotrage
+- database
+- networking
+- Overall software of virtualization
 
 
 - Customer
-  Customers and apn partners are responsible for the security *in* the cloud.
-  - Client side data encryption and data integrity authentication
-  - Server-side encryption (file system and data)
-  - Network traffic protection (encryption / integrity / identity)
-  - Operating system, network, and firewall configuration
-  - platform, applications, identity and access management
-  - Customer Data
+Customers and apn partners are responsible for the security *in* the cloud.
+- Client side data encryption and data integrity authentication
+- Server-side encryption (file system and data)
+- Network traffic protection (encryption / integrity / identity)
+- Operating system, network, and firewall configuration
+- platform, applications, identity and access management
+- Customer Data
 
 
 Encryption is a shared responsibility between AWS and customers.
@@ -677,14 +695,14 @@ Encryption is a shared responsibility between AWS and customers.
 ### Cloud Compliance
 
 - Sharing Information
-  - Industry certifications
-  - Security and control practices
-  - Compliance reports directly under NDA
+- Industry certifications
+- Security and control practices
+- Compliance reports directly under NDA
 
 - Assurance Programs
-  - Certiifcation and attestation
-  - Laws, regulations, and privacy
-  - alignments and frameworks
+- Certiifcation and attestation
+- Laws, regulations, and privacy
+- alignments and frameworks
 
 ### Others
 Later I will organize the below:
@@ -695,15 +713,15 @@ Later I will organize the below:
 - AWS CloudHSM - Hardware based key storage
 - AWS Certificate Manager - provision, manage and deploy SSL and TLS security certificates
 - AWS Secrets Manager
-  - protects the secrets required to access the resources.
-  - rotates automatically, manage and retrive secrets.
-  - stores passwords, keys and tokens
+- protects the secrets required to access the resources.
+- rotates automatically, manage and retrive secrets.
+- stores passwords, keys and tokens
 
 
 #### Infrastructure Protection
 - AWS shield - It's a managed Denial of Service protection service.
-    - Shield Standard protects against layer 3 and 4 attacks.
-    - Shield Advanced protects against layer 3, 4 and 7 attacks.
+  - Shield Standard protects against layer 3 and 4 attacks.
+  - Shield Advanced protects against layer 3, 4 and 7 attacks.
 - AWS Web application Firewall (WAF) - filter malicious website traffics. It protects web applications against common web attacks like SQL injection attacks and cross-site scripting.
 - aws firewall manager - Centrally manage firewall rules.
 
@@ -715,67 +733,77 @@ Later I will organize the below:
 
 #### Identity management
 - aws iam
+- securely manage access to AWS account services and resources.
+- iam users
+  root user
+- iam policy
+- iam role: both service and user can assume a role to get particular privilege/permission to perform a task. For example, The company will need to create a role that grants access to S3 and associate it with the EC2 instance.
+- aws single sign-on / IAM Identity Centre - Implement cloud  single sign-on
+- Amazon Cognito - Manage identity inside applications.
+- aws directory service
+=======
+- aws iam
 - aws single sign-on / IAM Identity Centre 
-  - Implement cloud single sign-on
+- Implement cloud single sign-on
 - Amazon Cognito 
-  - Manage identity inside applications.
+- Manage identity inside applications.
 - AWS Directory Service
-  - Implement and manage Microsoft AD.
-  - Managed Microsoft AD
-  - Managed Simple AD
-  - AD connector - allow on-pemise users to login to aws applications with AD.
-  - distributed service with automatic failover
-  - compatible with other aws services
+- Implement and manage Microsoft AD.
+- Managed Microsoft AD
+- Managed Simple AD
+- AD connector - allow on-pemise users to login to aws applications with AD.
+- distributed service with automatic failover
+- compatible with other aws services
 - aws organizations 
-  - centrally govern and manage multiple aws accounts in one place.
+- centrally govern and manage multiple aws accounts in one place.
 
 
 #### Management and governance
-  - Account management services
-    - AWS control tower 
-      - set up and govern a secure multi-account aws environment. 
-      - It helps to ensure all AWS accounts to conform to company-wide policies.
-    - AWS organization 
-      - Centrally govern and manage your environments across multiple aws accounts.
-    - Service control policies (SCPs)
-      - AWS Organizations provides central governance and management for multiple accounts. 
-      - Organization SCPs allow you to create permissions guardrails that apply to all accounts within a given organization. 
-    - aws budgets 
-      - improve your planning and cost control.
-  - Provisioning Services
-    - aws cloudformation - model and provision all your resources via code.
-      - Templates
-      - json or yaml settings.
-      - specify all the configuration to the cloudformation. It will generate the full infrastructure.
-      - Full infrastructure with version control systems.
-      - Nesting templates
-      - automation devops engineer can use it for automaiton.
-      - scale
-    - aws service catalog - create, organize and govern your own curated catalog of AWS products.
-    - aws ops works - automate operations with Chef and Puppet.
-    - aws marketplace - find, test, buy and deploy software that runs on AWS.
-  - Operation services
-    - amazon cloudwatch - observe your services via metrics and logging
-      - A CloudWatch alarm can be set up to monitor CPU utilization and trigger further action. Further action could be an Auto Scaling group adding another EC2 instance and/or using SNS to notify team members of the occurrence.
-      - CloudWatch Alarms can be used to determine the percentage of utilization versus the limit.
-      - monitoring
-      - collect metrics from services
-      - integrates with 70+ aws services
-      - lots of pre-defined metrics
-      - log storage
-      - ssh login logs -> cloudwatch logs -> cloudwatch filter -> cloudwatch alarm
-    - aws config - record and evaluate configurations of aws resources
-    - aws cloudtrail - track all user and API activity across your aws accounts
-    - aws systems manager - optimize performance and security while managing a large amonut of systems.
-    - amazon x-ray - analyze and debug production applications
-    - autoscaling
-      - minimum size
-      - desired size
-      - scale out to the maximum
-      - high availability
-      - better fault tolerance
-      - better cost management
-      - ec2, dynamodb, aurora
+- Account management services
+  - AWS control tower 
+    - set up and govern a secure multi-account aws environment. 
+    - It helps to ensure all AWS accounts to conform to company-wide policies.
+  - AWS organization 
+    - Centrally govern and manage your environments across multiple aws accounts.
+  - Service control policies (SCPs)
+    - AWS Organizations provides central governance and management for multiple accounts. 
+    - Organization SCPs allow you to create permissions guardrails that apply to all accounts within a given organization. 
+  - aws budgets 
+    - improve your planning and cost control.
+- Provisioning Services
+  - aws cloudformation - model and provision all your resources via code.
+    - Templates
+    - json or yaml settings.
+    - specify all the configuration to the cloudformation. It will generate the full infrastructure.
+    - Full infrastructure with version control systems.
+    - Nesting templates
+    - automation devops engineer can use it for automaiton.
+    - scale
+  - aws service catalog - create, organize and govern your own curated catalog of AWS products.
+  - aws ops works - automate operations with Chef and Puppet.
+  - aws marketplace - find, test, buy and deploy software that runs on AWS.
+- Operation services
+  - amazon cloudwatch - observe your services via metrics and logging
+    - A CloudWatch alarm can be set up to monitor CPU utilization and trigger further action. Further action could be an Auto Scaling group adding another EC2 instance and/or using SNS to notify team members of the occurrence.
+    - CloudWatch Alarms can be used to determine the percentage of utilization versus the limit.
+    - monitoring
+    - collect metrics from services
+    - integrates with 70+ aws services
+    - lots of pre-defined metrics
+    - log storage
+    - ssh login logs -> cloudwatch logs -> cloudwatch filter -> cloudwatch alarm
+  - aws config - record and evaluate configurations of aws resources
+  - aws cloudtrail - track all user and API activity across your aws accounts
+  - aws systems manager - optimize performance and security while managing a large amonut of systems.
+  - amazon x-ray - analyze and debug production applications
+  - autoscaling
+    - minimum size
+    - desired size
+    - scale out to the maximum
+    - high availability
+    - better fault tolerance
+    - better cost management
+    - ec2, dynamodb, aurora
 
 #### AWS Trust & Safety team
 The customer should contact the AWS Trust & Safety team using the form or email if they found that there is mining happening in their EC2 machines.
@@ -784,8 +812,8 @@ The customer should contact the AWS Trust & Safety team using the form or email 
 Use the following services:
 - AWS Shield
 - CloudFront has the following Security Feature:
-  - AWS Shield
-  - AWS Web Application Firewall (WAF)
+- AWS Shield
+- AWS Web Application Firewall (WAF)
 - Web Application Firewall (WAF)
 - Route 53
 
@@ -794,16 +822,16 @@ Use the following services:
 AWS customers are welcome to carry out security assessments or penetration tests against their AWS infrastructure without prior approval for Amazon EC2 instances, NAT gateways, elastic load balancers, and 7 other services.
 
 ## Machine Learning
-  - Amazon Kendra - intelligent search
-  - Amazon Personalize - personalized recommendation
+- Amazon Kendra - intelligent search
+- Amazon Personalize - personalized recommendation
 
 
 Machine learning tools for business metrics
-  - Lookout for Metrics - detect unexpected changes eg revenue performance or customer retention, and identify root causes
-  - Forecast - build accurate forecasting models
-  - Fraud Detector - identify potentially fraudulent online activities.
+- Lookout for Metrics - detect unexpected changes eg revenue performance or customer retention, and identify root causes
+- Forecast - build accurate forecasting models
+- Fraud Detector - identify potentially fraudulent online activities.
 
-  Rekognition - Analyze images, object and scene detection and extract meaning
+Rekognition - Analyze images, object and scene detection and extract meaning
 
 Polly - turn text into life-like speech.
 Transcribe - turn high quality speech to text. add this capability to your applications.
@@ -962,105 +990,105 @@ Sustainability = Focuses on environmental impacts like energy efficiency and con
 # From Service to Solution
 ## Discovery
 - Discover custormer requirements
-  - Research customer's business
-  - Determine market segment
-  - Identify industry trends
-  - Identify customer's competitors
-  - Research recent news
-  - Research customer relationsihp to AWS
+- Research customer's business
+- Determine market segment
+- Identify industry trends
+- Identify customer's competitors
+- Research recent news
+- Research customer relationsihp to AWS
 
 - How to ask Questions
-  - Ask targeted questions
-  - Ask open-ended questions
-  - Dive deeper
-  - Uncover the real desired outcomes
-  - Keep track of the conversation
-  - Illustrate workflows and ideation
+- Ask targeted questions
+- Ask open-ended questions
+- Dive deeper
+- Uncover the real desired outcomes
+- Keep track of the conversation
+- Illustrate workflows and ideation
 
 - Objection handling best practices
-  - Data driven approach
-  - Use case studies
-  - Dive deep.
-  - Have backbone
-  - Keep the momentum going.
+- Data driven approach
+- Use case studies
+- Dive deep.
+- Have backbone
+- Keep the momentum going.
 
 - Security
-  - Security at AWS is our top priority
-  - Higher security posture than in legacy environments
-  - Customer inherit all the benefits of our experiencec.
-  - Validated against the strictest of third-parti assurance frameworks.
+- Security at AWS is our top priority
+- Higher security posture than in legacy environments
+- Customer inherit all the benefits of our experiencec.
+- Validated against the strictest of third-parti assurance frameworks.
 
 - Cost or cost savings
-  - reduce tco
-  - achieve continuously optimized and predictable spned
-  - no longer overprovision infrastructure for peak demand
-  - GE Oil and Gas decreased TCO by 52%.
+- reduce tco
+- achieve continuously optimized and predictable spned
+- no longer overprovision infrastructure for peak demand
+- GE Oil and Gas decreased TCO by 52%.
 
 - Scalability and response
-  - build cloud foundation team.
-  - create gourd rails around security, availablity, reliability.
-  - aws control tower gives maximum control -- with sacrificing speed and agility.
+- build cloud foundation team.
+- create gourd rails around security, availablity, reliability.
+- aws control tower gives maximum control -- with sacrificing speed and agility.
 
 - Presentation
-  - 1 hour presentation needs at least 3 hours preparation
+- 1 hour presentation needs at least 3 hours preparation
 
 - What NOT to do
-  - Use words like definitely, never, or guaranteed.
-  - use acronyms or technical jargon
-  - focus on technology
-  - focus on the short/mid-term
-  - read the slides
+- Use words like definitely, never, or guaranteed.
+- use acronyms or technical jargon
+- focus on technology
+- focus on the short/mid-term
+- read the slides
 
 ## Migration
 ### Six R's
 - rehost
-  - lift and shift
-  - recreating the on-premises network, only hosted on AWS.
-  - automating with tools such as aws VM import/export
-  - easier to optimize and re-architect applicaitons after migration.
+- lift and shift
+- recreating the on-premises network, only hosted on AWS.
+- automating with tools such as aws VM import/export
+- easier to optimize and re-architect applicaitons after migration.
 
 - replatform
-  - lift, tinker, and shift
-  - Retaining the core architecture
-  - making targeted aws cloud optimizations
-  - examples:
-    - migrating databases to amazon RDS
-    - Migrating applications to amazon elastic beanstalk
+- lift, tinker, and shift
+- Retaining the core architecture
+- making targeted aws cloud optimizations
+- examples:
+  - migrating databases to amazon RDS
+  - Migrating applications to amazon elastic beanstalk
 
 - refactor
-  - modernize
-  - re-imagining how the application is architected and developed
-  - Using cloud-native features : Turn monolithic application into containerized mini applications.
+- modernize
+- re-imagining how the application is architected and developed
+- Using cloud-native features : Turn monolithic application into containerized mini applications.
 
 - retire
-  - shutting off non-useful applications
-  - reducing spend, manageemnt, and security
+- shutting off non-useful applications
+- reducing spend, manageemnt, and security
 
 - retain/revisit
-  - keeping certain application on-premises
+- keeping certain application on-premises
 
 - repurchase
-  - moving workflows to software as a service (SaaS)
+- moving workflows to software as a service (SaaS)
 
 ## Implementation
 ### Migration
 - Four phases of iterative migration process
-  + Assessment
-    - Identify readiness
-    - Identify potential business outcome
-  + Readiness and Planning
-    - Analyze environment and find the dependencies.
-    - Determine migration strategies
-    - Create a well-architected landing zone
-  + Migration
-    - Design, migrate and validate each application
-    - Automatic or manual
-    - Migrate data
-  + Operations and Optimizations
-    - Operate
-    - manage
-    - Optimize
-    - Improve operating model.
++ Assessment
+  - Identify readiness
+  - Identify potential business outcome
++ Readiness and Planning
+  - Analyze environment and find the dependencies.
+  - Determine migration strategies
+  - Create a well-architected landing zone
++ Migration
+  - Design, migrate and validate each application
+  - Automatic or manual
+  - Migrate data
++ Operations and Optimizations
+  - Operate
+  - manage
+  - Optimize
+  - Improve operating model.
 ### Going to production
 ### Minimum Viable Product (MVP)
 Avoid building a solution where you only discover if there is success at the end.
@@ -1077,86 +1105,86 @@ Modernizing the legacy application by re-architecting and hosting the applicatio
 #### Architect
 Responsible for desiging IT acrhitectures based on businesss requirements.
 - Enterprise or System Architect
-  Create Holistic IT architecture designs
+Create Holistic IT architecture designs
 - Application Architect
-  Design applications
+Design applications
 - Storage Architect
-  Design Storage Infrastructure
+Design Storage Infrastructure
 - Network Architect
-  Design Network Architecture
+Design Network Architecture
 - Security Architect
-  Specify Security Requirements
+Specify Security Requirements
 #### System Adminsitrator
 - Hardawre / Software
-  install
-  repair
-  replace
-  maintain
-  monitor performance
+install
+repair
+replace
+maintain
+monitor performance
 
 - Computer Systems
-  Support
-  Maintain
-  Monitor Network
-  Manage Log Files
-  service outage response
+Support
+Maintain
+Monitor Network
+Manage Log Files
+service outage response
 
 - OS and applications
-  Install
-  update
-  patch
+Install
+update
+patch
 
 - File Systems
-  Manage
+Manage
 
 - Enntire Environment
-  Backup and Recover
+Backup and Recover
 
 - Users
-  Manage users
-  Access control
+Manage users
+Access control
 
 # Cloud Value Economics - Cost Optimization
 ## Cloud Benifits
-   - Agility allows to avoid planning ahead of time for how much capacity I need.
-   - 
+ - Agility allows to avoid planning ahead of time for how much capacity I need.
+ - 
 
 ## Cloud Value Framework
 - Cost Savings (TCO)
-  Tool: Cost Savings Analysis
-  On Premises vs AWS
-  Customer analysis might be wrong because customer might find getting all informaiton and putting it together is very hard.
-  20% - 40% less cores on AWS
+Tool: Cost Savings Analysis
+On Premises vs AWS
+Customer analysis might be wrong because customer might find getting all informaiton and putting it together is very hard.
+20% - 40% less cores on AWS
 
 - Consumption-based Pricing Model
-    Pay for what you consume.
-    Better than overprovision or underprovision because they bring inefficiency leading to financial loss.
+  Pay for what you consume.
+  Better than overprovision or underprovision because they bring inefficiency leading to financial loss.
 
 - AWS pricinng models
-  - Test
-    - on-demand
-    - reserverd = reserved instances can reduce 75% cost than on-demand
-    - Spot instances - 90% off the normal price. The workloads have to be fault tolerant.
-    - Dedicated instances
-    - Price reductions
-    customer will automatically get the reduced price. No need to renew contract
+- Test
+  - on-demand
+  - reserverd = reserved instances can reduce 75% cost than on-demand
+  - Spot instances - 90% off the normal price. The workloads have to be fault tolerant.
+  - Dedicated instances
+  - Price reductions
+  customer will automatically get the reduced price. No need to renew contract
 
 Migration Cost Formula
 ROI = (Cost Savings) / (Sunk Costs + Migration Costs)
 
 - Sunk Costs
-  Customer's hardware is fully depreciated, and the company is not close to a hardware refresh.
-  and cannot sell the non-depreciated assets.
+Customer's hardware is fully depreciated, and the company is not close to a hardware refresh.
+and cannot sell the non-depreciated assets.
 
-  Depreciation
-  Was the asset's depreciation considered?
+Depreciation
+Was the asset's depreciation considered?
 
-  Recovery Value
-  Can any value be recovered by selling assets?
+Recovery Value
+Can any value be recovered by selling assets?
 
 
 - Cost of migration and decommissioning
-  Customer's existing data center is moved to cloud and data center is shutdown. It requires significant cost and effort.
+Customer's existing data center is moved to cloud and data center is shutdown. It requires significant cost and effort.
 
 - Staff Productivity
 - Operational Resilience
@@ -1195,8 +1223,8 @@ What to Avoid / What does not work
 
 Delivering cost savings
 1. Kickoff
-   - cost savings, overview
-   - Timeline, scope, and roles
+ - cost savings, overview
+ - Timeline, scope, and roles
 
 
 # Documents to Read
@@ -1283,13 +1311,13 @@ Notes:
 
 Network:
 1. AWS Global Network: interconnections between AWS Global Infrastructure. Commonly referred to as "the backbone of AWS". It's private networks, where things can move very fast/consistent/reliable/secure without internet topology disruptions between data centers.
-    A. Edge Locations: on and off ramps to the AWS Global Network.
-    B. AWS Global Accelerator : Use edge locations as on-ramps to quickly reach AWS resources by traversing the fast Global Network. One great use case is when you deploy your web application in one region, and you can use AWS global accelerator to boost your response time globally.
-    C. Amazon CloudFront (CDN): Uses edge locations as an off-ramp to provide at the edge storage and compute near the end user
-    D. VPC endpoints: Ensuring your resources stay within AWS network and do not traverse over the public internet.
+  A. Edge Locations: on and off ramps to the AWS Global Network.
+  B. AWS Global Accelerator : Use edge locations as on-ramps to quickly reach AWS resources by traversing the fast Global Network. One great use case is when you deploy your web application in one region, and you can use AWS global accelerator to boost your response time globally.
+  C. Amazon CloudFront (CDN): Uses edge locations as an off-ramp to provide at the edge storage and compute near the end user
+  D. VPC endpoints: Ensuring your resources stay within AWS network and do not traverse over the public internet.
 2. PoP: data center for content delivery or expedited upload.
-    A. Edge locations: holds cached copy of the popular files
-    B. Regional Edge Locations: hold large cache of less-popular files to reduce full round trip and reduce cost of transfer fees.
+  A. Edge locations: holds cached copy of the popular files
+  B. Regional Edge Locations: hold large cache of less-popular files to reduce full round trip and reduce cost of transfer fees.
 3. AWS Direct Connect: Private / Dedicated connection that provides private, consistent and reliable network between your on-prem data center to the AWS Cloud.
 4. Local Zones (Opt-in feature): data centers close to densely populated area to provide single-digit millisecond low latency performance for that area. The identifier looks like us-west-2-lax--1a. Only certain services are available.
 5. Wavelength Zones: ultra low latency edge-computing on 5G networks. (e.g., deploy Ec2 instance to hardware in a 5G networks.)
@@ -1359,36 +1387,60 @@ Design Cost-Optimized Architectures.
 
 # Links to Courses
 Now there are 11 training courses with badge assessments. How to enroll ⬇
- 
-The best investment you can make, is an investment in yourself. I prepared a list of free cloud courses that that come with free assessments and digital badges.
- 
-There is not a single page that summarizes how to enroll to different AWS badges, so here you go (all up-to-date) including the latest addition cloud essentials:
- 
-Cloud Essentials: https://bit.ly/awscloudess
-  7 🔸 Media & Entertainment: https://bit.ly/awsmebadge
-  8 🔸 Architecting: https://bit.ly/architect23
-  9 🔸 AWS for Games: https://go.aws/3l6fYf7
- 10 🔸 Serverless: https://go.aws/3UZpFs0
- 11 🔸 Object Storage: https://go.aws/3JVneTS
- 12 🔸 Block Storage: https://go.aws/3JVneTS
- 13 🔸 File Storage: https://go.aws/3JVneTS
- 14 🔸 Storage Data Migration: https://go.aws/3JVneTS
- 15 🔸 Data Protection & Disaster Recovery: https://go.aws/3JVneTS
- 16 
- 17 ⚡️ Feel free to share it with friends and help others to upskill!
- 18 
 
+The best investment you can make, is an investment in yourself. I prepared a list of free cloud courses that that come with free assessments and digital badges.
+
+There is not a single page that summarizes how to enroll to different AWS badges, so here you go (all up-to-date) including the latest addition cloud essentials:
+
+Cloud Essentials: https://bit.ly/awscloudess
+7 🔸 Media & Entertainment: https://bit.ly/awsmebadge
+8 🔸 Architecting: https://bit.ly/architect23
+9 🔸 AWS for Games: https://go.aws/3l6fYf7
+10 🔸 Serverless: https://go.aws/3UZpFs0
+11 🔸 Object Storage: https://go.aws/3JVneTS
+12 🔸 Block Storage: https://go.aws/3JVneTS
+13 🔸 File Storage: https://go.aws/3JVneTS
+14 🔸 Storage Data Migration: https://go.aws/3JVneTS
+15 🔸 Data Protection & Disaster Recovery: https://go.aws/3JVneTS
+16 
+17 ⚡️ Feel free to share it with friends and help others to upskill!
+18 
+
+#AWS IAM
+=======
 ## Misc Notes
 - Web and mobile apps
 - Data processing and warehousing
 - Storage and Archiving
 
-# Testing links
-[Testing Links](./test.md)
+# Job Roles
+## Cloud Architect
+What he/she must know? Service integration, CloudWatch and Logging, IAM & Security
 
-# Testing Tables
+Certifications:
+1. AWS Cloud Practitioner Foundational
+2. AWS Solutions Architect Associate
+3. AWS Solutions Architect Professional
 
-EC2 Pricing Plan
-| Type      | Payment Method | Workloads               | Capacity Reservation                                         |
-|:----------|:---------------|:------------------------|:-------------------------------------------------------------|
-| On Demand | Pay as you go  | Unpredictable Workloads | Holds the capacity whether or not <br /> instance is running |
+## Systems Administrator
+What to know: Configuration management, requirement gathering and make it to deployments
+
+Certifications:
+1. AWS Cloud Practitioner Foundational
+2. AWS Solutions Architect Associate
+* AWS SysOps Administrator Associate
+* AWS Advanced Networkin Specialty
+
+## Security Administrator
+What to know?
+1. Defines and understands cloud and IT security rules and requirements based on business security and regulator needs.
+2. Can communicate well to engineers and managemnet/leaders.
+3. Resourceful: knows where to find the answers.
+
+1. AWS Solutions Architect Associate
+2. AWS Security Administration
+
+## DevOps Administrator
+What to know: programming, automation and orchestration of many tools and stages in the pipeline
+
+
