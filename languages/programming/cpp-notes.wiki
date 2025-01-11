@@ -1,0 +1,20 @@
+= Some Random Notes =
+Here is some random notes or C or C++.
+
+== NULL ==
+NULL is NULL.
+The value is 0.
+The size of NULL is 8 bytes. But the size of NULL is 4 bytes.
+NULL can't be used in arithmetic operation like (10 + NULL)
+
+== Pointers ==
+    * int \*j; => The value at the address contained in j is a int.
+    * You can only return pointers to static local variables from the function.
+    {{{C
+    int *return_local_pointer()
+    {
+        static int a = 1900;
+        return &a;
+    }
+    }}}
+    * 

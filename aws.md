@@ -1,7 +1,8 @@
 # AWS Cloud Basics
 ## Definitions
 ### Latency
-The time that passes between a user request and the resulting response.
+Latency = Time that passes between
+|-- User Request --> |-- Response from Server -->|
 
 ## Characteristics of cloud computing
 1. pay-as-you-go pricing
@@ -12,15 +13,23 @@ The time that passes between a user request and the resulting response.
 1. Go global in minutes: Going global in minutes means you can deploy applications in multiple Regions around the world.
 2. Stop spending money running and maintaining data centers
 3. Benefit from massive economies of scale.
-4. Increase speed and agility: The cloud gives you increased speed and agility. All the services you have access to help you innovate faster, giving you speed to market.
+4. Increase speed and agility: All the services are ready to use. no need to reinvent the wheel. So innovate faster, giving you speed to market.
 5. Stop guessing capacity
-6. Trade capital expenses for variable expenses
+6. No upfront expenses = no capital expenses. Only variable expnses.
 
 ## 4 benefits of cloud in technical terms
-1. High Availability : Highly available systems are designed to operate continousoly without failure for a long time. These systems avoid loss of service by reducing or managing failures.
-2. Elasticity : With elasticity, you don't have to plan ahead of time how much capacity you need. You can provision only what you need and then grow andshrink based on demand. With elasticity, the company doesn't have to plan ahead of time how much capacity they'll need - elasticity allows them to match the supply of resources with changing workload demands.
-3. Agility : The colud gives you incresaed agility. All the services you have access to help you innovate faster, giving you speed to market i.e. innovate more quickly and deliver your applications faster.
-4. Durability : Durability is all about long-term data protection. This means your data will remain intact without corruption.
+### High Availability : 
+Highly available systems are designed to operate continousoly without failure for a long time. These systems avoid loss of service by reducing or managing failures.
+
+### Elasticity : No concern or planning about capacity
+With elasticity, you don't have to plan ahead of time how much capacity you need. You can provision only what you need and then grow and shrink based on demand. With elasticity, the company doesn't have to plan ahead of time how much capacity they'll need - elasticity allows them to match the supply of resources with changing workload demands.
+
+### Agility : 
+All different services are already created for use. No need to scratch head or to hire engineers to reinvent the wheel. The customer can quickly and nimbly click and start using the infra services. Innovate more quickly. Speed to market. Deliver application faster. 
+
+### Durability : 
+Durability is all about long-term data protection. This means your data will remain intact without corruption.
+
 5. Scalability: It means the systems can adapt to meet new levels of demand. It means a system has the ability to grow to accomodate an increase in demand. There are both horizontal and vertical scaling in regards to compute resources. Horizontal scaling involves the adding of instances of the same size. Vertical scaling is typically a manual process where the size of the instance is changed.
 
 ## 3 Common Cloud Computing Models
@@ -32,6 +41,12 @@ The time that passes between a user request and the resulting response.
 1. Private Cloud
 2. Public Cloud
 3. Hybrid Coud
+
++-------+                        +---+
+|Company|<--- Direct Connect --->|AWS|
++-------+                        +---+
+
+
 
 ## Regions
 What's a region?
@@ -53,6 +68,21 @@ What's a availability zone?
 - AZs in a region are within 100kms or 60 miles.
 - One or more discrete data centers with redundant power, networking, and connectivity in an AWS region.
 - Multi-AZ deployment provides high availability.
+
+### Edge Computing
+- AWS Outposts 
+  - fully managed on-premise cloud solution.
+  - Run aws services on-premise
+  - Due to requirement of low latency or local data residency
+  - AWS installs servers on-premises in 2 ways: Outposts Rack or Outposts servers.
+- AWS Snow Family - Offline Data Transfer
+- AWS Wavelength - Access aws services 5g networks
+- VMWare Cloud on AWS - Migrate VMWare workloads
+- AWS Local Zones 
+  - Run latency sensitive applications closer to end users.
+  - They are extension to AWS regions providing millisecond latency to the demanding applications like gaming.
+- AWS Batch - batch allows you to proces large workloads in smaller chunks
+- AWS Edge locatinos - An edge location ensures low latency by placing website contents closer to users.
 
 ### Edge Location
 They are just endpoints for AWS thare used for caching content. This consists of AWS's content delivery network: CloudFront.
@@ -234,15 +264,6 @@ Fully managed Kubernetes service.
 
 ### Amazon Lightsail
 An easy-to-use cloud platform to quickly launch pre-configured applications for small projects.
-
-### Edge Computing
-- AWS Outposts - Run aws services on-premise - installs servers on-premises
-- AWS Snow Family - Offline Data Transfer
-- AWS Wavelength - Access aws services 5g networks
-- VMWare Cloud on AWS - Migrate VMWare workloads
-- AWS Local Zones - Run latency sensitive applications closer to end users. They are extension to AWS regions providing millisecond latency to the demanding applications like gaming.
-- AWS Batch - batch allows you to proces large workloads in smaller chunks
-- AWS Edge locatinos - An edge location ensures low latency by placing website contents closer to users.
 
 ### Notes - to be organized
 Remember, 
@@ -522,7 +543,7 @@ service httpd start
     - Elastic load balancing - automatically distribute network traffic across a pool of resources.
     - AWS Global accelerator - direct traffic through the aws global network to improve global application performance.
 
-- Content Delivery
+- Content Delivery Network (CDN)
     - Amazon CloudFront - securely deliver data, videos and applications to customers globally with low latency and high transfer speeds.
 
 ### Amazon VPC
@@ -762,7 +783,9 @@ The customer should contact the AWS Trust & Safety team using the form or email 
 #### DDoS attack protection
 Use the following services:
 - AWS Shield
-- CloudFront
+- CloudFront has the following Security Feature:
+  - AWS Shield
+  - AWS Web Application Firewall (WAF)
 - Web Application Firewall (WAF)
 - Route 53
 
@@ -1362,3 +1385,10 @@ Cloud Essentials: https://bit.ly/awscloudess
 
 # Testing links
 [Testing Links](./test.md)
+
+# Testing Tables
+
+EC2 Pricing Plan
+| Type      | Payment Method | Workloads               | Capacity Reservation                                         |
+|:----------|:---------------|:------------------------|:-------------------------------------------------------------|
+| On Demand | Pay as you go  | Unpredictable Workloads | Holds the capacity whether or not <br /> instance is running |
